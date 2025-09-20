@@ -1,0 +1,864 @@
+2025-05-27 09:39:00,359 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'd_route'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 274, in get_recommended_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 395, in get_routes_by_type
+    d_route_doc = await self.d_route_repo.get_by_id(doc["d_route"]["_id"])
+                                                    ~~~^^^^^^^^^^^
+KeyError: 'd_route'
+2025-05-27 09:39:04,043 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'd_route'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 203, in get_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Авторские')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 395, in get_routes_by_type
+    d_route_doc = await self.d_route_repo.get_by_id(doc["d_route"]["_id"])
+                                                    ~~~^^^^^^^^^^^
+KeyError: 'd_route'
+2025-05-27 09:40:07,046 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'd_route'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 274, in get_recommended_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 395, in get_routes_by_type
+    d_route_doc = await self.d_route_repo.get_by_id(doc["d_route"]["_id"])
+                                                    ~~~^^^^^^^^^^^
+KeyError: 'd_route'
+2025-05-27 09:43:59,114 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'travel'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 274, in get_recommended_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 396, in get_routes_by_type
+    travel_doc = await self.travel_repo.get_by_id(doc["travel"]["_id"])
+                                                  ~~~^^^^^^^^^^
+KeyError: 'travel'
+2025-05-27 09:44:03,186 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'travel'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 274, in get_recommended_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 396, in get_routes_by_type
+    travel_doc = await self.travel_repo.get_by_id(doc["travel"]["_id"])
+                                                  ~~~^^^^^^^^^^
+KeyError: 'travel'
+2025-05-27 09:57:29,088 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'travel'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/route.py", line 274, in get_recommended_tours
+    routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/services/route_service.py", line 88, in get_routes_by_type
+    return await self.repository.get_routes_by_type(type_route)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/repository_mongodb/route_repository.py", line 396, in get_routes_by_type
+    travel_doc = await self.travel_repo.get_by_id(doc["travel"]["_id"])
+                                                  ~~~^^^^^^^^^^
+KeyError: 'travel'
+2025-05-27 19:51:28,129 - sqlalchemy.pool.impl.AsyncAdaptedQueuePool - ERROR [base.py:1032] - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <asyncpg.connection.Connection object at 0xffffa2bf3200>>, which will be terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2025-05-27 19:52:09,618 - sqlalchemy.pool.impl.AsyncAdaptedQueuePool - ERROR [base.py:378] - Exception terminating connection <AdaptedConnection <asyncpg.connection.Connection object at 0xffffa2bf1b80>>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/pool/base.py", line 374, in _close_connection
+    self._dialect.do_terminate(connection)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 1130, in do_terminate
+    dbapi_connection.terminate()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 922, in terminate
+    self._connection.terminate()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/asyncpg/connection.py", line 1515, in terminate
+    self._abort()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/asyncpg/connection.py", line 1567, in _abort
+    self._protocol.abort()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "asyncpg/protocol/protocol.pyx", line 608, in asyncpg.protocol.protocol.BaseProtocol.abort
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 826, in abort
+    self._force_close(None)
+    ~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 898, in _force_close
+    self._loop.call_soon(self._call_connection_lost, exc)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/asyncio/base_events.py", line 827, in call_soon
+    self._check_closed()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/asyncio/base_events.py", line 550, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-05-27 19:52:09,635 - sqlalchemy.pool.impl.AsyncAdaptedQueuePool - ERROR [base.py:1032] - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <asyncpg.connection.Connection object at 0xffffa2bf1b80>>, which will be terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2025-05-27 19:52:09,638 - sqlalchemy.pool.impl.AsyncAdaptedQueuePool - ERROR [base.py:378] - Exception terminating connection <AdaptedConnection <asyncpg.connection.Connection object at 0xffffa2bf1a90>>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/pool/base.py", line 374, in _close_connection
+    self._dialect.do_terminate(connection)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 1130, in do_terminate
+    dbapi_connection.terminate()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 922, in terminate
+    self._connection.terminate()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/asyncpg/connection.py", line 1515, in terminate
+    self._abort()
+    ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/asyncpg/connection.py", line 1567, in _abort
+    self._protocol.abort()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "asyncpg/protocol/protocol.pyx", line 608, in asyncpg.protocol.protocol.BaseProtocol.abort
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 826, in abort
+    self._force_close(None)
+    ~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/local/lib/python3.13/asyncio/selector_events.py", line 898, in _force_close
+    self._loop.call_soon(self._call_connection_lost, exc)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/asyncio/base_events.py", line 827, in call_soon
+    self._check_closed()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/asyncio/base_events.py", line 550, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-05-27 19:52:09,646 - sqlalchemy.pool.impl.AsyncAdaptedQueuePool - ERROR [base.py:1032] - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <asyncpg.connection.Connection object at 0xffffa2bf1a90>>, which will be terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2025-05-27 19:52:21,499 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: cannot access local variable 'acc_repo' where it is not associated with a value
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/service_locator.py", line 264, in get_service_locator
+    repositories = Repositories(acc_repo, city_repo, d_route_repo, ent_repo, route_repo, travel_repo, user_repo)
+                                ^^^^^^^^
+UnboundLocalError: cannot access local variable 'acc_repo' where it is not associated with a value
+2025-09-19 20:30:52,830 - repository_mongodb.user_repository - ERROR [user_repository.py:49] - Ошибка при добавлении пользователя: E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }', 'keyPattern': {'login': 1}, 'keyValue': {'login': 'user1'}}
+Traceback (most recent call last):
+  File "/app/src/repository_mongodb/user_repository.py", line 43, in add
+    result = await self.users.insert_one(user_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 891, in insert_one
+    self._insert_one(
+    ~~~~~~~~~~~~~~~~^
+        document,
+        ^^^^^^^^^
+    ...<5 lines>...
+        comment=comment,
+        ^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        acknowledged, _insert_command, session, operation=_Op.INSERT
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2061, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1947, in _retry_with_session
+    return self._retry_internal(
+           ~~~~~~~~~~~~~~~~~~~~^
+        func=func,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        operation_id=operation_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1993, in _retry_internal
+    ).run()
+      ~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2730, in run
+    return self._read() if self._is_read else self._write()
+                                              ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2862, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 288, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 258, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }', 'keyPattern': {'login': 1}, 'keyValue': {'login': 'user1'}}
+2025-09-19 20:30:52,844 - services.user_service - ERROR [user_service.py:80] - Ошибка регистрации пользователя user1: E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: login_1 dup key: { login: "user1" }', 'keyPattern': {'login': 1}, 'keyValue': {'login': 'user1'}}
+2025-09-19 20:30:52,845 - controllers.user_controller - ERROR [user_controller.py:86] - Registration error: Пользователь с таким логином уже существует
+2025-09-20 06:05:22,238 - repository_mongodb.user_repository - ERROR [user_repository.py:49] - Ошибка при добавлении пользователя: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+Traceback (most recent call last):
+  File "/app/src/repository_mongodb/user_repository.py", line 43, in add
+    result = await self.users.insert_one(user_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 891, in insert_one
+    self._insert_one(
+    ~~~~~~~~~~~~~~~~^
+        document,
+        ^^^^^^^^^
+    ...<5 lines>...
+        comment=comment,
+        ^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        acknowledged, _insert_command, session, operation=_Op.INSERT
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2061, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1947, in _retry_with_session
+    return self._retry_internal(
+           ~~~~~~~~~~~~~~~~~~~~^
+        func=func,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        operation_id=operation_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1993, in _retry_internal
+    ).run()
+      ~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2730, in run
+    return self._read() if self._is_read else self._write()
+                                              ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2862, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 288, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 258, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+2025-09-20 06:05:22,288 - services.user_service - ERROR [user_service.py:80] - Ошибка регистрации пользователя fsdfsf: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+2025-09-20 06:05:22,288 - controllers.user_controller - ERROR [user_controller.py:86] - Registration error: Пользователь с таким логином уже существует
+2025-09-20 06:05:31,775 - repository_mongodb.user_repository - ERROR [user_repository.py:49] - Ошибка при добавлении пользователя: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+Traceback (most recent call last):
+  File "/app/src/repository_mongodb/user_repository.py", line 43, in add
+    result = await self.users.insert_one(user_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 891, in insert_one
+    self._insert_one(
+    ~~~~~~~~~~~~~~~~^
+        document,
+        ^^^^^^^^^
+    ...<5 lines>...
+        comment=comment,
+        ^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        acknowledged, _insert_command, session, operation=_Op.INSERT
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2061, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1947, in _retry_with_session
+    return self._retry_internal(
+           ~~~~~~~~~~~~~~~~~~~~^
+        func=func,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        operation_id=operation_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1993, in _retry_internal
+    ).run()
+      ~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2730, in run
+    return self._read() if self._is_read else self._write()
+                                              ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2862, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 288, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 258, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+2025-09-20 06:05:31,780 - services.user_service - ERROR [user_service.py:80] - Ошибка регистрации пользователя fsdfsf: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1111111111" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1111111111'}}
+2025-09-20 06:05:31,780 - controllers.user_controller - ERROR [user_controller.py:86] - Registration error: Пользователь с таким логином уже существует
+2025-09-20 08:07:39,660 - controllers.user_controller - ERROR [user_controller.py:120] - Ошибка при авторизации пользователя: 401: Invalid login or password
+Traceback (most recent call last):
+  File "/app/src/controllers/user_controller.py", line 109, in login
+    raise HTTPException(status_code=401, detail="Invalid login or password")
+fastapi.exceptions.HTTPException: 401: Invalid login or password
+2025-09-20 08:07:40,905 - controllers.user_controller - ERROR [user_controller.py:120] - Ошибка при авторизации пользователя: 401: Invalid login or password
+Traceback (most recent call last):
+  File "/app/src/controllers/user_controller.py", line 109, in login
+    raise HTTPException(status_code=401, detail="Invalid login or password")
+fastapi.exceptions.HTTPException: 401: Invalid login or password
+2025-09-20 08:07:51,382 - controllers.user_controller - ERROR [user_controller.py:120] - Ошибка при авторизации пользователя: 401: Invalid login or password
+Traceback (most recent call last):
+  File "/app/src/controllers/user_controller.py", line 109, in login
+    raise HTTPException(status_code=401, detail="Invalid login or password")
+fastapi.exceptions.HTTPException: 401: Invalid login or password
+2025-09-20 08:09:00,607 - controllers.route_controller - ERROR [route_controller.py:92] - Ошибка при создании маршрута: 2 validation errors for Travel
+entertainments
+  Value error, Список entertainments не должен быть пустым [type=value_error, input_value=[], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+accommodations
+  Value error, Список accommodation не должен быть пустым [type=value_error, input_value=[], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Traceback (most recent call last):
+  File "/app/src/controllers/route_controller.py", line 64, in create_new_route_user
+    travel = Travel(
+        travel_id=1,
+    ...<9 lines>...
+        ]
+    )
+  File "/usr/local/lib/python3.13/site-packages/pydantic/main.py", line 243, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 2 validation errors for Travel
+entertainments
+  Value error, Список entertainments не должен быть пустым [type=value_error, input_value=[], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+accommodations
+  Value error, Список accommodation не должен быть пустым [type=value_error, input_value=[], input_type=list]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-09-20 12:51:07,043 - controllers.user_controller - WARNING [user_controller.py:41] - Пользователь ID 3 не найден
+2025-09-20 12:51:07,063 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'user'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/user.py", line 138, in get_user_profile
+    "current_user_id": profile_data["user"]["user_id"]
+                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'user'
+2025-09-20 12:51:09,311 - controllers.user_controller - WARNING [user_controller.py:41] - Пользователь ID 3 не найден
+2025-09-20 12:51:09,328 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'user'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/user.py", line 138, in get_user_profile
+    "current_user_id": profile_data["user"]["user_id"]
+                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'user'
+2025-09-20 12:51:42,960 - controllers.user_controller - ERROR [user_controller.py:120] - Ошибка при авторизации пользователя: 401: Invalid login or password
+Traceback (most recent call last):
+  File "/app/src/controllers/user_controller.py", line 109, in login
+    raise HTTPException(status_code=401, detail="Invalid login or password")
+fastapi.exceptions.HTTPException: 401: Invalid login or password
+2025-09-20 14:13:31,996 - controllers.route_controller - ERROR [route_controller.py:92] - Ошибка при создании маршрута: No active exception to reraise
+Traceback (most recent call last):
+  File "/app/src/controllers/route_controller.py", line 63, in create_new_route_user
+    raise
+RuntimeError: No active exception to reraise
+2025-09-20 14:15:56,748 - controllers.user_controller - WARNING [user_controller.py:41] - Пользователь ID 3 не найден
+2025-09-20 14:15:56,775 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'user'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/user.py", line 138, in get_user_profile
+    "current_user_id": profile_data["user"]["user_id"]
+                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'user'
+2025-09-20 14:15:58,753 - controllers.user_controller - WARNING [user_controller.py:41] - Пользователь ID 3 не найден
+2025-09-20 14:15:58,773 - src.main - ERROR [main.py:59] - Ошибка при обработке запроса: 'user'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.13/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/src/routers/user.py", line 138, in get_user_profile
+    "current_user_id": profile_data["user"]["user_id"]
+                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'user'
+2025-09-20 14:16:38,229 - repository_mongodb.user_repository - ERROR [user_repository.py:49] - Ошибка при добавлении пользователя: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1345678453'}}
+Traceback (most recent call last):
+  File "/app/src/repository_mongodb/user_repository.py", line 43, in add
+    result = await self.users.insert_one(user_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 891, in insert_one
+    self._insert_one(
+    ~~~~~~~~~~~~~~~~^
+        document,
+        ^^^^^^^^^
+    ...<5 lines>...
+        comment=comment,
+        ^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        acknowledged, _insert_command, session, operation=_Op.INSERT
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2061, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1947, in _retry_with_session
+    return self._retry_internal(
+           ~~~~~~~~~~~~~~~~~~~~^
+        func=func,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        operation_id=operation_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1993, in _retry_internal
+    ).run()
+      ~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2730, in run
+    return self._read() if self._is_read else self._write()
+                                              ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2862, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 288, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 258, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1345678453'}}
+2025-09-20 14:16:38,250 - services.user_service - ERROR [user_service.py:80] - Ошибка регистрации пользователя lao22u233: E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: passport_1 dup key: { passport: "1345678453" }', 'keyPattern': {'passport': 1}, 'keyValue': {'passport': '1345678453'}}
+2025-09-20 14:16:38,250 - controllers.user_controller - ERROR [user_controller.py:86] - Registration error: Пользователь с таким логином уже существует
+2025-09-20 14:17:00,365 - repository_mongodb.user_repository - ERROR [user_repository.py:49] - Ошибка при добавлении пользователя: E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }', 'keyPattern': {'phone': 1}, 'keyValue': {'phone': '89257891245'}}
+Traceback (most recent call last):
+  File "/app/src/repository_mongodb/user_repository.py", line 43, in add
+    result = await self.users.insert_one(user_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 891, in insert_one
+    self._insert_one(
+    ~~~~~~~~~~~~~~~~^
+        document,
+        ^^^^^^^^^
+    ...<5 lines>...
+        comment=comment,
+        ^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 831, in _insert_one
+    self._database.client._retryable_write(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        acknowledged, _insert_command, session, operation=_Op.INSERT
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2061, in _retryable_write
+    return self._retry_with_session(retryable, func, s, bulk, operation, operation_id)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1947, in _retry_with_session
+    return self._retry_internal(
+           ~~~~~~~~~~~~~~~~~~~~^
+        func=func,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        operation_id=operation_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/_csot.py", line 119, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 1993, in _retry_internal
+    ).run()
+      ~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2730, in run
+    return self._read() if self._is_read else self._write()
+                                              ~~~~~~~~~~~^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/mongo_client.py", line 2862, in _write
+    return self._func(self._session, conn, self._retryable)  # type: ignore
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/synchronous/collection.py", line 829, in _insert_command
+    _check_write_command_response(result)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 288, in _check_write_command_response
+    _raise_last_write_error(write_errors)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pymongo/helpers_shared.py", line 258, in _raise_last_write_error
+    raise DuplicateKeyError(error.get("errmsg"), 11000, error)
+pymongo.errors.DuplicateKeyError: E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }', 'keyPattern': {'phone': 1}, 'keyValue': {'phone': '89257891245'}}
+2025-09-20 14:17:00,375 - services.user_service - ERROR [user_service.py:80] - Ошибка регистрации пользователя lao22u233: E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }, full error: {'index': 0, 'code': 11000, 'errmsg': 'E11000 duplicate key error collection: travel_db.users index: phone_1 dup key: { phone: "89257891245" }', 'keyPattern': {'phone': 1}, 'keyValue': {'phone': '89257891245'}}
+2025-09-20 14:17:00,376 - controllers.user_controller - ERROR [user_controller.py:86] - Registration error: Пользователь с таким логином уже существует
