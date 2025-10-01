@@ -8,7 +8,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 
-from init_monodb.create_mongodb import async_init_mongodb
+# from init_monodb.create_mongodb import async_init_mongodb
 from logger import setup_logging
 from routers.accommodation import accommodation_router
 from routers.city import city_router
@@ -66,7 +66,7 @@ async def handle_exceptions(request: Request, exc: Exception) -> JSONResponse:
 @app.on_event("startup")
 async def startup() -> None:
     logger.info("Запуск приложения")
-    await async_init_mongodb()
+    # await async_init_mongodb()
 
 
 @app.on_event("shutdown")
