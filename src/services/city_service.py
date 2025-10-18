@@ -28,7 +28,7 @@ class CityService(ICityService):
             logger.debug("Добавление города с ID %d", city.city_id)
             city = await self.repository.add(city)
         except (Exception):
-            logger.error("Город c таким ID %d уже существует.", city.city_id)
+            logger.error("Город c таким ID %s уже существует.", city.city_id)
             raise ValueError("Город c таким ID уже существует.")
         return city
 

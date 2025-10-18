@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 # Создание движка для подключения к базе данных
-engine = create_engine("postgresql://nastya@localhost:5432/postgres")
+engine = create_engine("postgresql://nastya@localhost:5440/travel_db")
 with engine.begin() as connection:
     connection.execute(text("CREATE SCHEMA IF NOT EXISTS travel_db"))
 

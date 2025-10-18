@@ -21,8 +21,8 @@ class UserRepository(IUserRepository):
 
     async def add(self, user: User) -> User:
         query = text("""
-            INSERT INTO users (full_name, passport, phone, email, login, password)
-            VALUES (:full_name, :passport, :phone, :email, :login, :password)
+            INSERT INTO users (full_name, passport, phone, email, login, password, is_admin)
+            VALUES (:full_name, :passport, :phone, :email, :login, :password, :is_admin)
             RETURNING id
         """)
         try:
@@ -32,7 +32,8 @@ class UserRepository(IUserRepository):
                 "phone": user.phone_number,
                 "email": user.email,
                 "login": user.login,
-                "password": user.password
+                "password": user.password,
+                "is_admin": user.is_admin
             })
             await self.session.commit() 
             db_id = result.scalar_one()

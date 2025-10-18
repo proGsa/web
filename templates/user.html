@@ -90,13 +90,13 @@
         <a href="#name"><span class="white-text name">Admin</span></a>
       </div>
     </li>
-    <li><a class="waves-effect" href="user.html"><i class="material-icons">person</i>Пользователи</a></li>
+    <li><a class="waves-effect" href="users"><i class="material-icons">person</i>Пользователи</a></li>
     <li><a class="waves-effect" href="travel.html"><i class="material-icons">flight_takeoff</i>Путешествия</a></li>
     <li><a class="waves-effect" href="route.html"><i class="material-icons">map</i>Маршруты</a></li>
     <li><a class="waves-effect" href="directory_route.html"><i class="material-icons">directions</i>Справочник маршрутов</a></li>
     <li><a class="waves-effect" href="entertainment.html"><i class="material-icons">local_activity</i>Развлечения</a></li>
     <li><a class="waves-effect" href="accommodation.html"><i class="material-icons">hotel</i>Размещение</a></li>
-    <li><a class="waves-effect" href="city.html"><i class="material-icons">location_city</i>Города</a></li>
+    <li><a class="waves-effect" href="cities"><i class="material-icons">location_city</i>Города</a></li>
   </ul>
   <!-- Основной контент -->
   <main>
@@ -122,11 +122,12 @@
                   <td>{{ user.phone_number }}</td>
                   <td>{{ user.email }}</td>
                   <td>
-                    <form method="post" action="/user/delete/{{ user.id }}" onsubmit="return confirm('Удалить это пользователя?');">
-                      <button type="submit" class="btn-flat" style="color: #888;">
-                        <i class="material-icons">delete</i>
-                      </button>
-                    </form>
+                    <button class="btn-flat delete-user-btn" 
+                      style="color: #888;"
+                      data-id="{{ user.id }}"
+                      data-fio="{{ user.fio }}">
+                      <i class="material-icons">delete</i>
+                    </button>
                     <a class="btn-flat edit-trigger" 
                       style="color: #888;"
                       data-id="{{ user.id }}"
@@ -224,6 +225,32 @@
 
       let currentUserId = null;
 
+      $(document).on('click', '.delete-user-btn', function() {
+        const userId = $(this).data('id');
+        const userFio = $(this).data('fio');
+        
+        if (!confirm(`Удалить пользователя "${userFio}"?`)) {
+          return;
+        }
+
+        $.ajax({
+          url: `/api/v1/users/${userId}`,
+          type: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          success: function(response) {
+            alert('Пользователь успешно удален!');
+            location.reload();
+          },
+          error: function(error) {
+            console.error('Ошибка при удалении:', error);
+            alert('Ошибка при удалении пользователя: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
+          }
+        });
+      });
+
+      // Исправьте URL в форме добавления
       $('#addUserForm').submit(function (event) {
         event.preventDefault();
 
@@ -243,34 +270,32 @@
           return;
         }
 
+        // Используем FormData вместо JSON для совместимости с бэкендом
+        const formDataObj = new FormData();
+        for (const key in formData) {
+          formDataObj.append(key, formData[key]);
+        }
+
         $.ajax({
-          url: '/api/users',
+          url: '/api/v1/users',  // Исправленный URL
           type: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(formData),
+          data: formDataObj,
+          processData: false,
+          contentType: false,
           success: function (response) {
             $('#addUserModal').modal('close');
+            $('#addUserForm')[0].reset();
             alert("Пользователь добавлен успешно.");
             location.reload();
           },
           error: function (error) {
             console.error('Ошибка при добавлении:', error);
-            alert('Ошибка при добавлении нового пользователя.');
+            alert('Ошибка при добавлении нового пользователя: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
           }
         });
       });
 
-      $('.edit-trigger').on('click', function () {
-        currentUserId = $(this).data('id');
-        $('#editFio').val($(this).data('fio'));
-        $('#editPassport').val($(this).data('passport'));
-        $('#editPhone').val($(this).data('phone'));
-        $('#editEmail').val($(this).data('email'));
-
-        M.updateTextFields();
-        $('#editUserModal').modal('open');
-      });
-
+      // Исправьте URL в редактировании
       $('#saveUserEdit').on('click', function () {
         const requestData = {
           fio: $('#editFio').val(),
@@ -278,18 +303,25 @@
           phone_number: $('#editPhone').val(),
           email: $('#editEmail').val()
         };
-        console.log(requestData);
+
         if (!requestData.fio || !requestData.number_passport || 
             !requestData.phone_number || !requestData.email) {
           alert('Пожалуйста, заполните все поля.');
           return;
         }
 
+        // Используем FormData вместо JSON
+        const formData = new FormData();
+        for (const key in requestData) {
+          formData.append(key, requestData[key]);
+        }
+
         $.ajax({
-          url: `/api/users/${currentUserId}`,
+          url: `/api/v1/users/${currentUserId}`,
           type: 'PUT',
-          contentType: 'application/json',
-          data: JSON.stringify(requestData),
+          data: formData,
+          processData: false,
+          contentType: false,
           success: function (response) {
             $('#editUserModal').modal('close');
             alert('Пользователь обновлен успешно.');
@@ -297,7 +329,7 @@
           },
           error: function (error) {
             console.error('Ошибка при обновлении:', error);
-            alert('Ошибка при обновлении пользователя.');
+            alert('Ошибка при обновлении пользователя: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
           }
         });
       });

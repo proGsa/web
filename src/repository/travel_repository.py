@@ -160,7 +160,7 @@ class TravelRepository(ITravelRepository):
         """)
         user_query = text("""
             INSERT INTO users_travel (users_id, travel_id) 
-            VALUES (:users_id, travel_id)
+            VALUES (:users_id, :travel_id)
         """)
         try:
             result = await self.session.execute(query, {
@@ -362,17 +362,36 @@ class TravelRepository(ITravelRepository):
             logger.error("Ошибка при поиске путешествия: %s", str(e), exc_info=True)
             return []
 
-    async def complete(self, travel_id: int) -> None:
+    async def complete(self, travel_id: int) -> Travel | None:
         try:
-            sql = """UPDATE travel
-                    SET status = 'Завершен'
-                    WHERE id = :travel_id"""
-            await self.session.execute(text(sql), {"travel_id": travel_id})
+            sql = text("""
+                UPDATE travel
+                SET status = 'Завершен'
+                WHERE id = :travel_id
+                RETURNING id, status
+            """)
+            result = await self.session.execute(sql, {"travel_id": travel_id})
+            row = result.mappings().first()
             await self.session.commit()
+
+            if not row:
+                logger.warning("Путешествие ID %d не найдено при завершении", travel_id)
+                return None
+
             logger.debug("Путешествие ID %d успешно завершено", travel_id)
-        except SQLAlchemyError:
-            logger.debug("Ошибка при завершении путешествия ID %d", travel_id)
-            await self.session.rollback() 
+
+            return Travel(
+                travel_id=row["id"],
+                status=row["status"],
+                users=await self.get_users_by_travel(row["id"]),
+                entertainments=await self.get_entertainments_by_travel(row["id"]),
+                accommodations=await self.get_accommodations_by_travel(row["id"])
+            )
+
+        except SQLAlchemyError as e:
+            logger.error("Ошибка при завершении путешествия ID %d: %s", travel_id, e, exc_info=True)
+            await self.session.rollback()
+            return None
 
     async def link_entertainments(self, travel_id: int, entertainment_ids: list[int]) -> None:
         try:
@@ -465,3 +484,36 @@ class TravelRepository(ITravelRepository):
             await self.session.rollback()
             logger.error("Ошибка при связывании пользователей: %s", str(e), exc_info=True)
             raise
+    
+    async def unlink_entertainment(self, travel_id: int, entertainment_id: int) -> None:
+        try:
+            await self.session.execute(
+                text("""
+                    DELETE FROM travel_entertainment
+                    WHERE travel_id = :travel_id AND entertainment_id = :entertainment_id
+                """),
+                {"travel_id": travel_id, "entertainment_id": entertainment_id}
+            )
+            await self.session.commit()
+            logger.debug("Развлечение ID %d успешно отвязано от путешествия ID %d", entertainment_id, travel_id)
+        except SQLAlchemyError as e:
+            await self.session.rollback()
+            logger.error("Ошибка при отвязке развлечения ID %d от путешествия ID %d: %s", accommodation_id, travel_id, str(e), exc_info=True)
+            raise
+
+    async def unlink_accommodation(self, travel_id: int, accommodation_id: int) -> None:
+        try:
+            await self.session.execute(
+                text("""
+                    DELETE FROM travel_accommodations
+                    WHERE travel_id = :travel_id AND accommodation_id = :accommodation_id
+                """),
+                {"travel_id": travel_id, "accommodation_id": accommodation_id}
+            )
+            await self.session.commit()
+            logger.debug("Развлечение ID %d успешно отвязано от путешествия ID %d", accommodation_id, travel_id)
+        except SQLAlchemyError as e:
+            await self.session.rollback()
+            logger.error("Ошибка при отвязке развлечения ID %d от путешествия ID %d: %s", accommodation_id, travel_id, str(e), exc_info=True)
+            raise
+    

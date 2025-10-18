@@ -1,0 +1,2274 @@
+openapi: 3.0.3
+info:
+  title: TravelGuide API
+  description: API для помощи в путешествиях
+  version: 2.0.0
+servers:
+  - url: http://localhost:8800/api/v2
+    description: Development server
+
+paths:
+  # ==================== ГОРОДА ====================
+  /api/v2/cities:
+    post:
+      summary: Создать новый город
+      description: Создает новый город в системе
+      operationId: create_city
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Название города
+                  example: "Москва"
+              required:
+                - name
+      responses:
+        '201':
+          description: Город успешно создан
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Москва"
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - cities
+
+    get:
+      summary: Получить все города
+      description: Возвращает список всех городов
+      operationId: get_all_cities
+      responses:
+        '200':
+          description: Список городов получен успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+        '404':
+          description: Города не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - cities
+
+  /api/v2/cities/{city_id}:
+    get:
+      summary: Получить город по ID
+      description: Возвращает информацию о конкретном городе
+      operationId: get_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Информация о городе получена успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - cities
+
+    put:
+      summary: Обновить город
+      description: Обновляет информацию о городе
+      operationId: update_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Санкт-Петербург"
+              required:
+                - name
+      responses:
+        '200':
+          description: Город успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - cities
+
+    delete:
+      summary: Удалить город
+      description: Удаляет город по ID
+      operationId: delete_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Город успешно удалён
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - cities
+  
+  # ==================== ПОЛЬЗОВАТЕЛИ ====================
+  /api/v2/users:
+    post:
+      summary: Создать нового пользователя
+      description: Создает нового пользователя в системе (администратор или обычный пользователь)
+      operationId: create_user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fio:
+                  type: string
+                  description: ФИО пользователя
+                  example: "Иванов Иван Иванович"
+                number_passport:
+                  type: string
+                  description: Номер паспорта
+                  example: "1234 567890"
+                phone_number:
+                  type: string
+                  description: Номер телефона
+                  example: "+7 999 123-45-67"
+                email:
+                  type: string
+                  format: email
+                  description: Email адрес
+                  example: "user@example.com"
+                login:
+                  type: string
+                  description: Логин для входа
+                  example: "ivanov"
+                password:
+                  type: string
+                  format: password
+                  description: Пароль
+                  example: "securepassword123"
+                is_admin:
+                  type: boolean
+                  description: Является ли пользователь администратором
+                  example: false
+              required:
+                - fio
+                - number_passport
+                - phone_number
+                - email
+                - login
+                - password
+                - is_admin
+      responses:
+        '201':
+          description: Пользователь успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - users
+
+    get:
+      summary: Получить всех пользователей
+      description: Возвращает список всех пользователей системы
+      operationId: get_all_users
+      responses:
+        '200':
+          description: Список пользователей успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Пользователи не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - users
+
+  /api/v2/users/{user_id}:
+    get:
+      summary: Получить пользователя по ID
+      description: Возвращает информацию о конкретном пользователе
+      operationId: get_user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Информация о пользователе успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - users
+
+    put:
+      summary: Обновить данные пользователя
+      description: Обновляет информацию о пользователе (включая статус администратора)
+      operationId: update_user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fio:
+                  type: string
+                  example: "Иванов Иван Иванович"
+                number_passport:
+                  type: string
+                  example: "1234 567890"
+                phone_number:
+                  type: string
+                  example: "+7 999 123-45-67"
+                email:
+                  type: string
+                  format: email
+                  example: "ivanov@example.com"
+                is_admin:
+                  type: boolean
+                  example: true
+      responses:
+        '200':
+          description: Данные пользователя успешно обновлены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - users
+
+    delete:
+      summary: Удалить пользователя
+      description: Удаляет пользователя по ID
+      operationId: delete_user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Пользователь успешно удален
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - users
+  
+  # ==================== АУТЕНТИФИКАЦИЯ ====================
+  /api/v2/login:
+    post:
+      summary: Login user
+      description: Authenticate user and return JSON with access token
+      operationId: login_user
+      tags:
+        - authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                  description: User login
+                  example: "user123"
+                password:
+                  type: string
+                  format: password
+                  description: User password
+                  example: "mypassword123"
+              required:
+                - login
+                - password
+      responses:
+        '201':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: JWT access token
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user_id:
+                    type: integer
+                    description: ID of authenticated user
+                    example: 1
+                  message:
+                    type: string
+                    description: Success message
+                    example: "Login successful"
+        '401':
+          description: Invalid login or password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAcc'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+# ==================== ПРОЖИВАНИЕ ====================
+  /api/v2/accommodations:
+    post:
+      summary: Создать новое размещение
+      description: Создает новое размещение в системе
+      operationId: create_accommodation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Название размещения
+                  example: "Гостиница Россия"
+                city_id:
+                  type: integer
+                  description: ID города
+                  example: 1
+                address:
+                  type: string
+                  description: Адрес размещения
+                  example: "ул. Ленина, 10"
+                price:
+                  type: number
+                  description: Стоимость проживания
+                  example: 3500
+                type:
+                  type: string
+                  description: Тип размещения
+                  example: "Отель"
+                rating:
+                  type: integer
+                  description: Рейтинг (1–5)
+                  example: 4
+                check_in:
+                  type: string
+                  format: date-time
+                  example: "2025-06-15T14:00:00Z"
+                check_out:
+                  type: string
+                  format: date-time
+                  example: "2025-06-20T12:00:00Z"
+              required:
+                - name
+                - city_id
+                - address
+                - price
+                - type
+                - check_in
+                - check_out
+      responses:
+        '201':
+          description: Размещение успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - accommodations
+
+    get:
+      summary: Получить все размещения
+      description: Возвращает список всех размещений
+      operationId: get_all_accommodations
+      responses:
+        '200':
+          description: Список размещений успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accommodation'
+        '404':
+          description: Размещения не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - accommodations
+
+  /api/v2/accommodations/{accommodation_id}:
+    get:
+      summary: Получить размещение по ID
+      description: Возвращает информацию о конкретном размещении
+      operationId: get_accommodation
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Информация о размещении успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        '404':
+          description: Размещение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - accommodations
+
+    put:
+      summary: Обновить размещение
+      description: Обновляет информацию о размещении
+      operationId: update_accommodation
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Отель Европа"
+                city_id:
+                  type: integer
+                  example: 2
+                address:
+                  type: string
+                  example: "Невский проспект, 5"
+                price:
+                  type: number
+                  example: 4200
+                type:
+                  type: string
+                  example: "Хостел"
+                rating:
+                  type: integer
+                  example: 5
+                check_in:
+                  type: string
+                  format: date-time
+                  example: "2025-07-01T14:00:00Z"
+                check_out:
+                  type: string
+                  format: date-time
+                  example: "2025-07-10T12:00:00Z"
+              required:
+                - name
+                - city_id
+                - address
+                - price
+                - type
+                - check_in
+                - check_out
+      responses:
+        '200':
+          description: Размещение успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Размещение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - accommodations
+
+    delete:
+      summary: Удалить размещение
+      description: Удаляет размещение по ID
+      operationId: delete_accommodation
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Размещение успешно удалено
+        '404':
+          description: Размещение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - accommodations
+
+  /api/v2/travels/{travel_id}/accommodations/{accommodation_id}:
+    post:
+      summary: Добавить размещение к путешествию
+      description: Создает новое размещение и добавляет его к указанному путешествию
+      operationId: add_accommodation_to_travel
+      tags:
+        - travel-accommodations
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Название размещения
+                  example: "Отель Москва"
+                city_id:
+                  type: integer
+                  description: ID города
+                  example: 1
+                address:
+                  type: string
+                  description: Адрес размещения
+                  example: "ул. Тверская, 15"
+                price:
+                  type: number
+                  description: Стоимость проживания
+                  example: 4200
+                type:
+                  type: string
+                  description: Тип размещения
+                  example: "Отель"
+                rating:
+                  type: integer
+                  description: Рейтинг (1–5)
+                  example: 5
+                check_in:
+                  type: string
+                  format: date-time
+                  description: Дата и время заезда
+                  example: "2025-08-10T14:00:00Z"
+                check_out:
+                  type: string
+                  format: date-time
+                  description: Дата и время выезда
+                  example: "2025-08-15T12:00:00Z"
+              required:
+                - name
+                - city_id
+                - address
+                - price
+                - type
+                - check_in
+                - check_out
+      responses:
+        '201':
+          description: Размещение успешно добавлено к маршруту
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accommodation'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить размещение из путешествия
+      description: Удаляет размещение из указанного путешествия
+      operationId: delete_accommodation_from_travel
+      tags:
+        - travel-accommodations
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 2
+      responses:
+        '204':
+          description: Размещение успешно удалено из путешествия
+        '404':
+          description: Путешествие или размещение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+# ==================== РАЗВЛЕЧЕНИЕ ====================
+  /api/v2/entertainments:
+    post:
+      summary: Создать новое развлечение
+      description: Создает новое развлечение в системе
+      operationId: create_entertainment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city_id:
+                  type: integer
+                  description: ID города, где проходит событие
+                  example: 1
+                event_name:
+                  type: string
+                  description: Название события
+                  example: "Концерт"
+                event_time:
+                  type: string
+                  format: date-time
+                  description: Дата и время проведения
+                  example: "2025-09-15T19:00:00Z"
+                duration:
+                  type: string
+                  description: Продолжительность мероприятия
+                  example: "2 часа"
+                address:
+                  type: string
+                  description: Адрес проведения
+                  example: "ул. Арбат, 20"
+                description:
+                  type: string
+                  description: Краткое описание события
+                  example: "Музыкальный концерт под открытым небом"
+              required:
+                - event_name
+                - city_id
+                - event_time
+                - address
+                - duration
+      responses:
+        '201':
+          description: Развлечение успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entertainment'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - entertainments
+
+    get:
+      summary: Получить все развлечения
+      description: Возвращает список всех развлечений
+      operationId: get_all_entertainments
+      responses:
+        '200':
+          description: Список развлечений успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Entertainment'
+        '404':
+          description: Развлечения не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - entertainments
+
+  /api/v2/entertainments/{entertainment_id}:
+    get:
+      summary: Получить развлечение по ID
+      description: Возвращает информацию о конкретном развлечении
+      operationId: get_entertainment
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Информация о развлечении успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entertainment'
+        '404':
+          description: Развлечение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - entertainments
+
+    put:
+      summary: Обновить развлечение
+      description: Обновляет информацию о конкретном развлечении
+      operationId: update_entertainment
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event_name:
+                  type: string
+                  example: "Фестиваль уличной еды"
+                city_id:
+                  type: integer
+                  example: 2
+                event_time:
+                  type: string
+                  format: date-time
+                  example: "2025-09-20T15:00:00Z"
+                duration:
+                  type: string
+                  example: "5 часов"
+                address:
+                  type: string
+                  example: "Парк Горького, 1"
+                cost:
+                  type: number
+                  example: 500
+                description:
+                  type: string
+                  example: "Гастрономический фестиваль с музыкой и мастер-классами"
+              required:
+                - event_name
+                - city_id
+                - event_time
+                - address
+                - duration
+      responses:
+        '200':
+          description: Развлечение успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entertainment'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Развлечение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - entertainments
+
+    delete:
+      summary: Удалить развлечение
+      description: Удаляет развлечение по ID
+      operationId: delete_entertainment
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Развлечение успешно удалено
+        '404':
+          description: Развлечение не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      tags:
+        - entertainments
+
+  /api/v2/travels/{travel_id}/entertainments/{entertainment_id}:
+    post:
+      summary: Добавить развлечение к маршруту
+      description: Создает новое развлечение и добавляет его к указанному путешествию
+      operationId: add_entertainment_to_travel
+      tags:
+        - travel-entertainments
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Название развлечения
+                  example: "Театр имени Чехова"
+                city_id:
+                  type: integer
+                  description: ID города
+                  example: 2
+                address:
+                  type: string
+                  description: Адрес проведения
+                  example: "ул. Пушкина, 7"
+                cost:
+                  type: number
+                  description: Стоимость участия
+                  example: 1200
+                event_time:
+                  type: string
+                  format: date-time
+                  description: Дата и время проведения
+                  example: "2025-09-05T19:00:00Z"
+                description:
+                  type: string
+                  description: Описание мероприятия
+                  example: "Постановка классической пьесы Чехова"
+              required:
+                - name
+                - city_id
+                - address
+                - cost
+                - event_time
+      responses:
+        '201':
+          description: Развлечение успешно добавлено к путешествию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entertainment'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Путешествие не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить развлечение из путешествия
+      description: Удаляет развлечение из указанного путешествия
+      operationId: delete_entertainment_from_travel
+      tags:
+        - travel-entertainments
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 5
+      responses:
+        '204':
+          description: Развлечение успешно удалено из путешествия
+        '404':
+          description: Развлечение или путешествие не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+# ==================== СПРАВОЧНИК МАРШРУТОВ ====================
+  /api/v2/directory_routes:
+    post:
+      summary: Создать новый справочный маршрут
+      description: Создает новый справочный маршрут
+      operationId: create_d_route
+      tags:
+        - directory-routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type_transport
+                - cost
+                - distance
+                - departure_city_id
+                - destination_city_id
+              properties:
+                type_transport:
+                  type: string
+                  description: Тип транспорта
+                  example: "train"
+                cost:
+                  type: integer
+                  minimum: 0
+                  description: Стоимость маршрута
+                  example: 1500
+                distance:
+                  type: integer
+                  minimum: 1
+                  description: Дистанция в километрах
+                  example: 300
+                departure_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID города отправления
+                destination_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID города назначения
+      responses:
+        '201':
+          description: Маршрут успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryRoute'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+    
+    get:
+      summary: Получить все справочные маршруты
+      description: Возвращает список всех справочных маршрутов
+      operationId: get_all_d_routes
+      tags:
+        - directory-routes
+      responses:
+        '200':
+          description: Список маршрутов успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectoryRoute'
+        '404':
+          description: Маршруты не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+  /api/v2/directory_routes/{d_route_id}:
+    get:
+      summary: Получить маршрут по ID
+      description: Возвращает информацию о конкретном справочном маршруте
+      operationId: get_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Маршрут успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryRoute'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    put:
+      summary: Обновить маршрут
+      description: Обновляет информацию о справочном маршруте
+      operationId: update_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_transport:
+                  type: string
+                  description: Тип транспорта
+                  example: "bus"
+                cost:
+                  type: integer
+                  minimum: 0
+                  description: Стоимость маршрута
+                  example: 1200
+                distance:
+                  type: integer
+                  minimum: 1
+                  description: Дистанция в километрах
+                  example: 250
+                departure_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID города отправления
+                destination_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID города назначения
+      responses:
+        '200':
+          description: Маршрут успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryRoute'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить маршрут
+      description: Удаляет маршрут по ID
+      operationId: delete_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '204':
+          description: Маршрут успешно удален
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+    
+    patch:
+      summary: Частично обновить маршрут
+      description: Обновляет отдельные поля справочного маршрута
+      operationId: partial_update_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type_transport:
+                  type: string
+                  example: "bus"
+      responses:
+        '200':
+          description: Маршрут успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryRoute'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+# ==================== ПУТЕШЕСТВИЕ ====================
+  /api/v2/travels:
+    post:
+      summary: Создать новое путешествие
+      description: Создает новое путешествие с пользователями, развлечениями и размещениями
+      operationId: create_travel
+      tags:
+        - travels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: ['В процессе', 'Завершен', 'Отменен']
+                  example: "В процессе"
+                user_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Список ID пользователей
+                entertainment_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Список ID развлечений
+                accommodation_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Список ID размещений
+              required:
+                - status
+                - user_ids
+                - entertainment_ids
+                - accommodation_ids
+      responses:
+        '201':
+          description: Путешествие успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Travel'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    get:
+      summary: Получить все путешествия
+      description: Возвращает список всех путешествий с пользователями, развлечениями и размещениями
+      operationId: get_all_travels
+      tags:
+        - travels
+      responses:
+        '200':
+          description: Список путешествий успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Travel'
+        '404':
+          description: Путешествия не найдены
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+  /api/v2/travels/{travel_id}:
+    get:
+      summary: Получить путешествие по ID
+      description: Возвращает информацию о конкретном путешествии, включая пользователей, размещения и развлечения
+      operationId: get_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Путешествие успешно получено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Travel'
+        '404':
+          description: Путешествие не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+    
+    put:
+      summary: Обновить путешествие
+      description: Обновляет существующее путешествие
+      operationId: update_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [planned, active, completed, cancelled]
+                user_ids:
+                  type: array
+                  items:
+                    type: integer
+                entertainment_ids:
+                  type: array
+                  items:
+                    type: integer
+                accommodation_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Путешествие успешно обновлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Travel'
+        '404':
+          description: Путешествие не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить путешествие
+      description: Удаляет указанное путешествие
+      operationId: delete_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Путешествие успешно удалено
+        '404':
+          description: Путешествие не найдено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    patch:
+      summary: Завершить путешествие
+      description: Пометить путешествие как завершенное
+      operationId: complete_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Путешествие успешно завершено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Travel'
+        '404':
+          description: Путешествие или пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+  /api/v2/travels/{travel_id}/cities/{city_id}:
+    post:
+      summary: Добавить новый город в маршрут
+      description: Добавляет новый город в маршрут путешествия после указанного города.
+      operationId: insert_city_into_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          description: ID путешествия
+          schema:
+            type: integer
+            example: 1
+        - name: city_id
+          in: path
+          required: true
+          description: ID города
+          schema:
+            type: integer
+            example: 3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                after_city_id:
+                  type: integer
+                  example: 3
+                transport:
+                  type: string
+                  example: "train"
+              required:
+                - city_id
+                - after_city_id
+                - transport
+      responses:
+        '200':
+          description: Город успешно добавлен в маршрут
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Город успешно добавлен"
+        '404':
+          description: Путешествие или город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '400':
+          description: Неверные данные запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить город из маршрута
+      description: Удаляет город из маршрута путешествия. Соседние сегменты соединяются новым маршрутом.
+      operationId: delete_city_from_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          description: ID путешествия
+          schema:
+            type: integer
+            example: 1
+        - name: city_id
+          in: path
+          required: true
+          description: ID города, который нужно удалить
+          schema:
+            type: integer
+            example: 3
+      responses:
+        '204':
+          description: Город успешно удален из маршрута
+        '404':
+          description: Путешествие или город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '400':
+          description: Неверные данные запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+# ==================== МАРШРУТ ====================
+  /api/v2/routes:
+    post:
+      summary: Создать новый маршрут
+      description: Создает новый маршрут и возвращает JSON с данными маршрута
+      operationId: create_route
+      tags:
+        - routes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                d_route_id:
+                  type: integer
+                  example: 1
+                travel_id:
+                  type: integer
+                  example: 1
+                start_time:
+                  type: string
+                  format: date-time
+                  example: "2025-09-15T19:00:00Z"
+                end_time:
+                  type: string
+                  format: date-time
+                  example: "2025-09-15T19:00:00Z"
+                type:
+                  type: string
+                  enum: [Авторские, Рекомендованные, Пользовательские]
+              required:
+                - d_route_id
+                - travel_id
+                - start_time
+                - end_time
+                - type
+      responses:
+        '201':
+          description: Маршрут успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    get:
+      summary: Получить все маршруты
+      description: Возвращает список маршрутов, с возможностью фильтрации по типу
+      operationId: get_all_routes
+      tags:
+        - routes
+      parameters:
+        - name: type
+          in: query
+          description: Фильтрация по типу маршрута
+          required: false
+          schema:
+            type: string
+            enum: ["Все", "Авторские", "Пользовательские"]
+            example: custom
+      responses:
+        '200':
+          description: Список маршрутов успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+  /api/v2/routes/{route_id}:
+    get:
+      summary: Получить маршрут по ID
+      description: Возвращает информацию о конкретном маршруте, включая справочник и путешествие
+      operationId: get_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Маршрут успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    put:
+      summary: Обновить маршрут
+      description: Обновляет существующий маршрут
+      operationId: update_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                d_route_id:
+                  type: integer
+                  example: 1
+                travel_id:
+                  type: integer
+                  example: 1
+                start_time:
+                  type: string
+                  format: date-time
+                  example: "2025-09-15T19:00:00Z"
+                end_time:
+                  type: string
+                  format: date-time
+                  example: "2025-09-15T19:00:00Z"
+                type:
+                  type: string
+                  enum: [Авторские, Рекомендованные, Пользовательские]
+      responses:
+        '200':
+          description: Маршрут успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+
+    delete:
+      summary: Удалить маршрут
+      description: Удаляет маршрут по ID
+      operationId: delete_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Маршрут успешно удален
+        '404':
+          description: Маршрут не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundError'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Москва"
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        fio:
+          type: string
+          example: "Иванов Иван Иванович"
+        number_passport:
+          type: string
+          example: "1234 567890"
+        phone_number:
+          type: string
+          example: "+7 999 123-45-67"
+        email:
+          type: string
+          example: "user@example.com"
+        login:
+          type: string
+          example: "ivanov"
+        is_admin:
+          type: boolean
+          example: false
+
+    Accommodation:
+      type: object
+      properties:
+        accommodation_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Гостиница Россия"
+        address:
+          type: string
+          example: "ул. Ленина, 10"
+        price:
+          type: number
+          example: 3500
+        type:
+          type: string
+          example: "Отель"
+        rating:
+          type: integer
+          example: 4
+        check_in:
+          type: string
+          format: date-time
+          example: "2025-06-15T14:00:00Z"
+        check_out:
+          type: string
+          format: date-time
+          example: "2025-06-20T12:00:00Z"
+        city:
+          $ref: '#/components/schemas/City'
+
+    Entertainment:
+      type: object
+      properties:
+        entertainment_id:
+          type: integer
+          example: 1
+        duration:
+          type: string
+          example: "2 часа"
+        address:
+          type: string
+          example: "ул. Арбат, 20"
+        event_name:
+          type: string
+          example: "Концерт"
+        event_time:
+          type: string
+          format: date-time
+          example: "2025-09-15T19:00:00Z"
+        city:
+          $ref: '#/components/schemas/City'
+
+    Travel:
+      type: object
+      properties:
+        travel_id:
+          type: integer
+          example: 1
+        status:
+          type: string
+          enum: ['В процессе', 'Завершен', 'Отменен']
+          example: "В процессе"
+        user_ids:
+          type: array
+          items:
+            type: integer
+        entertainment_ids:
+          type: array
+          items:
+            type: integer
+        accommodation_ids:
+          type: array
+          items:
+            type: integer
+      required:
+        - travel_id
+        - status
+        - user_ids
+        - entertainment_ids
+        - accommodation_ids
+    
+    Route:
+      type: object
+      properties:
+        route_id:
+          type: integer
+          example: 1
+        d_route:
+          type: integer
+          example: 1
+        travel:
+          type: integer
+          example: 1
+        start_time:
+          type: string
+          format: date-time
+          example: "2025-09-15T19:00:00Z"
+        end_time:
+          type: string
+          format: date-time
+          example: "2025-09-15T19:00:00Z"
+        type:
+          type: string
+          enum: [Авторские, Пользовательские]
+      required:
+        - route_id
+        - d_route
+        - travel
+        - start_time
+        - end_time
+        - type
+
+    DirectoryRoute:
+      type: object
+      properties:
+        d_route_id:
+          type: integer
+          example: 1
+        type_transport:
+          type: string
+          example: "train"
+        cost:
+          type: integer
+          example: 1500
+        distance:
+          type: integer
+          example: 300
+        departure_city:
+          type: integer
+          example: 1
+        destination_city:
+          type: integer
+          example: 3
+      required:
+        - d_route_id
+        - type_transport
+        - cost
+        - distance
+        - departure_city
+        - destination_city
+
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Bad Request"
+        message:
+          type: string
+          example: "Неверный запрос"
+        status_code:
+          type: integer
+          example: 400
+    
+    InternalServerError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Internal Server Error"
+        message:
+          type: string
+          example: "Внутренняя ошибка сервера"
+        status_code:
+          type: integer
+          example: 500
+    
+    NotFoundError:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Not Found"
+        message:
+          type: string
+          example: "Объект не найден"
+        status_code:
+          type: integer
+          example: 404
+    
+    InvalidAcc:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Код ошибки
+          example: "invalid_credentials"
+        message:
+          type: string
+          description: Сообщение об ошибке
+          example: "Неверный логин или пароль"
+        status:
+          type: integer
+          description: HTTP статус ошибки
+          example: 401 
+
+tags:
+  - name: cities
+    description: Операции с городами
+  - name: users
+    description: Операции с пользователями
+  - name: authentication
+    description: Аутентификация
+  - name: accommodations
+    description: Операции с местом жительства
+  - name: entertainments
+    description: Операции с развлечением
+  - name: travels
+    description: Операции с развлечением
+  - name: routes
+    description: Операции с маршрутами
+  - name: directory-routes
+    description: Операции со справочниками маршрутами

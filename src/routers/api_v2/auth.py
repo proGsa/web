@@ -1,0 +1,29 @@
+from __future__ import annotations
+
+import logging
+from fastapi import APIRouter, Depends, HTTPException, status
+from schemas.auth import LoginRequest, LoginResponse
+from service_locator import ServiceLocator, get_service_locator
+
+logger = logging.getLogger(__name__)
+router = APIRouter(prefix="/login", tags=["authentication"])
+get_sl_dep = Depends(get_service_locator)
+
+
+@router.post(
+    "",
+    response_model=LoginResponse,
+    status_code=status.HTTP_201_CREATED,
+    responses={
+        401: {"description": "Invalid login or password"},
+        500: {"description": "Internal server error"},
+    },
+)
+async def login_user(credentials: LoginRequest, service_locator: ServiceLocator = get_sl_dep):
+    try:
+        return await service_locator.get_user_contr().login(credentials)
+    except ValueError:
+        raise HTTPException(status_code=401, detail="Invalid login or password")
+    except Exception as e:
+        logger.error(f"Ошибка при логине: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Internal server error")

@@ -109,13 +109,13 @@
         <a href="#name"><span class="white-text name">Admin</span></a>
       </div>
     </li>
-    <li><a class="waves-effect" href="user.html"><i class="material-icons">person</i>Пользователи</a></li>
+    <li><a class="waves-effect" href="users"><i class="material-icons">person</i>Пользователи</a></li>
     <li><a class="waves-effect" href="travel.html"><i class="material-icons">flight_takeoff</i>Путешествия</a></li>
     <li><a class="waves-effect" href="route.html"><i class="material-icons">map</i>Маршруты</a></li>
     <li><a class="waves-effect" href="directory_route.html"><i class="material-icons">directions</i>Справочник маршрутов</a></li>
     <li><a class="waves-effect" href="entertainment.html"><i class="material-icons">local_activity</i>Развлечения</a></li>
     <li><a class="waves-effect" href="accommodation.html"><i class="material-icons">hotel</i>Размещение</a></li>
-    <li><a class="waves-effect" href="city.html"><i class="material-icons">location_city</i>Города</a></li>
+    <li><a class="waves-effect" href="cities"><i class="material-icons">location_city</i>Города</a></li>
   </ul>
   <!-- Основной контент -->
   <main>
@@ -135,8 +135,9 @@
             <td>{{ city.id }}</td>
             <td>{{ city.name }}</td>
             <td>
-              <form method="post" action="/city/delete/{{ city.id }}" onsubmit="return confirm('Удалить этот город?');">
-                <button type="submit" class="btn-flat" style="color: #888;">
+              <form method="DELETE" action="/api/v1/cities/{{ city.id }}" class="delete-form" style="display: inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn-flat" style="color: #888;" onclick="return confirm('Удалить этот город?');">
                   <i class="material-icons">delete</i>
                 </button>
               </form>
@@ -204,7 +205,8 @@
     $('.modal').modal();
     $('.dropdown-trigger').dropdown();
     let currentActivityId = null;
-    let isEditing = false; 
+    let currentCityId = null;
+    let currentCityName = null;
 
     $('#addCityForm').submit(function (event) {
       event.preventDefault(); 
@@ -214,68 +216,141 @@
       };
 
       if (!formData.name) {
-        alert("Пожалуйста, заполните все поля.");
+        alert("Пожалуйста, введите название города.");
         return;
-        }
+      }
+      const formDataObj = new FormData();
+      formDataObj.append('name', formData.name);
 
-      // AJAX запрос для добавления данных
+      showLoading(true);
       $.ajax({
-        url: '/api/cities',  // Путь для добавления данных
+        url: '/api/v1/cities',  // Путь для добавления данных
         type: 'POST',  // Метод запроса
-        contentType: 'application/json',
-        data: JSON.stringify(formData),
+        data: formDataObj,
+        processData: false,
+        contentType: false,
         success: function (response) {
           $('#addCityModal').modal('close');
-          alert("Город добавлен успешно.");
-          location.reload(); // Перезагружаем страницу для обновления данных
+          $('#addCityForm')[0].reset();
+          alert("Город успешно добавлен!");
+          location.reload();
         },
         error: function (error) {
           console.error('Ошибка при добавлении:', error);
-          alert('Ошибка при добавлении нового города.');
+          alert('Ошибка при добавлении города: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
+        },
+        complete: function() {
+          showLoading(false);
         }
       });
     });
 
     $('.edit-trigger').on('click', function () {
-      currentActivityId = $(this).data('id');
+      currentCityId = $(this).data('id');
       const name = $(this).data('name');
 
       $('#editName').val(name);
-
+      M.updateTextFields();
       $('#editModal').modal('open');
-      isEditing = true;
     });
+    $(document).on('submit', '.delete-form', function(event) {
+      event.preventDefault();
+      
+      const form = $(this);
+      const cityId = form.attr('action').split('/').pop();
+      
+      if (!confirm('Удалить этот город?')) {
+        return false;
+      }
 
+      showLoading(true);
+      
+      $.ajax({
+        url: `/api/v1/cities/${cityId}`,
+        type: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        success: function(response) {
+          alert('Город успешно удален!');
+          location.reload(); // Перезагружаем страницу для обновления списка
+        },
+        error: function(error) {
+          console.error('Ошибка при удалении:', error);
+          alert('Ошибка при удалении города: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
+        },
+        complete: function() {
+          showLoading(false);
+        }
+      });
+    });
     $('#saveEdit').on('click', function () {
-      const activityName = $('#editName').val();
+      const cityName = $('#editName').val();  // Правильное название переменной
 
-      if (!activityName) 
-      {
-          alert('Пожалуйста, заполните все поля.');
+      if (!cityName) {
+          alert('Пожалуйста, заполните название города.');
           return;
       }
       
-      const requestData = {
-        name: activityName,
-      };
+      const formData = new FormData();
+      formData.append('name', cityName);
+
+      showLoading(true);
+
+      $.ajax({
+        url: `/api/v1/cities/${currentCityId}`,
+        type: 'PUT',  // Метод запроса для обновления
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            $('#editModal').modal('close');
+            alert('Город обновлено успешно.');
+            location.reload(); 
+        },
+        error: function (error) {
+            console.error('Ошибка при обновлении:', error);
+            alert('Ошибка при обновлении города.');
+        },
+        complete: function() {
+          showLoading(false);
+        }
+      });
+    });
+    $('.delete-trigger').on('click', function () {
+        currentCityId = $(this).data('id');
+        currentCityName = $(this).data('name');
+
+        $('#deleteCityName').text(currentCityName);
+        $('#deleteModal').modal('open');
+      });
+
+      $('#confirmDelete').on('click', function () {
+        showLoading(true);
 
         $.ajax({
-            url: `/api/cities/${currentActivityId}`,
-            type: 'PUT',  // Метод запроса для обновления
-            contentType: 'application/json',
-            data: JSON.stringify(requestData),
-            success: function (response) {
-                $('#editModal').modal('close');
-                alert('Город обновлено успешно.');
-                location.reload(); 
-            },
-            error: function (error) {
-                console.error('Ошибка при обновлении:', error);
-                alert('Ошибка при обновлении города.');
-            }
+          url: `/api/v1/cities/${currentCityId}`,
+          type: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          success: function (response) {
+            $('#deleteModal').modal('close');
+            alert('Город успешно удален!');
+            // Удаляем строку из таблицы без перезагрузки страницы
+            $(`tr[data-city-id="${currentCityId}"]`).remove();
+          },
+          error: function (error) {
+            console.error('Ошибка при удалении:', error);
+            alert('Ошибка при удалении города: ' + (error.responseJSON?.error || 'Неизвестная ошибка'));
+          },
+          complete: function() {
+            showLoading(false);
+            currentCityId = null;
+            currentCityName = null;
+          }
         });
-    });
-    
+      });
     $('#logoutLink').on('click', function () {
       localStorage.removeItem('auth_token'); 
       localStorage.removeItem('user_id');
@@ -284,6 +359,15 @@
 
       window.location.replace('/');
     });
+    function showLoading(show) {
+      if (show) {
+        $('#loading').show();
+        $('#citiesTable').hide();
+      } else {
+        $('#loading').hide();
+        $('#citiesTable').show();
+      }
+    }
   });
 </script>
 

@@ -83,8 +83,8 @@ class EntertainmentRepository(IEntertainmentRepository):
             })
             new_id = row.scalar_one()
             await self.session.commit()
-            logger.debug("Развлечение '%s' успешно добавлено", entertainment.event_name)
             entertainment.entertainment_id = new_id
+            logger.debug("Развлечение '%s' успешно добавлено", entertainment.event_name)
         except IntegrityError:
             logger.warning("Развлечение '%s' уже существует в базе данных", entertainment.event_name)
             await self.session.rollback()

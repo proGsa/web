@@ -62,10 +62,10 @@ class TravelService(ITravelService):
             logger.error("Путешествия по параметрам %s не найдены", travel_dict)
             raise ValueError("Путешествие по переданным параметрам не найдено.")
     
-    async def complete(self, travel_id: int) -> None:
+    async def complete(self, travel_id: int) -> Travel | None:
         try:
             logger.debug("Завершение путешествия с ID %d", travel_id)
-            await self.repository.complete(travel_id)
+            return await self.repository.complete(travel_id)
         except (Exception):
             logger.error("Ошибка при завершении путешествия %d", travel_id)
             raise ValueError("Ошибка при завершении путешествия")
@@ -134,3 +134,18 @@ class TravelService(ITravelService):
             logger.error("Путешествие по route ID %d не найдено", route_id)
             raise ValueError("Ошибка при получении путешествий по route ID %d", route_id)
     
+    async def unlink_entertainment(self, travel_id: int, entertainment_id: int) -> None:
+        try:
+            logger.debug("Удаление развлечения %d из путешествия %d", entertainment_id, travel_id)
+            await self.repository.unlink_entertainment(travel_id, entertainment_id)
+        except (Exception):
+            logger.error("Путешествие с ID %d не найдено.", travel_id)
+            raise ValueError("Путешествие не найдено.")
+    
+    async def unlink_accommodation(self, travel_id: int, accommodation_id: int) -> None:
+        try:
+            logger.debug("Удаление размещения %d из путешествия %d", accommodation_id, travel_id)
+            await self.repository.unlink_accommodation(travel_id, accommodation_id)
+        except (Exception):
+            logger.error("Путешествие с ID %d не найдено.", travel_id)
+            raise ValueError("Путешествие не найдено.")

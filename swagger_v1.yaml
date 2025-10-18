@@ -1,0 +1,1840 @@
+openapi: 3.0.3
+info:
+  title: TravelGuide API
+  description: API для управления городами и пользователями
+  version: 2.0.0
+servers:
+  - url: http://localhost:8800/api/v2
+    description: Development server
+
+paths:
+  # ==================== ГОРОДА ====================
+  /api/v1/cities:
+    post:
+      summary: Создать новый город
+      description: Создает новый город в системе
+      operationId: create_city
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Название города
+                  example: "Москва"
+              required:
+                - name
+      responses:
+        '201':
+          description: Город успешно создан
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - cities
+
+    get:
+      summary: Получить все города
+      description: Возвращает список всех городов
+      operationId: get_all_cities
+      responses:
+        '201':
+          description: Список городов получен успешно
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - cities
+
+  /api/v1/cities/{city_id}:
+    get:
+      summary: Получить город по ID
+      description: Возвращает информацию о конкретном городе
+      operationId: get_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          description: ID города
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '201':
+          description: Информация о городе получена успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityResponse'
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - cities
+
+    put:
+      summary: Обновить город
+      description: Обновляет информацию о городе
+      operationId: update_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          description: ID города
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Новое название города
+                  example: "Санкт-Петербург"
+              required:
+                - name
+      responses:
+        '201':
+          description: Город успешно обновлен
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - cities
+
+    delete:
+      summary: Удалить город
+      description: Удаляет город по ID
+      operationId: delete_city
+      parameters:
+        - name: city_id
+          in: path
+          required: true
+          description: ID города
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '204':
+          description: Город успешно удален
+        '404':
+          description: Город не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - cities
+
+  # ==================== ПОЛЬЗОВАТЕЛИ ====================
+  
+  /api/v1/users:
+    post:
+      summary: Создать администратора
+      description: Создает нового администратора в системе
+      operationId: register_admin
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fio:
+                  type: string
+                  description: ФИО пользователя
+                  example: "Иванов Иван Иванович"
+                number_passport:
+                  type: string
+                  description: Номер паспорта
+                  example: "1234 567890"
+                phone_number:
+                  type: string
+                  description: Номер телефона
+                  example: "+7 999 123-45-67"
+                email:
+                  type: string
+                  format: email
+                  description: Email адрес
+                  example: "admin@example.com"
+                login:
+                  type: string
+                  description: Логин для входа
+                  example: "admin"
+                password:
+                  type: string
+                  format: password
+                  description: Пароль
+                  example: "securepassword123"
+              required:
+                - fio
+                - number_passport
+                - phone_number
+                - email
+                - login
+                - password
+      responses:
+        '201':
+          description: Администратор успешно создан
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - users
+    get:
+      summary: Получить всех пользователей
+      description: Возвращает список всех пользователей системы
+      operationId: get_all_users
+      responses:
+        '201':
+          description: Список пользователей получен успешно
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - users
+
+  /api/v1/users/{user_id}:
+    put:
+      summary: Обновить администратора
+      description: Обновляет информацию об администраторе
+      operationId: update_admin
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fio:
+                  type: string
+                  description: ФИО пользователя
+                  example: "Иванов Иван Иванович"
+                number_passport:
+                  type: string
+                  description: Номер паспорта
+                  example: "1234 567890"
+                phone_number:
+                  type: string
+                  description: Номер телефона
+                  example: "+7 999 123-45-67"
+                email:
+                  type: string
+                  format: email
+                  description: Email адрес
+                  example: "admin@example.com"
+              required:
+                - fio
+                - number_passport
+                - phone_number
+                - email
+      responses:
+        '201':
+          description: Администратор успешно обновлен
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Неверный запрос
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - users
+
+    delete:
+      summary: Удалить пользователя
+      description: Удаляет пользователя по ID
+      operationId: delete_user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - users
+    get:
+      summary: Получить профиль пользователя
+      description: Возвращает детальную информацию о профиле пользователя с маршрутами
+      operationId: get_user_profile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          description: ID пользователя
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '201':
+          description: Профиль пользователя получен успешно
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - users
+
+  # ==================== АУТЕНТИФИКАЦИЯ ====================
+  /api/v1/register:
+    post:
+      summary: Зарегистрировать пользователя
+      description: Регистрирует нового пользователя в системе
+      operationId: register_user
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                fio:
+                  type: string
+                  description: ФИО пользователя
+                  example: "Петров Петр Петрович"
+                number_passport:
+                  type: string
+                  description: Номер паспорта
+                  example: "9876 543210"
+                phone_number:
+                  type: string
+                  description: Номер телефона
+                  example: "+7 888 765-43-21"
+                email:
+                  type: string
+                  format: email
+                  description: Email адрес
+                  example: "user@example.com"
+                login:
+                  type: string
+                  description: Логин для входа
+                  example: "user123"
+                password:
+                  type: string
+                  format: password
+                  description: Пароль
+                  example: "mypassword123"
+              required:
+                - fio
+                - number_passport
+                - phone_number
+                - email
+                - login
+                - password
+      responses:
+        '201':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: JWT токен доступа
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user_id:
+                    type: integer
+                    description: ID созданного пользователя
+                    example: 1
+                  message:
+                    type: string
+                    description: Сообщение об успехе
+                    example: "Регистрация прошла успешно"
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - authentication
+
+  /api/v1/login:
+    post:
+      summary: Войти в систему
+      description: Аутентификация пользователя в системе
+      operationId: login_user
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                  description: Логин пользователя
+                  example: "user123"
+                password:
+                  type: string
+                  format: password
+                  description: Пароль пользователя
+                  example: "mypassword123"
+              required:
+                - login
+                - password
+      responses:
+        '201':
+          description: Успешный вход в систему
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: JWT токен доступа
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user_id:
+                    type: integer
+                    description: ID пользователя
+                    example: 1
+                  message:
+                    type: string
+                    description: Сообщение об успехе
+                    example: "Вход выполнен успешно"
+        '401':
+          description: Неверные учетные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - authentication
+
+  # ==================== ПРОФИЛИ ====================
+  /api/v1/profile:
+    get:
+      summary: Показать профиль
+      description: Отображает страницу профиля пользователя
+      operationId: show_profile
+      responses:
+        '201':
+          description: Страница профиля
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - profiles
+
+
+# ==================== ПРОЖИВАНИЕ ====================
+
+  /api/v1/accommodations:
+    get:
+      summary: Get all accommodations
+      description: Retrieve all accommodations and render HTML page
+      operationId: get_all_accommodations
+      tags:
+        - accommodations
+      responses:
+        '201':
+          description: HTML page with accommodations
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create new accommodation
+      description: Create a new accommodation and return HTML response
+      operationId: create_accommodation
+      tags:
+        - accommodations
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                check_in:
+                  type: string
+                  format: date-time
+                check_out:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Accommodation created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+
+  /api/v1/accommodations/{accommodation_id}:
+    get:
+      summary: Get accommodation details
+      description: Retrieve detailed information about a specific accommodation
+      operationId: get_accommodation
+      tags:
+        - accommodations
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          description: ID of the accommodation
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '201':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Accommodation not found
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update accommodation
+      description: Update an existing accommodation and return HTML response
+      operationId: update_accommodation
+      tags:
+        - accommodations
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                check_in:
+                  type: string
+                  format: date-time
+                check_out:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Accommodation updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Accommodation not found
+        '500':
+          description: Internal server error
+
+    patch:
+      summary: Partial update accommodation dates
+      description: Update only the check-in and check-out dates of an accommodation
+      operationId: update_accommodation_dates
+      tags:
+        - accommodations
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                check_in:
+                  type: string
+                  format: date-time
+                check_out:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Accommodation dates updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Accommodation not found
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete accommodation
+      description: Delete an accommodation and redirect to accommodations page
+      operationId: delete_accommodation
+      tags:
+        - accommodations
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Accommodation not found
+        '500':
+          description: Internal server error
+
+  /api/v1/route/{route_id}/accommodations/{accommodation_id}:
+    delete:
+      summary: Delete accommodation from route
+      description: Delete an accommodation from a specific route and redirect to route edit page
+      operationId: delete_accommodation_for_route
+      tags:
+        - route-accommodations
+      parameters:
+        - name: accommodation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: route_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Accommodation or route not found
+        '500':
+          description: Internal server error
+    post:
+      summary: Add accommodation to route
+      description: Create a new accommodation and add it to a specific route
+      operationId: add_acc_to_route
+      tags:
+        - route-accommodations
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                check_in:
+                  type: string
+                  format: date-time
+                check_out:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '400':
+          description: Bad request
+        '404':
+          description: Route not found
+        '500':
+          description: Internal server error
+# ==================== РАЗВЛЕЧЕНИЕ ====================
+  /api/v1/entertainments:
+    get:
+      summary: Get all entertainments
+      description: Retrieve all entertainments and render HTML page
+      operationId: get_all_entertainments
+      tags:
+        - entertainments
+      responses:
+        '201':
+          description: HTML page with entertainments
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create new entertainment
+      description: Create a new entertainment and return HTML response
+      operationId: create_entertainment
+      tags:
+        - entertainments
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                event_time:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Entertainment created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+
+  /api/v1/entertainments/{entertainment_id}:
+    get:
+      summary: Get entertainment details
+      description: Retrieve detailed information about a specific entertainment
+      operationId: get_entertainment
+      tags:
+        - entertainments
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          description: ID of the entertainment
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entertainment_id:
+                    type: integer
+                  name:
+                    type: string
+                  city_id:
+                    type: integer
+                  event_time:
+                    type: string
+                    format: date-time
+                  address:
+                    type: string
+                  cost:
+                    type: number
+                  description:
+                    type: string
+        '404':
+          description: Entertainment not found
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update entertainment
+      description: Update an existing entertainment and return HTML response
+      operationId: update_entertainment
+      tags:
+        - entertainments
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                event_time:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Entertainment updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Entertainment not found
+        '500':
+          description: Internal server error
+
+    patch:
+      summary: Partial update entertainment time
+      description: Update only the event time of an entertainment
+      operationId: update_entertainment_dates
+      tags:
+        - entertainments
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                event_time:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Entertainment time updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '404':
+          description: Entertainment not found
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete entertainment
+      description: Delete an entertainment and redirect to entertainments page
+      operationId: delete_entertainment
+      tags:
+        - entertainments
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Entertainment not found
+        '500':
+          description: Internal server error
+
+  /api/v1/route/{route_id}/entertainments/{entertainment_id}:
+    delete:
+      summary: Delete entertainment from route
+      description: Delete an entertainment from a specific route and redirect to route edit page
+      operationId: delete_entertainment_for_route
+      tags:
+        - route-entertainments
+      parameters:
+        - name: entertainment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+        - name: route_id
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Entertainment or route not found
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Add entertainment to route
+      description: Create a new entertainment and add it to a specific route
+      operationId: add_ent_to_route
+      tags:
+        - route-entertainments
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                city_id:
+                  type: integer
+                event_time:
+                  type: string
+                  format: date-time
+                address:
+                  type: string
+                cost:
+                  type: number
+                description:
+                  type: string
+      responses:
+        '400':
+          description: Bad request
+        '404':
+          description: Route not found
+        '500':
+          description: Internal server error
+
+# ==================== СПРАВОЧНИК МАРШРУТОВ ====================
+  /api/v1/directory_routes:
+    get:
+      summary: Get all directory routes
+      description: Retrieve all directory routes and render HTML page
+      operationId: get_all_d_routes
+      tags:
+        - directory-routes
+      responses:
+        '201':
+          description: HTML page with directory routes
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create new directory route
+      description: Create a new directory route and return HTML response
+      operationId: create_d_route
+      tags:
+        - directory-routes
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - type_transport
+                - cost
+                - distance
+                - departure_city_id
+                - destination_city_id
+              properties:
+                type_transport:
+                  type: string
+                  description: Type of transport
+                  example: "train"
+                cost:
+                  type: integer
+                  minimum: 0
+                  description: Cost of the route
+                  example: 1500
+                distance:
+                  type: integer
+                  minimum: 1
+                  description: Distance in kilometers
+                  example: 300
+                departure_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID of departure city
+                destination_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID of destination city
+      responses:
+        '201':
+          description: Directory route created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+
+  /api/v1/directory_routes/{d_route_id}:
+    get:
+      summary: Get directory route details
+      description: Retrieve detailed information about a specific directory route
+      operationId: get_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          description: ID of the directory route
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d_route_id:
+                    type: integer
+                    example: 1
+                  type_transport:
+                    type: string
+                    example: "train"
+                  cost:
+                    type: integer
+                    example: 1500
+                  distance:
+                    type: integer
+                    example: 300
+                  departure_city:
+                    type: object
+                    properties:
+                      city_id:
+                        type: integer
+                      name:
+                        type: string
+                      # Другие поля города
+                  destination_city:
+                    type: object
+                    properties:
+                      city_id:
+                        type: integer
+                      name:
+                        type: string
+                      # Другие поля города
+        '404':
+          description: Directory route not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Directory route not found"
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update directory route
+      description: Update an existing directory route and return HTML response
+      operationId: update_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                type_transport:
+                  type: string
+                  description: Type of transport
+                  example: "bus"
+                cost:
+                  type: integer
+                  minimum: 0
+                  description: Cost of the route
+                  example: 1201
+                distance:
+                  type: integer
+                  minimum: 1
+                  description: Distance in kilometers
+                  example: 250
+                departure_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID of departure city
+                destination_city_id:
+                  type: integer
+                  minimum: 1
+                  description: ID of destination city
+      responses:
+        '201':
+          description: Directory route updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Directory route not found
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete directory route
+      description: Delete a directory route and redirect to directory routes page
+      operationId: delete_d_route
+      tags:
+        - directory-routes
+      parameters:
+        - name: d_route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Directory route not found
+        '500':
+          description: Internal server error
+
+# ==================== ПУТЕШЕСТВИЕ ====================
+  /api/v1/travels:
+    get:
+      summary: Get all travels
+      description: Retrieve all travels with users, entertainments and accommodations
+      operationId: get_all_travels
+      tags:
+        - travels
+      responses:
+        '201':
+          description: HTML page with travels data
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Create new travel
+      description: Create a new travel and return HTML response
+      operationId: create_travel
+      tags:
+        - travels
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the travel
+                description:
+                  type: string
+                  description: Description of the travel
+                user_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: List of user IDs
+                entertainment_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: List of entertainment IDs
+                accommodation_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: List of accommodation IDs
+      responses:
+        '201':
+          description: Travel created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+
+  /api/v1/travels/{travel_id}:
+    put:
+      summary: Update travel
+      description: Update an existing travel and return HTML response
+      operationId: update_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                  enum: [planned, active, completed, cancelled]
+                user_ids:
+                  type: array
+                  items:
+                    type: integer
+                entertainment_ids:
+                  type: array
+                  items:
+                    type: integer
+                accommodation_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '201':
+          description: Travel updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Travel not found
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete travel
+      description: Delete a travel and redirect to travels page
+      operationId: delete_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Travel not found
+        '500':
+          description: Internal server error
+
+    patch:
+      summary: Complete travel
+      description: Mark a travel as completed and redirect to user profile
+      operationId: complete_travel
+      tags:
+        - travels
+      parameters:
+        - name: travel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Travel or user not found
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<h1>Пользователь не найден</h1>"
+        '500':
+          description: Internal server error
+
+# ==================== МАРШРУТ ====================
+  /api/v1/routes:
+    get:
+      summary: Get all routes
+      description: Вернуть все маршруты. Фильтрация по типу маршрута.
+      operationId: get_all_route
+      tags:
+        - routes
+      parameters:
+        - name: type
+          in: query
+          description: Фильтрация по типу (свой, авторский)
+          required: false
+          schema:
+            type: string
+            enum:
+              - custom
+              - author
+              - popular
+            example: custom
+      responses:
+        '201':
+          description: HTML page with routes data
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+    post:
+      summary: Create new route
+      description: Create a new route and return HTML response
+      operationId: create_route
+      tags:
+        - routes
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                d_route_id:
+                  type: integer
+                  description: ID of directory route
+                travel_id:
+                  type: integer
+                  description: ID of travel
+                start_time:
+                  type: string
+                  format: date-time
+                  description: Start time of the route
+                end_time:
+                  type: string
+                  format: date-time
+                  description: End time of the route
+                type:
+                  type: string
+                  enum: [Авторские, Рекомендованные, Пользовательские]
+                  description: Type of the route
+      responses:
+        '201':
+          description: Route created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+
+  /api/v1/routes/{route_id}:
+    put:
+      summary: Update route
+      description: Update an existing route and return HTML response
+      operationId: update_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                d_route_id:
+                  type: integer
+                travel_id:
+                  type: integer
+                start_time:
+                  type: string
+                  format: date-time
+                end_time:
+                  type: string
+                  format: date-time
+                type:
+                  type: string
+                  enum: [Авторские, Рекомендованные, Пользовательские]
+      responses:
+        '201':
+          description: Route updated successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Route not found
+        '500':
+          description: Internal server error
+
+    post:
+      summary: Delete route
+      description: Delete a route and redirect to routes page
+      operationId: delete_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '404':
+          description: Route not found
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/edit:
+    get:
+      summary: Get route edit page
+      description: Retrieve route details for editing
+      operationId: edit_page
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '201':
+          description: HTML page for route editing
+          content:
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Route not found
+          content:
+            text/html:
+              schema:
+                type: string
+                example: "<h1>Пользователь не найден</h1>"
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/change_transport:
+    patch:
+      summary: Change transport in route
+      description: Change transport type for a route and return HTML response
+      operationId: change_transport
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                transport:
+                  type: string
+                  description: New transport type
+      responses:
+        '201':
+          description: Transport changed successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/directory_routes/{d_route_id}:
+    delete:
+      summary: Delete city from route
+      description: Remove a city from route and return HTML response
+      operationId: delete_city_from_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                city_id:
+                  type: integer
+      responses:
+        '201':
+          description: City deleted successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/add_city:
+    post:
+      summary: Add city to route
+      description: Add a new city to route and return HTML response
+      operationId: add_new_city
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                city_id:
+                  type: integer
+                transport:
+                  type: string
+                cost:
+                  type: integer
+                distance:
+                  type: integer
+      responses:
+        '201':
+          description: City added successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/extend:
+    patch:
+      summary: Extend travel duration
+      description: Change travel duration for a route and return HTML response
+      operationId: api_change_travel_duration
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                start_time:
+                  type: string
+                  format: date-time
+                end_time:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Travel duration changed successfully
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+
+  /api/v1/routes/{route_id}/join:
+    post:
+      summary: Join route
+      description: Join a user to a route/trip and return HTML response
+      operationId: join_route
+      tags:
+        - routes
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+      responses:
+        '201':
+          description: Successfully joined the route
+          content:
+            text/html:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+
+components:
+  responses:
+    NotFound:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Внутренняя ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Неавторизованный доступ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+tags:
+  - name: cities
+    description: Операции с городами
+  - name: users
+    description: Операции с пользователями
+  - name: authentication
+    description: Аутентификация и регистрация
+  - name: profiles
+    description: Профили пользователей
+  - name: accommodations
+    description: Операции с местом жительства
+  - name: entertainments
+    description: Операции с развлечением
+  - name: travels
+    description: Операции с развлечением
+  - name: routes
+    description: Операции с маршрутами
+  - name: directory-routes
+    description: Операции со справочниками маршрутами

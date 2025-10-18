@@ -19,13 +19,13 @@ from abstract_repository.ientertainment_repository import IEntertainmentReposito
 from abstract_repository.iroute_repository import IRouteRepository
 from abstract_repository.itravel_repository import ITravelRepository
 from abstract_repository.iuser_repository import IUserRepository
-from controllers.accommodation_controller import AccommodationController
-from controllers.city_controller import CityController
-from controllers.d_route_controller import DirectoryRouteController
-from controllers.entertainment_controller import EntertainmentController
-from controllers.route_controller import RouteController
-from controllers.travel_controller import TravelController
-from controllers.user_controller import UserController
+from controllers.api_v2.accommodation_controller import AccommodationController
+from controllers.api_v2.d_route_controller import DirectoryRouteController
+from controllers.api_v2.entertainment_controller import EntertainmentController
+from controllers.api_v2.route_controller import RouteController
+from controllers.api_v2.travel_controller import TravelController
+from controllers.api_v2.city_controller import CityController
+from controllers.api_v2.user_controller import UserController
 from repository.accommodation_repository import AccommodationRepository
 from repository.city_repository import CityRepository
 from repository.directory_route_repository import DirectoryRouteRepository
@@ -53,7 +53,7 @@ from settings import settings
 
 logger = logging.getLogger(__name__)
 
-_mongo_client: AsyncIOMotorClient[Any] | None= None
+_mongo_client: AsyncIOMotorClient[Any] | None = None
 _async_session_maker = None
 
 
@@ -262,10 +262,9 @@ async def get_service_locator() -> ServiceLocator:
     d_route_contr = DirectoryRouteController(d_route_serv, city_serv)
     acc_contr = AccommodationController(acc_serv, city_serv)
     ent_contr = EntertainmentController(ent_serv, city_serv)
-    travel_contr = TravelController(travel_serv, user_serv, ent_serv, acc_serv)
+    travel_contr = TravelController(travel_serv, user_serv, ent_serv, acc_serv, city_serv)
     user_contr = UserController(user_serv, auth_serv)
 
-    
     services = Services(acc_serv, city_serv, d_route_serv, ent_serv, route_serv, travel_serv, user_serv, auth_serv)
     controllers = Controllers(acc_contr, route_contr, ent_contr, travel_contr, user_contr, 
                                                                                 d_route_contr, city_contr)

@@ -57,7 +57,7 @@ class CityRepository(ICityRepository):
         query = text("""
             INSERT INTO city (name)
             VALUES (:name)
-            RETURNING id
+            RETURNING city_id
         """)
         try:
             row = await self.session.execute(query, {"name": city.name})
