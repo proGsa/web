@@ -135,7 +135,7 @@ class UserController:
     async def registrate(self, request: Request) -> dict[str, Any]:
         try:
             data = await request.json()
-            user_data = UserCreate(**data, is_admin=False)
+            user_data = UserCreate(**data)
             created_user = await self.create_user(user_data)
             token = self.auth_service.create_access_token(created_user)
             return {

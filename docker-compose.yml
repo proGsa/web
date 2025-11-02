@@ -2,9 +2,9 @@
 services:
   app:
     build: .
-    image: ppo
+    image: web
     ports:
-      - "8000:8000"
+      - "8010:8010"
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -25,7 +25,7 @@ services:
 
   db:
     image: postgres:15
-    container_name: postgres_container_ppo
+    container_name: postgres_container_web
     environment:
       POSTGRES_USER: nastya
       POSTGRES_PASSWORD: nastya
@@ -64,10 +64,39 @@ services:
       - my_network
     restart: unless-stopped 
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/var/www/static
+      - ./docs:/var/www/docs
+      - ./management:/var/www/management
+    depends_on:
+      - app
+    networks:
+      - my_network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: travelguide-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@travelguide.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
+    networks:
+      - my_network
 
 volumes:
   postgres_data:
   mongodb_data:
+  pgadmin-data:
 
 networks:
   my_network:

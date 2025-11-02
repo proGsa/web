@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from schemas.user import UserCreate, UserUpdate, UserResponse, UsersResponse
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 
 user_router = APIRouter(prefix="/users", tags=["users"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 @user_router.post("/", response_model=UserResponse, responses={
     400: {"description": "Неверный запрос"},
     500: {"description": "Внутренняя ошибка сервера"},
 })
-async def create_user(user: UserCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_user(user: UserCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         created_user = await service_locator.get_user_contr().create_user(user)
         return created_user
@@ -23,7 +23,7 @@ async def create_user(user: UserCreate, service_locator: ServiceLocator = get_sl
     404: {"description": "Пользователи не найдены"},
     500: {"description": "Внутренняя ошибка сервера"},
 })
-async def get_all_users(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_users(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         users = await service_locator.get_user_contr().get_all_users()
         if not users:
@@ -39,7 +39,7 @@ async def get_all_users(service_locator: ServiceLocator = get_sl_dep):
     404: {"description": "Пользователь не найдены"},
     500: {"description": "Внутренняя ошибка сервера"},
 })
-async def get_user(user_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_user(user_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         user = await service_locator.get_user_contr().get_user_profile(user_id)
         if not user:
@@ -57,7 +57,7 @@ async def get_user(user_id: int, service_locator: ServiceLocator = get_sl_dep):
     404: {"description": "Пользователи не найдены"},
     500: {"description": "Внутренняя ошибка сервера"},
 })
-async def update_user(user_id: int, user: UserUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def update_user(user_id: int, user: UserUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         updated_user = await service_locator.get_user_contr().update_user(user_id, user)
         if not updated_user:
@@ -74,7 +74,7 @@ async def update_user(user_id: int, user: UserUpdate, service_locator: ServiceLo
     404: {"description": "Пользователи не найдены"},
     500: {"description": "Внутренняя ошибка сервера"},
 })
-async def delete_user(user_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_user(user_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_user_contr().delete_user(user_id)
     except ValueError as e:

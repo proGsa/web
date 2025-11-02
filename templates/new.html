@@ -655,7 +655,7 @@
           });
           
           
-          const response = await fetch('/route/new', {
+          const response = await fetch('/api/v1/route/new', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -671,7 +671,7 @@
           
           const result = await response.json();
           M.toast({html: 'Путешествие успешно создано!', classes: 'green'});
-          window.location.href = `/profile`;
+          window.location.href = `/api/v1/profile`;
         } catch (error) {
           console.error('Ошибка:', error);
           M.toast({html: `Ошибка при создании путешествия: ${error.message}`, classes: 'red'});
@@ -695,7 +695,7 @@
       $('#profileLink').on('click', function() {
         const userId = localStorage.getItem('user_id') || sessionStorage.getItem('user_id');
         if (userId) {
-          window.location.href = `/profile_user/${userId}`;
+          window.location.href = `/api/v1/profile_user/${userId}`;
         } else {
           M.toast({html: 'Не удалось получить ID пользователя', classes: 'red'});
         }

@@ -15,26 +15,26 @@ from fastapi.responses import RedirectResponse
 from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
 
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV1
+from service_locator import get_service_locator_v1
 
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v1)
 
 
 @router.post("/routes", response_class=HTMLResponse)
-async def create_route(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def create_route(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_route_contr().create_new_route(request)
     logger.info("Маршрут успешно создан: %s", result)
     return templates.TemplateResponse("route.html", {"request": request})
 
 
 # @router.post("/routes/new", response_class=HTMLResponse)
-# async def create_route_user(request: Request, service_locator: ServiceLocator = get_sl_dep) -> JSONResponse:
+# async def create_route_user(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> JSONResponse:
 #     logger.info("create_route_user\n")
 #     result = await service_locator.get_route_contr().create_new_route_user(request)
 #     logger.info("Маршрут успешно создан: %s", result)
@@ -42,7 +42,7 @@ async def create_route(request: Request, service_locator: ServiceLocator = get_s
 
 
 # @router.get("/routes/new", response_class=HTMLResponse)
-# async def get_route_page(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+# async def get_route_page(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
 #     entertainments = await service_locator.get_ent_serv().get_list()
 #     accommodations = await service_locator.get_acc_serv().get_list()
 #     cities = await service_locator.get_city_serv().get_all_cities()
@@ -58,7 +58,7 @@ async def create_route(request: Request, service_locator: ServiceLocator = get_s
 
 
 @router.get("/routes", response_class=HTMLResponse)
-async def get_all_route(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_all_route(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     route_list = await service_locator.get_route_contr().get_all_routes()
     routes = route_list.get("routes", [])
     user = None
@@ -132,7 +132,7 @@ async def get_all_route(request: Request, service_locator: ServiceLocator = get_
 
 
 @router.put("/routes/{route_id}", response_class=HTMLResponse)
-async def update_route(route_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def update_route(route_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_route_contr().update_route(route_id, request)
     logger.info("Маршрут ID %d успешно обновлен: %s", route_id, result)
     return templates.TemplateResponse("route.html", {"request": request})
@@ -140,14 +140,14 @@ async def update_route(route_id: int, request: Request, service_locator: Service
 
 @router.post("/routes/{route_id}", response_class=HTMLResponse)
 async def delete_route(route_id: int, request: Request,
-                                        service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                        service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_route_contr().delete_route(route_id)
     logger.info("Маршрут ID %d успешно удален: %s", route_id, result)
     return RedirectResponse(url="/route.html", status_code=303)
 
 
 @router.get("/routes/{route_id}/edit")
-async def edit_page(route_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> Response:
+async def edit_page(route_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> Response:
     route = await service_locator.get_route_serv().get_by_id(route_id)
     if not route:
         logger.error("Маршрут с таким ID %s не найден", route_id)
@@ -187,7 +187,7 @@ async def edit_page(route_id: int, request: Request, service_locator: ServiceLoc
 
 @router.patch("/routes/{route_id}/change_transport")
 async def change_transport(route_id: int, request: Request, 
-                                            service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+                                            service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     
     result = await service_locator.get_route_contr().change_transport(route_id, request)
     logger.info("Транспорт в маршруте успешно изменен: %s", result)
@@ -195,21 +195,21 @@ async def change_transport(route_id: int, request: Request,
 
 
 @router.delete("/routes/{route_id}/delete_city")
-async def delete_city_from_route(request: Request, service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+async def delete_city_from_route(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     result = await service_locator.get_route_contr().delete_city_from_route(request)
     logger.info("Город успешно удален из маршрута: %s", result)
     return result
 
 
 @router.post("/routes/{route_id}/add_city")
-async def add_new_city(request: Request, service_locator: ServiceLocator = get_sl_dep) -> None:
+async def add_new_city(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> None:
     result = await service_locator.get_route_contr().add_new_city(request)
     logger.info("Город успешно добавлен в маршрут: %s", result)
 
 
 @router.patch("/routes/{route_id}/extend")
 async def api_change_travel_duration(route_id: int, request: Request, 
-    service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+    service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     try:
         result = await service_locator.get_route_contr().change_travel_duration(route_id, request)
         if "error" in result:
@@ -225,7 +225,7 @@ async def api_change_travel_duration(route_id: int, request: Request,
 
 
 @router.get("/routes/tours", response_class=HTMLResponse)
-async def get_tours(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_tours(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     routes = await service_locator.get_route_serv().get_routes_by_type('Авторские')
     routes_data = []
     
@@ -296,7 +296,7 @@ async def get_tours(request: Request, service_locator: ServiceLocator = get_sl_d
 
     
 @router.get("/routes/recommended", response_class=HTMLResponse)
-async def get_recommended_tours(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_recommended_tours(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     routes = await service_locator.get_route_serv().get_routes_by_type('Рекомендованные')
     routes_data = []
     
@@ -369,6 +369,6 @@ async def get_recommended_tours(request: Request, service_locator: ServiceLocato
 
 
 @router.post("/routes/{route_id}/join")
-async def join_route(route_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+async def join_route(route_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     logger.info("Присоединяемся к маршруту %d ID", route_id)
     return await service_locator.get_route_contr().join_to_trip(route_id, request)

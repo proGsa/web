@@ -5,7 +5,7 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 from schemas.directory_route import (
     DirectoryRouteCreate,
     DirectoryRouteUpdate,
@@ -17,7 +17,7 @@ from schemas.directory_route import (
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/directory_routes", tags=["directory-routes"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @router.post(
@@ -29,7 +29,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def create_d_route(d_route: DirectoryRouteCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_d_route(d_route: DirectoryRouteCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         return await service_locator.get_d_route_contr().create_new_d_route(d_route)
     except ValueError as e:
@@ -48,7 +48,7 @@ async def create_d_route(d_route: DirectoryRouteCreate, service_locator: Service
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_d_routes(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_d_routes(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_d_route_contr().get_all_d_routes()
         if not result:
@@ -68,7 +68,7 @@ async def get_all_d_routes(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_d_route(d_route_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_d_route(d_route_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_d_route_contr().get_d_route_details(d_route_id)
         if not result:
@@ -89,7 +89,7 @@ async def get_d_route(d_route_id: int, service_locator: ServiceLocator = get_sl_
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def update_d_route(d_route_id: int, d_route: DirectoryRouteUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def update_d_route(d_route_id: int, d_route: DirectoryRouteUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_d_route_contr().update_d_route(d_route_id, d_route)
         if not result:
@@ -109,7 +109,7 @@ async def update_d_route(d_route_id: int, d_route: DirectoryRouteUpdate, service
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_d_route(d_route_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_d_route(d_route_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_d_route_contr().delete_d_route(d_route_id)
     except ValueError as e:
@@ -128,7 +128,7 @@ async def delete_d_route(d_route_id: int, service_locator: ServiceLocator = get_
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def partial_update_d_route(d_route_id: int, d_route: DirectoryRoutePartialUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def partial_update_d_route(d_route_id: int, d_route: DirectoryRoutePartialUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_d_route_contr().partial_update_d_route(d_route_id, d_route)
         if not result:

@@ -6,13 +6,13 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 from schemas.entertainment import EntertainmentCreate, EntertainmentUpdate, EntertainmentResponse, EntertainmentsResponse
 
 logger = logging.getLogger(__name__)
 
 entertainment_router = APIRouter(prefix="/entertainments", tags=["entertainments"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @entertainment_router.post(
@@ -23,7 +23,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def create_entertainment(entertainment: EntertainmentCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_entertainment(entertainment: EntertainmentCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         return await service_locator.get_ent_contr().create_new_entertainment(entertainment)
     except ValueError as e:
@@ -42,7 +42,7 @@ async def create_entertainment(entertainment: EntertainmentCreate, service_locat
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_entertainments(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_entertainments(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_ent_contr().get_all_entertainment()
         if not result:
@@ -63,7 +63,7 @@ async def get_all_entertainments(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_entertainment(entertainment_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_entertainment(entertainment_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_ent_contr().get_entertainment_details(entertainment_id)
         if not result:
@@ -86,7 +86,7 @@ async def get_entertainment(entertainment_id: int, service_locator: ServiceLocat
     },
 )
 async def update_entertainment(entertainment_id: int, entertainment: EntertainmentUpdate,
-    service_locator: ServiceLocator = get_sl_dep):
+    service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_ent_contr().update_entertainment(entertainment_id, entertainment)
         if result is None:
@@ -107,7 +107,7 @@ async def update_entertainment(entertainment_id: int, entertainment: Entertainme
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_entertainment(entertainment_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_entertainment(entertainment_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
     except ValueError as e:

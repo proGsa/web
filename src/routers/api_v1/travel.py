@@ -13,26 +13,26 @@ from fastapi.responses import RedirectResponse
 from fastapi.responses import Response
 from fastapi.templating import Jinja2Templates
 
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV1
+from service_locator import get_service_locator_v1
 
 
 logger = logging.getLogger(__name__)
 
 travel_router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v1)
 
 
 @travel_router.post("/travels", response_class=HTMLResponse)
-async def create_travel(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def create_travel(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_travel_contr().create_new_travel(request)
     logger.info("Путешествие успешно создано: %s", result)
     return templates.TemplateResponse("travel.html", {"request": request})
 
 
 @travel_router.get("/travels", response_class=HTMLResponse)
-async def get_all_travels(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_all_travels(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     travel_list = await service_locator.get_travel_contr().get_all_travels()
     travels = travel_list.get("travels", [])
     logger.info("Получено %d путешествий", len(travels))
@@ -94,7 +94,7 @@ async def get_all_travels(request: Request, service_locator: ServiceLocator = ge
 
 
 @travel_router.put("/travels/{travel_id}", response_class=HTMLResponse)
-async def update_travel(travel_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def update_travel(travel_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_travel_contr().update_travel(travel_id, request)
     logger.info("Путешествие ID %d успешно обновлено: %s", travel_id, result)
     return templates.TemplateResponse("travel.html", {"request": request})
@@ -102,7 +102,7 @@ async def update_travel(travel_id: int, request: Request, service_locator: Servi
 
 @travel_router.delete("/travels/{travel_id}", response_class=HTMLResponse)
 async def delete_travel(travel_id: int, request: Request, 
-                                            service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                            service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_travel_contr().delete_travel(travel_id)
     logger.info("Путешествие ID %d успешно удалено: %s", travel_id, result)
     return RedirectResponse(url="/travel.html", status_code=303)
@@ -110,7 +110,7 @@ async def delete_travel(travel_id: int, request: Request,
 
 @travel_router.patch("/travels/{travel_id}")
 async def complete_travel(travel_id: int, request: Request, 
-                                                service_locator: ServiceLocator = get_sl_dep) -> Response:
+                                                service_locator: ServiceLocatorV1 = get_sl_dep) -> Response:
     result = await service_locator.get_travel_contr().complete_travel(travel_id)
     logger.info("Путешествие успешно завершено: %s", result)
     travel = await service_locator.get_travel_contr().get_travel_details(travel_id)

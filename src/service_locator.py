@@ -19,13 +19,23 @@ from abstract_repository.ientertainment_repository import IEntertainmentReposito
 from abstract_repository.iroute_repository import IRouteRepository
 from abstract_repository.itravel_repository import ITravelRepository
 from abstract_repository.iuser_repository import IUserRepository
-from controllers.api_v2.accommodation_controller import AccommodationController
-from controllers.api_v2.d_route_controller import DirectoryRouteController
-from controllers.api_v2.entertainment_controller import EntertainmentController
-from controllers.api_v2.route_controller import RouteController
-from controllers.api_v2.travel_controller import TravelController
-from controllers.api_v2.city_controller import CityController
-from controllers.api_v2.user_controller import UserController
+
+from controllers.api_v2.accommodation_controller import AccommodationController as AccommodationController2
+from controllers.api_v2.d_route_controller import DirectoryRouteController as DirectoryRouteController2
+from controllers.api_v2.entertainment_controller import EntertainmentController as EntertainmentController2
+from controllers.api_v2.route_controller import RouteController as RouteController2
+from controllers.api_v2.travel_controller import TravelController as TravelController2
+from controllers.api_v2.city_controller import CityController as CityController2
+from controllers.api_v2.user_controller import UserController as UserController2
+
+from controllers.api_v1.accommodation_controller import AccommodationController as AccommodationController1
+from controllers.api_v1.d_route_controller import DirectoryRouteController as DirectoryRouteController1
+from controllers.api_v1.entertainment_controller import EntertainmentController as EntertainmentController1
+from controllers.api_v1.route_controller import RouteController as RouteController1
+from controllers.api_v1.travel_controller import TravelController as TravelController1
+from controllers.api_v1.city_controller import CityController as CityController1
+from controllers.api_v1.user_controller import UserController as UserController1
+
 from repository.accommodation_repository import AccommodationRepository
 from repository.city_repository import CityRepository
 from repository.directory_route_repository import DirectoryRouteRepository
@@ -94,10 +104,22 @@ class Services:
 
 
 @dataclass
-class Controllers:
-    def __init__(self, acc_contr: AccommodationController, route_contr: RouteController, 
-            ent_contr: EntertainmentController, travel_contr: TravelController, user_contr: UserController, 
-            d_route_contr: DirectoryRouteController, city_contr: CityController):
+class ControllersV1:
+    def __init__(self, acc_contr: AccommodationController1, route_contr: RouteController1, 
+            ent_contr: EntertainmentController1, travel_contr: TravelController1, user_contr: UserController1, 
+            d_route_contr: DirectoryRouteController1, city_contr: CityController1):
+        self.acc_contr = acc_contr
+        self.city_contr = city_contr
+        self.route_contr = route_contr
+        self.d_route_contr = d_route_contr
+        self.ent_contr = ent_contr
+        self.travel_contr = travel_contr
+        self.user_contr = user_contr
+
+class ControllersV2:
+    def __init__(self, acc_contr: AccommodationController2, route_contr: RouteController2, 
+            ent_contr: EntertainmentController2, travel_contr: TravelController2, user_contr: UserController2, 
+            d_route_contr: DirectoryRouteController2, city_contr: CityController2):
         self.acc_contr = acc_contr
         self.city_contr = city_contr
         self.route_contr = route_contr
@@ -107,11 +129,11 @@ class Controllers:
         self.user_contr = user_contr
 
 
-class ServiceLocator:
-    def __init__(self, repositories: Repositories, services: Services, controllers: Controllers):
+class ServiceLocatorV1:
+    def __init__(self, repositories: Repositories, services: Services, v1_controllers: ControllersV1):
         self.repositories = repositories
         self.services = services
-        self.controllers = controllers
+        self.v1_controllers = v1_controllers
 
     def get_acc_repo(self) -> IAccommodationRepository:
         return self.repositories.acc_repo
@@ -158,27 +180,98 @@ class ServiceLocator:
     def get_auth_serv(self) -> AuthService:
         return self.services.auth_serv
 
-    def get_acc_contr(self) -> AccommodationController:
-        return self.controllers.acc_contr
+    def get_acc_contr(self) -> AccommodationController1:
+        return self.v1_controllers.acc_contr
 
-    def get_city_contr(self) -> CityController:
-        return self.controllers.city_contr
+    def get_city_contr(self) -> CityController1:
+        return self.v1_controllers.city_contr
 
-    def get_route_contr(self) -> RouteController:
-        return self.controllers.route_contr
+    def get_route_contr(self) -> RouteController1:
+        return self.v1_controllers.route_contr
     
-    def get_d_route_contr(self) -> DirectoryRouteController:
-        return self.controllers.d_route_contr
+    def get_d_route_contr(self) -> DirectoryRouteController1:
+        return self.v1_controllers.d_route_contr
 
-    def get_ent_contr(self) -> EntertainmentController:
-        return self.controllers.ent_contr
+    def get_ent_contr(self) -> EntertainmentController1:
+        return self.v1_controllers.ent_contr
 
-    def get_travel_contr(self) -> TravelController:
-        return self.controllers.travel_contr
+    def get_travel_contr(self) -> TravelController1:
+        return self.v1_controllers.travel_contr
 
-    def get_user_contr(self) -> UserController:
-        return self.controllers.user_contr
+    def get_user_contr(self) -> UserController1:
+        return self.v1_controllers.user_contr
 
+class ServiceLocatorV2:
+    def __init__(self, repositories: Repositories, services: Services, v2_controllers: ControllersV2):
+        self.repositories = repositories
+        self.services = services
+        self.v2_controllers = v2_controllers
+
+    def get_acc_repo(self) -> IAccommodationRepository:
+        return self.repositories.acc_repo
+
+    def get_city_repo(self) -> ICityRepository:
+        return self.repositories.city_repo
+
+    def get_d_route_repo(self) -> IDirectoryRouteRepository:
+        return self.repositories.d_route_repo
+
+    def get_ent_repo(self) -> IEntertainmentRepository:
+        return self.repositories.ent_repo
+
+    def get_route_repo(self) -> IRouteRepository:
+        return self.repositories.route_repo
+
+    def get_travel_repo(self) -> ITravelRepository:
+        return self.repositories.travel_repo
+
+    def get_user_repo(self) -> IUserRepository:
+        return self.repositories.user_repo
+
+    def get_acc_serv(self) -> AccommodationService:
+        return self.services.acc_serv
+
+    def get_city_serv(self) -> CityService:
+        return self.services.city_serv
+
+    def get_d_route_serv(self) -> DirectoryRouteService:
+        return self.services.d_route_serv
+
+    def get_ent_serv(self) -> EntertainmentService:
+        return self.services.ent_serv
+
+    def get_route_serv(self) -> RouteService:
+        return self.services.route_serv
+
+    def get_travel_serv(self) -> TravelService:
+        return self.services.travel_serv
+
+    def get_user_serv(self) -> UserService:
+        return self.services.user_serv
+
+    def get_auth_serv(self) -> AuthService:
+        return self.services.auth_serv
+
+    def get_acc_contr(self) -> AccommodationController2:
+        return self.v2_controllers.acc_contr
+
+    def get_city_contr(self) -> CityController2:
+        return self.v2_controllers.city_contr
+
+    def get_route_contr(self) -> RouteController2:
+        return self.v2_controllers.route_contr
+    
+    def get_d_route_contr(self) -> DirectoryRouteController2:
+        return self.v2_controllers.d_route_contr
+
+    def get_ent_contr(self) -> EntertainmentController2:
+        return self.v2_controllers.ent_contr
+
+    def get_travel_contr(self) -> TravelController2:
+        return self.v2_controllers.travel_contr
+
+    def get_user_contr(self) -> UserController2:
+        return self.v2_controllers.user_contr
 
 async def get_sessionmaker(max_retries: int = 5, delay: int = 2) -> Any: 
     global _async_session_maker
@@ -207,7 +300,7 @@ async def get_sessionmaker(max_retries: int = 5, delay: int = 2) -> Any:
     return None
 
 
-async def get_service_locator() -> ServiceLocator:
+async def get_service_locator_v1() -> ServiceLocatorV1:
     global _mongo_client, _async_session_maker
     
     db_type = "mongo" if "mongo" in settings.DATABASE_URL_ASYNC else "postgres"
@@ -257,16 +350,80 @@ async def get_service_locator() -> ServiceLocator:
         user_serv = UserService(user_repo)
         auth_serv = AuthService(user_repo)
     
-    city_contr = CityController(city_serv)
-    route_contr = RouteController(route_serv, travel_serv, d_route_serv, user_serv, ent_serv, acc_serv) 
-    d_route_contr = DirectoryRouteController(d_route_serv, city_serv)
-    acc_contr = AccommodationController(acc_serv, city_serv)
-    ent_contr = EntertainmentController(ent_serv, city_serv)
-    travel_contr = TravelController(travel_serv, user_serv, ent_serv, acc_serv, city_serv)
-    user_contr = UserController(user_serv, auth_serv)
+    city_contr = CityController1(city_serv)
+    route_contr = RouteController1(route_serv, travel_serv, d_route_serv, user_serv, ent_serv, acc_serv) 
+    d_route_contr = DirectoryRouteController1(d_route_serv, city_serv)
+    acc_contr = AccommodationController1(acc_serv, city_serv)
+    ent_contr = EntertainmentController1(ent_serv, city_serv)
+    travel_contr = TravelController1(travel_serv, user_serv, ent_serv, acc_serv)
+    user_contr = UserController1(user_serv, auth_serv)
 
     services = Services(acc_serv, city_serv, d_route_serv, ent_serv, route_serv, travel_serv, user_serv, auth_serv)
-    controllers = Controllers(acc_contr, route_contr, ent_contr, travel_contr, user_contr, 
+    controllers = ControllersV1(acc_contr, route_contr, ent_contr, travel_contr, user_contr, 
                                                                                 d_route_contr, city_contr)
     
-    return ServiceLocator(repositories, services, controllers)
+    return ServiceLocatorV1(repositories, services, controllers)
+
+async def get_service_locator_v2() -> ServiceLocatorV2:
+    global _mongo_client, _async_session_maker
+    
+    db_type = "mongo" if "mongo" in settings.DATABASE_URL_ASYNC else "postgres"
+    
+    if db_type == "mongo":
+        if _mongo_client is None:
+            _mongo_client = AsyncIOMotorClient(settings.DATABASE_URL_ASYNC)
+        mongo_client: AsyncIOMotorClient[Any] = _mongo_client
+        m_city_repo: ICityRepository = MongoCityRepository(mongo_client)
+        m_d_route_repo: IDirectoryRouteRepository = MongoDirectoryRouteRepository(mongo_client, m_city_repo)
+        m_acc_repo: IAccommodationRepository = MongoAccommodationRepository(mongo_client, m_city_repo)
+        m_ent_repo: IEntertainmentRepository = MongoEntertainmentRepository(mongo_client, m_city_repo)
+        m_user_repo: IUserRepository = MongoUserRepository(mongo_client)
+        m_travel_repo: ITravelRepository = MongoTravelRepository(mongo_client, m_user_repo, m_ent_repo, m_acc_repo)
+        m_route_repo: IRouteRepository = MongoRouteRepository(mongo_client, m_d_route_repo, m_travel_repo)
+
+        acc_serv = AccommodationService(m_acc_repo)
+        city_serv = CityService(m_city_repo)
+        d_route_serv = DirectoryRouteService(m_d_route_repo)
+        ent_serv = EntertainmentService(m_ent_repo)
+        route_serv = RouteService(m_route_repo)
+        travel_serv = TravelService(m_travel_repo)
+        user_serv = UserService(m_user_repo)
+        auth_serv = AuthService(m_user_repo)
+
+        repositories = Repositories(m_acc_repo, m_city_repo, m_d_route_repo, m_ent_repo, m_route_repo, m_travel_repo, m_user_repo)
+    else:
+        if _async_session_maker is None:
+            _async_session_maker = await get_sessionmaker()
+        async with _async_session_maker() as session:
+            city_repo: ICityRepository = CityRepository(session)
+            d_route_repo: IDirectoryRouteRepository = DirectoryRouteRepository(session, city_repo)
+            acc_repo: IAccommodationRepository = AccommodationRepository(session, city_repo)
+            ent_repo: IEntertainmentRepository = EntertainmentRepository(session, city_repo)
+            user_repo: IUserRepository = UserRepository(session)
+            travel_repo: ITravelRepository = TravelRepository(session, user_repo, ent_repo, acc_repo)
+            route_repo: IRouteRepository = RouteRepository(session, d_route_repo, travel_repo)
+
+            repositories = Repositories(acc_repo, city_repo, d_route_repo, ent_repo, route_repo, travel_repo, user_repo)
+        
+        acc_serv = AccommodationService(acc_repo)
+        city_serv = CityService(city_repo)
+        d_route_serv = DirectoryRouteService(d_route_repo)
+        ent_serv = EntertainmentService(ent_repo)
+        route_serv = RouteService(route_repo)
+        travel_serv = TravelService(travel_repo)
+        user_serv = UserService(user_repo)
+        auth_serv = AuthService(user_repo)
+    
+    city_contr = CityController2(city_serv)
+    route_contr = RouteController2(route_serv, travel_serv, d_route_serv, user_serv, ent_serv, acc_serv) 
+    d_route_contr = DirectoryRouteController2(d_route_serv, city_serv)
+    acc_contr = AccommodationController2(acc_serv, city_serv)
+    ent_contr = EntertainmentController2(ent_serv, city_serv)
+    travel_contr = TravelController2(travel_serv, user_serv, ent_serv, acc_serv, city_serv)
+    user_contr = UserController2(user_serv, auth_serv)
+
+    services = Services(acc_serv, city_serv, d_route_serv, ent_serv, route_serv, travel_serv, user_serv, auth_serv)
+    controllers = ControllersV2(acc_contr, route_contr, ent_contr, travel_contr, user_contr, 
+                                                                                d_route_contr, city_contr)
+    
+    return ServiceLocatorV1(repositories, services, controllers)

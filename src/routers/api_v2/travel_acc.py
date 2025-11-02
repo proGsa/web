@@ -3,11 +3,11 @@ from __future__ import annotations
 import logging
 from fastapi import APIRouter, Depends, HTTPException, status
 from schemas.accommodation import AccommodationCreate, AccommodationResponse
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/api/v2/travels", tags=["travel-accommodations"])
-get_sl_dep = Depends(get_service_locator)
+router = APIRouter(prefix="/travels", tags=["travel-accommodations"])
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @router.post(
@@ -25,7 +25,7 @@ get_sl_dep = Depends(get_service_locator)
 async def add_accommodation_to_travel(
     travel_id: int,
     accommodation: AccommodationCreate,
-    service_locator: ServiceLocator = get_sl_dep,
+    service_locator: ServiceLocatorV2 = get_sl_dep,
 ):
     """
     Создать размещение и добавить его к путешествию
@@ -56,7 +56,7 @@ async def add_accommodation_to_travel(
 async def delete_accommodation_from_travel(
     travel_id: int,
     accommodation_id: int,
-    service_locator: ServiceLocator = get_sl_dep,
+    service_locator: ServiceLocatorV2 = get_sl_dep,
 ):
     """
     Удалить размещение из путешествия

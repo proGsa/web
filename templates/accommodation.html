@@ -109,13 +109,13 @@
         <a href="#name"><span class="white-text name">Admin</span></a>
       </div>
     </li>
-    <li><a class="waves-effect" href="user.html"><i class="material-icons">person</i>Пользователи</a></li>
-    <li><a class="waves-effect" href="travel.html"><i class="material-icons">flight_takeoff</i>Путешествия</a></li>
-    <li><a class="waves-effect" href="route.html"><i class="material-icons">map</i>Маршруты</a></li>
-    <li><a class="waves-effect" href="directory_route.html"><i class="material-icons">directions</i>Справочник маршрутов</a></li>
-    <li><a class="waves-effect" href="entertainment.html"><i class="material-icons">local_activity</i>Развлечения</a></li>
-    <li><a class="waves-effect" href="accommodation.html"><i class="material-icons">hotel</i>Размещение</a></li>
-    <li><a class="waves-effect" href="city.html"><i class="material-icons">location_city</i>Города</a></li>
+    <li><a class="waves-effect" href="/api/v1/users"><i class="material-icons">person</i>Пользователи</a></li>
+    <li><a class="waves-effect" href="/api/v1/travels"><i class="material-icons">flight_takeoff</i>Путешествия</a></li>
+    <li><a class="waves-effect" href="/api/v1/routes"><i class="material-icons">map</i>Маршруты</a></li>
+    <li><a class="waves-effect" href="/api/v1/directory_routes"><i class="material-icons">directions</i>Справочник маршрутов</a></li>
+    <li><a class="waves-effect" href="/api/v1/entertainments"><i class="material-icons">local_activity</i>Развлечения</a></li>
+    <li><a class="waves-effect" href="/api/v1/accommodations"><i class="material-icons">hotel</i>Размещение</a></li>
+    <li><a class="waves-effect" href="/api/v1/cities"><i class="material-icons">location_city</i>Города</a></li>
     
   </ul>
   <!-- Основной контент -->
@@ -150,7 +150,7 @@
             <td>{{ accommodation.check_out.strftime("%d.%m.%Y %H:%M") }}</td>
             <td>{{ accommodation.city.name }}</td>
             <td>
-              <form method="post" action="/accommodation/delete/{{ accommodation.id }}" onsubmit="return confirm('Удалить это размещение?');">
+              <form method="post" action="/api/v1/accommodation/delete/{{ accommodation.id }}" onsubmit="return confirm('Удалить это размещение?');">
                 <button type="submit" class="btn-flat" style="color: #888;">
                   <i class="material-icons">delete</i>
                 </button>
@@ -296,10 +296,6 @@
 <script>
   $(document).ready(function () {
     const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
-    if (!token) {
-      window.location.replace('/');
-      return;
-    }
     
     $('.modal').modal({
       onOpenStart: function() {
@@ -351,7 +347,7 @@
 
       // AJAX запрос для добавления данных
       $.ajax({
-        url: '/api/accommodations',  // Путь для добавления данных
+        url: '/api/v1/accommodations',  // Путь для добавления данных
         type: 'POST',  // Метод запроса
         contentType: 'application/json',
         data: JSON.stringify(formData),
@@ -425,7 +421,7 @@
       };
 
         $.ajax({
-            url: `/api/accommodations/${currentActivityId}`,
+            url: `/api/v1/accommodations/${currentActivityId}`,
             type: 'PUT',  // Метод запроса для обновления
             contentType: 'application/json',
             data: JSON.stringify(requestData),
@@ -447,7 +443,6 @@
       sessionStorage.removeItem('auth_token');
       sessionStorage.removeItem('user_id');
 
-      window.location.replace('/');
     });
   });
 </script>

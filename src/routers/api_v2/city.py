@@ -11,13 +11,13 @@ from fastapi import status
 from schemas.city import CityCreate
 from schemas.city import CityResponse
 from schemas.city import CityUpdate, CitiesResponse
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
 
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/cities", tags=["cities"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @router.post(
@@ -29,7 +29,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def create_city(city: CityCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_city(city: CityCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         return await service_locator.get_city_contr().create_city(city)
     except ValueError as e:
@@ -48,7 +48,7 @@ async def create_city(city: CityCreate, service_locator: ServiceLocator = get_sl
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_cities(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_cities(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         cities = await service_locator.get_city_contr().get_all_cities()
         if not cities:
@@ -69,7 +69,7 @@ async def get_all_cities(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_city(city_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_city(city_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         city = await service_locator.get_city_contr().get_city_by_id(city_id)
         if city is None:
@@ -91,7 +91,7 @@ async def get_city(city_id: int, service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def update_city(city_id: int, city: CityUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def update_city(city_id: int, city: CityUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         updated = await service_locator.get_city_contr().update_city(city_id, city)
         if updated is None:
@@ -113,7 +113,7 @@ async def update_city(city_id: int, city: CityUpdate, service_locator: ServiceLo
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_city(city_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_city(city_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_city_contr().delete_city(city_id)
     except ValueError as e:

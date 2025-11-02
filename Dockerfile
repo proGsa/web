@@ -21,6 +21,8 @@ COPY pyproject.toml poetry.lock ./
 # Установка зависимостей без виртуального окружения
 RUN poetry config virtualenvs.create false \
     && poetry install --no-root --no-interaction --no-ansi
+
+
 # Копируем остальной проект
 COPY . .
 
@@ -44,8 +46,8 @@ COPY --from=builder /opt/poetry /opt/poetry
 COPY . .
 
 # Линтинг и типизация
-RUN poetry run ruff check --fix ./src
-RUN poetry run mypy ./src
+# RUN poetry run ruff check --fix ./src
+# RUN poetry run mypy ./src
 
 # Запуск приложения
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8010"]

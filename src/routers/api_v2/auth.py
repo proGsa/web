@@ -3,11 +3,11 @@ from __future__ import annotations
 import logging
 from fastapi import APIRouter, Depends, HTTPException, status
 from schemas.auth import LoginRequest, LoginResponse
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/login", tags=["authentication"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @router.post(
@@ -19,7 +19,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Internal server error"},
     },
 )
-async def login_user(credentials: LoginRequest, service_locator: ServiceLocator = get_sl_dep):
+async def login_user(credentials: LoginRequest, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         return await service_locator.get_user_contr().login(credentials)
     except ValueError:

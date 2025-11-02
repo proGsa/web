@@ -14,8 +14,8 @@ from fastapi.responses import JSONResponse
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV1
+from service_locator import get_service_locator_v1
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ user_router = APIRouter()
 
 templates = Jinja2Templates(directory="templates")
 
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v1)
 
 
 @user_router.get("/profile")
@@ -40,7 +40,7 @@ async def show_profile(request: Request) -> HTMLResponse:
 
 
 @user_router.post("/users", response_class=HTMLResponse)
-async def register_admin(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def register_admin(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     try:
         form_data = await request.form()
         form_data["is_admin"] = True
@@ -59,7 +59,7 @@ async def register_admin(request: Request, service_locator: ServiceLocator = get
 
 
 @user_router.put("/users/{user_id}", response_class=HTMLResponse)
-async def update_admin(user_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def update_admin(user_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     try:
         form_data = await request.form()
         
@@ -80,8 +80,8 @@ async def update_admin(user_id: int, request: Request, service_locator: ServiceL
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@user_router.put("/api/v1/users/{user_id}", response_class=HTMLResponse)
-async def update_user(user_id: int, request: Request, service_locator: ServiceLocator = get_sl_dep) -> Any:
+@user_router.put("/users/{user_id}", response_class=HTMLResponse)
+async def update_user(user_id: int, request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> Any:
     try:
         form_data = await request.form()
 
@@ -101,7 +101,7 @@ async def update_user(user_id: int, request: Request, service_locator: ServiceLo
 
 
 @user_router.post("/register")
-async def register_user(request: Request, service_locator: ServiceLocator = get_sl_dep) -> JSONResponse:
+async def register_user(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> JSONResponse:
     try:
         result = await service_locator.get_user_contr().registrate(request)
         logger.info("Пользователь успешно зарегистрирован: %s", result)
@@ -120,7 +120,7 @@ async def register_user(request: Request, service_locator: ServiceLocator = get_
 
 
 @user_router.post("/login")
-async def login_user(request: Request, service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+async def login_user(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     try:
         result = await service_locator.get_user_contr().login(request)
         logger.info("Результат входа: %s", result)
@@ -135,7 +135,7 @@ async def login_user(request: Request, service_locator: ServiceLocator = get_sl_
 
 @user_router.get("/profile_user/{user_id}", response_class=HTMLResponse)
 async def get_user_profile(user_id: int, request: Request, 
-                                        service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+                                        service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     try:
         profile_data = await service_locator.get_user_contr().get_user_profile(user_id)
         active_routes = await service_locator.get_route_serv().get_routes_by_user_and_status_and_type(
@@ -218,7 +218,7 @@ async def get_user_profile(user_id: int, request: Request,
 
 
 @user_router.get("/users", response_class=HTMLResponse)
-async def get_all_users(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_all_users(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     try:
         user_list = await service_locator.get_user_contr().get_all_users()
         users = user_list.get("users", [])
@@ -239,7 +239,7 @@ async def get_all_users(request: Request, service_locator: ServiceLocator = get_
 
 
 @user_router.delete("/users/{user_id}", response_class=HTMLResponse)
-async def delete_user(user_id: int, service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+async def delete_user(user_id: int, service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     try:
         result = await service_locator.get_user_contr().delete_user(user_id)
         if not result:

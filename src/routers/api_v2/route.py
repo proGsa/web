@@ -5,11 +5,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 
 from schemas.route import RouteCreate, RouteUpdate, RouteResponse, InsertCityRequest, RoutesResponse
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/routes", tags=["routes"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 @router.post(
     "/",
@@ -20,7 +20,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def create_route(route: RouteCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_route(route: RouteCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         return await service_locator.get_route_contr().create_route(route)
     except ValueError as e:
@@ -39,7 +39,7 @@ async def create_route(route: RouteCreate, service_locator: ServiceLocator = get
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_routes(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_routes(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         routes = await service_locator.get_route_contr().get_all_routes()
         if not routes:
@@ -60,7 +60,7 @@ async def get_all_routes(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_route(route_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_route(route_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         route = await service_locator.get_route_contr().get_route_by_id(route_id)
         if route is None:
@@ -82,7 +82,7 @@ async def get_route(route_id: int, service_locator: ServiceLocator = get_sl_dep)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def update_route(route_id: int, route: RouteUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def update_route(route_id: int, route: RouteUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         updated = await service_locator.get_route_contr().update_route(route_id, route)
         if updated is None:
@@ -104,7 +104,7 @@ async def update_route(route_id: int, route: RouteUpdate, service_locator: Servi
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_route(route_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_route(route_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_route_contr().delete_route(route_id)
     except ValueError as e:
@@ -125,7 +125,7 @@ async def delete_route(route_id: int, service_locator: ServiceLocator = get_sl_d
     },
 )
 
-async def insert_city_into_route(travel_id: int, city_id: int, request: InsertCityRequest, service_locator: ServiceLocator = get_sl_dep):
+async def insert_city_into_route(travel_id: int, city_id: int, request: InsertCityRequest, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_route_contr().insert_city_after(travel_id, city_id, request)
         return {"message": "Город успешно добавлен"}
@@ -146,7 +146,7 @@ async def insert_city_into_route(travel_id: int, city_id: int, request: InsertCi
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_city_from_route(travel_id: int, city_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_city_from_route(travel_id: int, city_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         controller = service_locator.get_route_contr()
         await controller.delete_city_from_route(travel_id, city_id)

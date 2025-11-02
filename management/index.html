@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management - TravelGuide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .links {
+            display: grid;
+            gap: 10px;
+        }
+        .link {
+            display: block;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+        .link:hover {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .url {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .link:hover .url {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 TravelGuide Management Panel</h1>
+
+        <!-- Мониторинг -->
+        <div class="section">
+            <h2>📊 Мониторинг</h2>
+            <div class="links">
+                <a href="/status" class="link">
+                    <strong>Nginx Status</strong>
+                    <div class="url">/status</div>
+                </a>
+                <a href="/health" class="link">
+                    <strong>Health Check</strong>
+                    <div class="url">/health</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Администрирование -->
+        <div class="section">
+            <h2>🔧 Администрирование</h2>
+            <div class="links">
+                <a href="/admin" class="link">
+                    <strong>Database Admin (pgAdmin)</strong>
+                    <div class="url">/admin</div>
+                </a>
+                <a href="/documentation" class="link">
+                    <strong>Documentation</strong>
+                    <div class="url">/documentation</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- API Документация -->
+        <div class="section">
+            <h2>🌐 API Documentation</h2>
+            <div class="links">
+                <a href="/api/v1/docs" class="link" target="_blank">
+                    <strong>API v1 Swagger</strong>
+                    <div class="url">/api/v1/docs/</div>
+                </a>
+                <a href="/api/v2/docs" class="link" target="_blank">
+                    <strong>API v2 Swagger</strong>
+                    <div class="url">/api/v2/docs/</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Основные интерфейсы -->
+        <div class="section">
+            <h2>🔗 Основные интерфейсы</h2>
+            <div class="links">
+                <a href="/" class="link">
+                    <strong>Главная страница (SPA)</strong>
+                    <div class="url">/</div>
+                </a>
+                <a href="/legacy" class="link">
+                    <strong>Legacy System</strong>
+                    <div class="url">/legacy</div>
+                </a>
+                <a href="/reserved" class="link">
+                    <strong>Reserved Area</strong>
+                    <div class="url">/reserved</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Пользовательские интерфейсы -->
+        <div class="section">
+            <h2>👤 Пользовательские интерфейсы</h2>
+            <div class="links">
+                <a href="http://localhost/api/v1/accommodations" class="link" target="_blank">
+                    <strong>API v1 Accommodations</strong>
+                    <div class="url">http://localhost/api/v1/accommodations</div>
+                </a>
+                <a href="/api/v2/accommodations/" class="link" target="_blank">
+                    <strong>API v2 Accommodations</strong>
+                    <div class="url">/api/v2/accommodations/</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

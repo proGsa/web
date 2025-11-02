@@ -34,3 +34,7 @@ class UserResponse(UserBase):
 
 class UsersResponse(BaseModel):
     users: List[UserResponse]
+
+class LoginRequest(BaseModel):
+    login: str  
+    password: str

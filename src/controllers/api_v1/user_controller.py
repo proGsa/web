@@ -84,7 +84,7 @@ class UserController:
                 "email": email,
                 "login": login,
                 "password": self.auth_service.get_password_hash(password),
-                "is_admin": False
+                # "is_admin": False
             }
             user = User(**data)
             registered_user = await self.auth_service.registrate(user)

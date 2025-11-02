@@ -5,7 +5,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import JSONResponse
 
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 from schemas.accommodation import (
     AccommodationCreate,
     AccommodationUpdate,
@@ -16,7 +16,7 @@ from schemas.accommodation import (
 logger = logging.getLogger(__name__)
 
 accommodation_router = APIRouter(prefix="/accommodations", tags=["accommodations"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @accommodation_router.post(
@@ -29,7 +29,7 @@ get_sl_dep = Depends(get_service_locator)
     },
 )
 async def create_accommodation(
-    accommodation: AccommodationCreate, service_locator: ServiceLocator = get_sl_dep
+    accommodation: AccommodationCreate, service_locator: ServiceLocatorV2 = get_sl_dep
 ):
     try:
         result = await service_locator.get_acc_contr().create_new_accommodation(accommodation)
@@ -49,7 +49,7 @@ async def create_accommodation(
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_accommodations(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_accommodations(service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_acc_contr().get_all_accommodation()
         if not result:
@@ -68,7 +68,7 @@ async def get_all_accommodations(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_accommodation(accommodation_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_accommodation(accommodation_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         result = await service_locator.get_acc_contr().get_accommodation_details(accommodation_id)
         if result is None:
@@ -91,7 +91,7 @@ async def get_accommodation(accommodation_id: int, service_locator: ServiceLocat
     },
 )
 async def update_accommodation(
-    accommodation_id: int, accommodation: AccommodationUpdate, service_locator: ServiceLocator = get_sl_dep
+    accommodation_id: int, accommodation: AccommodationUpdate, service_locator: ServiceLocatorV2 = get_sl_dep
 ):
     try:
         result = await service_locator.get_acc_contr().update_accommodation(accommodation_id, accommodation)
@@ -113,7 +113,7 @@ async def update_accommodation(
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_accommodation(accommodation_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_accommodation(accommodation_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_acc_contr().delete_accommodation(accommodation_id)
     except ValueError:

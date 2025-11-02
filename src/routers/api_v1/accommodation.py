@@ -13,19 +13,19 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV1
+from service_locator import get_service_locator_v1
 
 
 logger = logging.getLogger(__name__)
 
 accommodation_router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v1)
 
 
 @accommodation_router.post("/accommodations", response_class=HTMLResponse)
-async def create_accommodation(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def create_accommodation(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_acc_contr().create_new_accommodation(request)
     logger.info("Проживание успешно создано: %s", result)
     return templates.TemplateResponse("accommodation.html", {"request": request})
@@ -54,8 +54,8 @@ async def get_all_accommodations(request: Request, service_locator: ServiceLocat
     )
 
 
-@accommodation_router.get("/accommodations/{accommodation_id}")
-async def get_accommodation(accommodation_id: int, service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+@accommodation_router.get("/accommodation/get/{accommodation_id}")
+async def get_accommodation(accommodation_id: int, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     try:
         acc = await service_locator.get_acc_contr().get_accommodation_details(accommodation_id)
         if acc is None:
@@ -70,30 +70,30 @@ async def get_accommodation(accommodation_id: int, service_locator: ServiceLocat
 
 @accommodation_router.put("/accommodations/{accommodation_id}", response_class=HTMLResponse)
 async def update_accommodation(accommodation_id: int, request: Request, 
-                                service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+                                service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_acc_contr().update_accommodation(accommodation_id, request)
     logger.info("Проживание ID %d успешно обновлено: %s", accommodation_id, result)
     return templates.TemplateResponse("accommodation.html", {"request": request})
 
 
-@accommodation_router.delete("/accommodations/{accommodation_id}", response_class=HTMLResponse)
-async def delete_accommodation(accommodation_id: int, service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+@accommodation_router.post("/accommodation/delete/{accommodation_id}", response_class=HTMLResponse)
+async def delete_accommodation(accommodation_id: int, service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_acc_contr().delete_accommodation(accommodation_id)
     logger.info("Проживание ID %d успешно удалено: %s", accommodation_id, result)
     return RedirectResponse(url="/accommodation.html", status_code=303)
 
 
-@accommodation_router.delete("/route/accommodations/{accommodation_id}", response_class=HTMLResponse)
+@accommodation_router.delete("/route/accommodation/delete/{accommodation_id}", response_class=HTMLResponse)
 async def delete_accommodation_for_route(accommodation_id: int, route_id: int,
-                                service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_acc_contr().delete_accommodation(accommodation_id)
     logger.info("Размещение ID %d успешно удалено: %s", accommodation_id, result)
     return RedirectResponse(url=f"/route/edit/{route_id}", status_code=303)
 
 
-@accommodation_router.post("/route/accommodations/{route_id}", response_class=HTMLResponse)
+@accommodation_router.post("/accommodation/add/{route_id}", response_class=HTMLResponse)
 async def add_acc_to_route(route_id: int, request: Request,
-                                         service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                         service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     try:
         result = await service_locator.get_acc_contr().create_new_accommodation(request)
         logger.info("Размещение успешно создано: %s", result)
@@ -116,7 +116,7 @@ async def add_acc_to_route(route_id: int, request: Request,
         raise
 
 
-@accommodation_router.patch("/accommodations/{accommodation_id}")
+@accommodation_router.put("/accommodations/{accommodation_id}")
 async def update_accommodation_dates(accommodation_id: int, request: Request,
-    service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+    service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     return await service_locator.get_acc_contr().update_accommodation_dates(accommodation_id, request)

@@ -157,7 +157,7 @@
       $('#profileLink').on('click', function() {
           const userId = localStorage.getItem('user_id') || sessionStorage.getItem('user_id');
           if (userId) {
-          window.location.href = `/profile_user/${userId}`;
+          window.location.href = `/api/v1/profile_user/${userId}`;
           } else {
           M.toast({html: 'Не удалось получить ID пользователя', classes: 'red'});
           }

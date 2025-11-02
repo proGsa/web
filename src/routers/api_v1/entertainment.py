@@ -13,26 +13,26 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
-from service_locator import ServiceLocator
-from service_locator import get_service_locator
+from service_locator import ServiceLocatorV1
+from service_locator import get_service_locator_v1
 
 
 logger = logging.getLogger(__name__)
 
 entertainment_router = APIRouter()
 templates = Jinja2Templates(directory="templates")
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v1)
 
 
 @entertainment_router.post("/entertainments", response_class=HTMLResponse)
-async def create_entertainment(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def create_entertainment(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_ent_contr().create_new_entertainment(request)
     logger.info("Развлечение успешно создано: %s", result)
     return templates.TemplateResponse("entertainment.html", {"request": request})
 
 
 @entertainment_router.get("/entertainments", response_class=HTMLResponse)
-async def get_all_entertainments(request: Request, service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+async def get_all_entertainments(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     entertainment_list = await service_locator.get_ent_contr().get_all_entertainment()
     entertainments = entertainment_list.get("entertainments", []) 
     logger.info("Получено %d развлечений", len(entertainments))
@@ -53,7 +53,7 @@ async def get_all_entertainments(request: Request, service_locator: ServiceLocat
 
 
 @entertainment_router.get("/entertainments/{entertainment_id}")
-async def get_entertainment(entertainment_id: int, service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+async def get_entertainment(entertainment_id: int, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     try:
         result = await service_locator.get_ent_contr().get_entertainment_details(entertainment_id)
         if result is None:
@@ -68,7 +68,7 @@ async def get_entertainment(entertainment_id: int, service_locator: ServiceLocat
 
 @entertainment_router.put("/entertainments/{entertainment_id}")
 async def update_entertainment(entertainment_id: int, request: Request, 
-                                service_locator: ServiceLocator = get_sl_dep) -> HTMLResponse:
+                                service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
     result = await service_locator.get_ent_contr().update_entertainment(entertainment_id, request)
     logger.info("Развлечение ID %d успешно обновлено: %s", entertainment_id, result)
     return templates.TemplateResponse("entertainment.html", {"request": request})
@@ -76,7 +76,7 @@ async def update_entertainment(entertainment_id: int, request: Request,
 
 @entertainment_router.delete("/entertainments/{entertainment_id}", response_class=HTMLResponse)
 async def delete_entertainment(entertainment_id: int, request: Request,
-                                service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
     logger.info("Развлечение ID %d успешно удалено: %s", entertainment_id, result)
     return RedirectResponse(url="/entertainment.html", status_code=303)
@@ -84,7 +84,7 @@ async def delete_entertainment(entertainment_id: int, request: Request,
 
 @entertainment_router.delete("/route/entertainments/{entertainment_id}", response_class=HTMLResponse)
 async def delete_entertainment_for_route(entertainment_id: int, route_id: int,
-                                service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     result = await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
     logger.info("Развлечение ID %d успешно удалено: %s", entertainment_id, result)
     return RedirectResponse(url=f"/route/edit/{route_id}", status_code=303)
@@ -92,7 +92,7 @@ async def delete_entertainment_for_route(entertainment_id: int, route_id: int,
 
 @entertainment_router.post("/route/entertainments/{route_id}", response_class=HTMLResponse)
 async def add_ent_to_route(route_id: int, request: Request,
-                                         service_locator: ServiceLocator = get_sl_dep) -> RedirectResponse:
+                                         service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
     try:
         result = await service_locator.get_ent_contr().create_new_entertainment(request)
         logger.info("Развлечение успешно создано: %s", result)
@@ -117,5 +117,5 @@ async def add_ent_to_route(route_id: int, request: Request,
 
 @entertainment_router.patch("/entertainments/{entertainment_id}")
 async def update_entertainment_dates(entertainment_id: int, request: Request,
-    service_locator: ServiceLocator = get_sl_dep) -> dict[str, Any]:
+    service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
     return await service_locator.get_ent_contr().update_entertainment_dates(entertainment_id, request)

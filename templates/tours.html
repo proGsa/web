@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       try {
-        const response = await fetch(`/routes/${routeId}/join`, {
+        const response = await fetch(`/api/v1/routes/${routeId}/join`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -424,10 +424,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
       if (!userId) {
         M.toast({html: 'Пожалуйста, войдите в систему'});
-        window.location.href = '/login';
+        window.location.href = '/api/v1/login';
         return;
       }
-    window.location.href = `/profile_user/${userId}`;
+    window.location.href = `/api/v1/profile_user/${userId}`;
   });
 });
     </script>

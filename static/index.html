@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelGuide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .welcome {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+        
+        .image-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome">ДОБРО ПОЖАЛОВАТЬ В TRAVELGUIDE</div>
+    
+    <div class="images">
+        <div class="image-item">
+            <img src="/static-img/i1.png" alt="картинка 1">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i2.png" alt="картинка 2">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i3.png" alt="картинка 3">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i4.png" alt="картинка 4">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i5.png" alt="картинка 5">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i6.png" alt="картинка 6">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i7.png" alt="картинка 7">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i8.png" alt="картинка 8">
+        </div>
+        <div class="image-item">
+            <img src="/static-img/i9.png" alt="картинка 9">
+        </div>
+    </div>
+</body>
+</html>

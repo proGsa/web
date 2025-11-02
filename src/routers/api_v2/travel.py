@@ -3,11 +3,11 @@ from __future__ import annotations
 import logging
 from fastapi import APIRouter, Depends, HTTPException, status
 from schemas.travel import TravelCreate, TravelResponse, TravelUpdate, TravelsResponse
-from service_locator import ServiceLocator, get_service_locator
+from service_locator import ServiceLocatorV2, get_service_locator_v2
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/travels", tags=["travels"])
-get_sl_dep = Depends(get_service_locator)
+get_sl_dep = Depends(get_service_locator_v2)
 
 
 @router.post(
@@ -19,7 +19,7 @@ get_sl_dep = Depends(get_service_locator)
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def create_travel(travel: TravelCreate, service_locator: ServiceLocator = get_sl_dep):
+async def create_travel(travel: TravelCreate, service_locator: ServiceLocatorV2 = get_sl_dep):
     """
     Создать новое путешествие с пользователями, развлечениями и размещениями
     """
@@ -43,7 +43,7 @@ async def create_travel(travel: TravelCreate, service_locator: ServiceLocator = 
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_all_travels(service_locator: ServiceLocator = get_sl_dep):
+async def get_all_travels(service_locator: ServiceLocatorV2 = get_sl_dep):
     """
     Получить список всех путешествий
     """
@@ -67,7 +67,7 @@ async def get_all_travels(service_locator: ServiceLocator = get_sl_dep):
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def get_travel(travel_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def get_travel(travel_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     """
     Получить путешествие по ID
     """
@@ -92,7 +92,7 @@ async def get_travel(travel_id: int, service_locator: ServiceLocator = get_sl_de
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def update_travel(travel_id: int, travel: TravelUpdate, service_locator: ServiceLocator = get_sl_dep):
+async def update_travel(travel_id: int, travel: TravelUpdate, service_locator: ServiceLocatorV2 = get_sl_dep):
     """
     Обновить существующее путешествие
     """
@@ -118,7 +118,7 @@ async def update_travel(travel_id: int, travel: TravelUpdate, service_locator: S
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def delete_travel(travel_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def delete_travel(travel_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     """
     Удалить путешествие по ID
     """
@@ -141,7 +141,7 @@ async def delete_travel(travel_id: int, service_locator: ServiceLocator = get_sl
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-async def complete_travel(travel_id: int, service_locator: ServiceLocator = get_sl_dep):
+async def complete_travel(travel_id: int, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         completed = await service_locator.get_travel_contr().complete_travel(travel_id)
         if completed is None:
