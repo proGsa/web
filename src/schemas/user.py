@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel
 from pydantic import EmailStr
-from typing import List
+
 
 class UserBase(BaseModel):
     fio: str
@@ -32,8 +32,10 @@ class UserResponse(UserBase):
     class Config:
         orm_mode = True
 
+
 class UsersResponse(BaseModel):
-    users: List[UserResponse]
+    users: list[UserResponse]
+
 
 class LoginRequest(BaseModel):
     login: str  

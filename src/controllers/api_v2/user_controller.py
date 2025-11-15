@@ -8,13 +8,13 @@ from fastapi import HTTPException
 from fastapi import Request
 
 from models.user import User
+from schemas.auth import LoginRequest
+from schemas.auth import LoginResponse
 from schemas.user import UserCreate
 from schemas.user import UserResponse
 from schemas.user import UserUpdate
 from services.user_service import AuthService
 from services.user_service import UserService
-from schemas.auth import LoginRequest, LoginResponse
-
 
 
 logger = logging.getLogger(__name__)
@@ -37,14 +37,14 @@ class UserController:
             user_dict = user_data.dict()
             user_dict["password"] = hashed_password
             user = User(
-                user_id = 1,
-                fio = user_data.fio,
-                number_passport = user_data.number_passport,
-                phone_number = user_data.phone_number,
-                email = user_data.email,
-                login = user_data.login,
-                password = user_data.password,
-                is_admin = user_data.is_admin
+                user_id=1,
+                fio=user_data.fio,
+                number_passport=user_data.number_passport,
+                phone_number=user_data.phone_number,
+                email=user_data.email,
+                login=user_data.login,
+                password=user_data.password,
+                is_admin=user_data.is_admin
             )
 
             if user_data.is_admin:

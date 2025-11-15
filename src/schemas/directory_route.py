@@ -1,6 +1,7 @@
 from __future__ import annotations
+
 from pydantic import BaseModel
-from typing import Optional, List
+
 
 class DirectoryRouteCreate(BaseModel):
     type_transport: str
@@ -17,8 +18,10 @@ class DirectoryRouteUpdate(BaseModel):
     departure_city: int | None = None
     destination_city: int | None = None
 
+
 class DirectoryRoutePartialUpdate(BaseModel):
-    type_transport: Optional[str] = None
+    type_transport: str | None = None
+
 
 class DirectoryRouteResponse(BaseModel):
     id: int
@@ -31,6 +34,7 @@ class DirectoryRouteResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 class DirectoryRouteResponseOut(BaseModel):
     id: int
     type_transport: str
@@ -39,5 +43,6 @@ class DirectoryRouteResponseOut(BaseModel):
     departure_city: str
     destination_city: str
 
+
 class DirectoryRoutesResponse(BaseModel):
-    d_routes: List[DirectoryRouteResponseOut]
+    d_routes: list[DirectoryRouteResponseOut]

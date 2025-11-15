@@ -1,17 +1,19 @@
 from __future__ import annotations
+
 import logging
-from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
 
-from service_locator import ServiceLocatorV2, get_service_locator_v2
-from schemas.accommodation import (
-    AccommodationCreate,
-    AccommodationUpdate,
-    AccommodationResponse,
-    AccommodationsResponse
-)
+from schemas.accommodation import AccommodationCreate
+from schemas.accommodation import AccommodationResponse
+from schemas.accommodation import AccommodationsResponse
+from schemas.accommodation import AccommodationUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +56,7 @@ async def get_all_accommodations(service_locator: ServiceLocatorV2 = get_sl_dep)
         result = await service_locator.get_acc_contr().get_all_accommodation()
         if not result:
             raise HTTPException(status_code=404, detail="Cities not found")
-        return {"accommodations" : result}
+        return {"accommodations": result}
     except Exception as e:
         logger.error("Ошибка при получении списка размещений: %s", str(e), exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")

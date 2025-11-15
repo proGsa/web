@@ -1,18 +1,16 @@
 from __future__ import annotations
+
 import logging
-from datetime import datetime
-from typing import Any
 
 from fastapi import HTTPException
 
-from schemas.entertainment import (
-    EntertainmentCreate,
-    EntertainmentUpdate,
-    EntertainmentResponse,
-)
-from services.entertainment_service import EntertainmentService
-from services.city_service import CityService
 from models.entertainment import Entertainment
+from schemas.entertainment import EntertainmentCreate
+from schemas.entertainment import EntertainmentResponse
+from schemas.entertainment import EntertainmentUpdate
+from services.city_service import CityService
+from services.entertainment_service import EntertainmentService
+
 
 logger = logging.getLogger(__name__)
 

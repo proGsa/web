@@ -1,0 +1,11 @@
+=== POST /cities (JSON v2) тест: http://localhost/api/v2/cities/ ===
+Создан город TestCity_20450 с id=546
+Создан город TestCity_589 с id=547
+Создан город TestCity_14069 с id=548
+Создан город TestCity_25310 с id=549
+Создан город TestCity_15174 с id=550
+Создан город TestCity_29889 с id=551
+Создан город TestCity_17125 с id=552
+Создан город TestCity_20025 с id=553
+Создан город TestCity_18794 с id=554
+Создан город TestCity_12194 с id=555

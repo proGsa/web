@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pydantic import BaseModel
-from typing import List
+
 
 class CityCreate(BaseModel):
     name: str
@@ -18,5 +18,6 @@ class CityResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 class CitiesResponse(BaseModel):
-    cities: List[CityResponse]
+    cities: list[CityResponse]

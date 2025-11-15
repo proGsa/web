@@ -1,0 +1,88 @@
+=== GET http://localhost/api/v1/health ===
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v1/health
+Document Length:        34 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.118 seconds
+Complete requests:      100
+Failed requests:        50
+   (Connect: 0, Receive: 0, Length: 50, Exceptions: 0)
+Total transferred:      18250 bytes
+HTML transferred:       3350 bytes
+Requests per second:    848.25 [#/sec] (mean)
+Time per request:       11.789 [ms] (mean)
+Time per request:       1.179 [ms] (mean, across all concurrent requests)
+Transfer rate:          151.18 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:     1   10   9.4      6      40
+Waiting:        1   10   9.4      6      40
+Total:          2   10   9.4      7      40
+
+Percentage of the requests served within a certain time (ms)
+  50%      7
+  66%     10
+  75%     11
+  80%     14
+  90%     26
+  95%     39
+  98%     40
+  99%     40
+ 100%     40 (longest request)
+=== GET http://localhost/api/v1/health ===
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v1/health
+Document Length:        34 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.607 seconds
+Complete requests:      100
+Failed requests:        50
+   (Connect: 0, Receive: 0, Length: 50, Exceptions: 0)
+Total transferred:      18250 bytes
+HTML transferred:       3350 bytes
+Requests per second:    164.77 [#/sec] (mean)
+Time per request:       60.692 [ms] (mean)
+Time per request:       6.069 [ms] (mean, across all concurrent requests)
+Transfer rate:          29.37 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.1      0       1
+Processing:     1   40  88.2      8     322
+Waiting:        1   40  88.2      8     322
+Total:          1   40  88.3      8     322
+
+Percentage of the requests served within a certain time (ms)
+  50%      8
+  66%     11
+  75%     15
+  80%     19
+  90%    271
+  95%    282
+  98%    322
+  99%    322
+ 100%    322 (longest request)

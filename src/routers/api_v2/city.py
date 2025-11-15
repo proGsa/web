@@ -8,9 +8,10 @@ from fastapi import Depends
 from fastapi import HTTPException
 from fastapi import status
 
+from schemas.city import CitiesResponse
 from schemas.city import CityCreate
 from schemas.city import CityResponse
-from schemas.city import CityUpdate, CitiesResponse
+from schemas.city import CityUpdate
 from service_locator import ServiceLocatorV2
 from service_locator import get_service_locator_v2
 

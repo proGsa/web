@@ -1,15 +1,25 @@
 from __future__ import annotations
 
 import logging
-from fastapi import APIRouter, Depends, HTTPException, status
-from typing import List
 
-from schemas.route import RouteCreate, RouteUpdate, RouteResponse, InsertCityRequest, RoutesResponse
-from service_locator import ServiceLocatorV2, get_service_locator_v2
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
+
+from schemas.route import InsertCityRequest
+from schemas.route import RouteCreate
+from schemas.route import RouteResponse
+from schemas.route import RoutesResponse
+from schemas.route import RouteUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/routes", tags=["routes"])
 get_sl_dep = Depends(get_service_locator_v2)
+
 
 @router.post(
     "/",
@@ -44,7 +54,7 @@ async def get_all_routes(service_locator: ServiceLocatorV2 = get_sl_dep):
         routes = await service_locator.get_route_contr().get_all_routes()
         if not routes:
             raise HTTPException(status_code=404, detail="Routes not found")
-        return {"routes" : routes}
+        return {"routes": routes}
     except HTTPException:
         raise
     except Exception as e:
@@ -114,6 +124,7 @@ async def delete_route(route_id: int, service_locator: ServiceLocatorV2 = get_sl
         logger.error("Внутренняя ошибка при удалении маршрута ID %d: %s", route_id, e, exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
+
 @router.post(
     "/cities/{city_id}",
     status_code=status.HTTP_200_OK,
@@ -124,7 +135,6 @@ async def delete_route(route_id: int, service_locator: ServiceLocatorV2 = get_sl
         500: {"description": "Внутренняя ошибка сервера"},
     },
 )
-
 async def insert_city_into_route(travel_id: int, city_id: int, request: InsertCityRequest, service_locator: ServiceLocatorV2 = get_sl_dep):
     try:
         await service_locator.get_route_contr().insert_city_after(travel_id, city_id, request)

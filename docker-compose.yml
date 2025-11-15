@@ -1,48 +1,132 @@
-
 services:
-  app:
+  # === Main app (write) ===
+  app_main:
     build: .
-    image: web
+    container_name: app_main
+    environment:
+      DB_MODE: write
+      DB_USER: write_user
+      DB_PASSWORD: write_password
+      DB_HOST: db-master
+      DB_PORT: 5432
+      USE_MIRROR: "false"
+      NODE_NAME: "app_main"
     ports:
       - "8010:8010"
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: nastya
-      DB_PASSWORD: nastya
-      DB_NAME: mydb
-      DATABASE_URL: "postgresql://nastya:nastya@db:5432/mydb"
-      MONGO_URI: "mongodb://admin:password@mongodb:27017"
-    volumes:
-      - .:/app
     depends_on:
-      db:
-        condition: service_healthy
-      mongodb: 
-        condition: service_healthy
+      - db-master
     networks:
-      - my_network
+      - web_my_network
 
-  db:
-    image: postgres:15
-    container_name: postgres_container_web
+  # === Read replicas ===
+  app_read1:
+    build: .
+    container_name: app_read1
     environment:
-      POSTGRES_USER: nastya
-      POSTGRES_PASSWORD: nastya
+      DB_MODE: read
+      DB_USER: write_user
+      DB_PASSWORD: write_password
+      DB_HOST: db-slave
+      DB_PORT: 5432
+      USE_MIRROR: "true"
+      NODE_NAME: "app_read1"
+    ports:
+      - "8011:8010"
+    depends_on:
+      - db-slave
+    networks:
+      - web_my_network
+
+  app_read2:
+    build: .
+    container_name: app_read2
+    environment:
+      DB_MODE: read
+      DB_USER: write_user
+      DB_PASSWORD: write_password
+      DB_HOST: db-slave
+      DB_PORT: 5432
+      USE_MIRROR: "true"
+      NODE_NAME: "app_read2"
+    ports:
+      - "8012:8010"
+    depends_on:
+      - db-slave
+    networks:
+      - web_my_network
+
+  # === Postgres master ===
+  db-master:
+    image: postgres:15
+    container_name: postgres_master
+    user: postgres
+    environment:
+      POSTGRES_USER: write_user
+      POSTGRES_PASSWORD: write_password
       POSTGRES_DB: mydb
-      PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./db-init:/docker-entrypoint-initdb.d/
+      - postgres_master_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d 
+      - ./db-init/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command:
+      - postgres
+      - -c
+      - wal_level=replica
+      - -c
+      - max_wal_senders=10
+      - -c
+      - wal_keep_size=64
+      - -c
+      - listen_addresses=*
+      - -c
+      - hba_file=/etc/postgresql/pg_hba.conf
     ports:
       - "5434:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U nastya -d mydb"]
+      test: ["CMD-SHELL", "pg_isready -U write_user -d mydb"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - my_network
+      - web_my_network
+
+  # === Postgres slave ===
+  db-slave:
+    image: postgres:15
+    container_name: postgres_slave
+    depends_on:
+      db-master:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: write_user
+      POSTGRES_PASSWORD: write_password
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres_slave_data:/var/lib/postgresql/data
+    command: >
+      bash -c "
+      if [ ! -s '/var/lib/postgresql/data/PG_VERSION' ]; then
+        echo 'Initializing replication from master...';
+        until pg_isready -h db-master -U replica_user; do
+          echo 'Waiting for master to be ready...';
+          sleep 2;
+        done;
+        rm -rf /var/lib/postgresql/data/*;
+        PGPASSWORD=replica_password pg_basebackup -h db-master -D /var/lib/postgresql/data -U replica_user -Fp -Xs -P -R;
+        chown -R postgres:postgres /var/lib/postgresql/data;
+        chmod 700 /var/lib/postgresql/data;
+      else
+        echo 'Slave data already initialized. Skipping base backup.';
+      fi;
+      exec docker-entrypoint.sh postgres
+      "
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U write_user -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - web_my_network
 
   mongodb:
     image: mongo:latest
@@ -54,30 +138,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping').ok", "-u", "admin", "-p", "password", "--quiet"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+    restart: unless-stopped
     networks:
-      - my_network
-    restart: unless-stopped 
+      - web_my_network
 
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./static:/var/www/static
-      - ./docs:/var/www/docs
-      - ./management:/var/www/management
-    depends_on:
-      - app
-    networks:
-      - my_network
+  # === pgAdmin ===
   pgadmin:
     image: dpage/pgadmin4
     container_name: travelguide-pgadmin
@@ -89,15 +154,170 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
-      - db
+      - db-master
     networks:
-      - my_network
+      - web_my_network
+    # === Nginx ===
+  nginx:
+    image: openresty/openresty:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/var/www/static
+      - ./docs:/var/www/docs
+      - ./management:/var/www/management
+      - ./nginx/logs:/var/log/nginx    
+    depends_on:
+      - app_main
+      - app_read1
+      - app_read2
+    networks:
+      - web_my_network
+networks:
+  web_my_network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  postgres_master_data:
+  postgres_slave_data:
   mongodb_data:
   pgadmin-data:
+# services:
+#   app_main:
+#     build: .
+#     container_name: app_main
+#     environment:
+#       DB_MODE: write
+#       DB_USER: write_user
+#       DB_PASSWORD: write_password
+#       DB_HOST: db
+#       DB_PORT: 5432
+#       NODE_NAME: "app_main"
+#       # DB_USER: nastya
+#       # DB_PASSWORD: nastya
+#       # DB_NAME: mydb
+#       # DATABASE_URL: "postgresql://nastya:nastya@db:5432/mydb"
+#       # MONGO_URI: "mongodb://admin:password@mongodb:27017"
+#     ports:
+#       - "8010:8010"
+#     # volumes:
+#     #   - .:/app
+#     # depends_on:
+#     #   db:
+#     #     condition: service_healthy
+#     #   mongodb: 
+#     #     condition: service_healthy
+#     networks:
+#       - my_network
+#   app_read1:
+#     build: .
+#     container_name: app_read1
+#     environment:
+#       DB_MODE: read
+#       DB_USER: read_user
+#       DB_PASSWORD: read_password
+#       DB_HOST: db
+#       DB_PORT: 5432
+#       NODE_NAME: "app_read1"
+#     ports:
+#       - "8011:8010"
+#     networks:
+#       - my_network
 
-networks:
-  my_network:
-    driver: bridge
+#   app_read2:
+#     build: .
+#     container_name: app_read2
+#     environment:
+#       DB_MODE: read
+#       DB_USER: read_user
+#       DB_PASSWORD: read_password
+#       DB_HOST: db
+#       DB_PORT: 5432
+#       NODE_NAME: "app_read2"
+#     ports:
+#       - "8012:8010"
+#     networks:
+#       - my_network
+
+#   db:
+#     image: postgres:15
+#     container_name: postgres_container_web
+#     environment:
+#       POSTGRES_USER: write_user
+#       POSTGRES_PASSWORD: write_password
+#       POSTGRES_DB: mydb
+#       PGDATA: /var/lib/postgresql/data/pgdata
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#       - ./db-init:/docker-entrypoint-initdb.d/
+#     ports:
+#       - "5434:5432"
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready -U nastya -d mydb"]
+#       interval: 5s
+#       timeout: 5s
+#       retries: 5
+#     networks:
+#       - my_network
+
+#   mongodb:
+#     image: mongo:latest
+#     container_name: mongodb
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongodb_data:/data/db
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: admin
+#       MONGO_INITDB_ROOT_PASSWORD: password
+#     healthcheck:
+#       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping').ok", "-u", "admin", "-p", "password", "--quiet"]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 3
+#       start_period: 10s
+#     networks:
+#       - my_network
+#     restart: unless-stopped 
+
+#   nginx:
+#     image: nginx:alpine
+#     ports:
+#       - "80:80"
+#     volumes:
+#       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+#       - ./nginx/conf.d:/etc/nginx/conf.d
+#       - ./static:/var/www/static
+#       - ./docs:/var/www/docs
+#       - ./management:/var/www/management
+#     depends_on:
+#       - app_main
+#       - app_read1
+#       - app_read2
+#     networks:
+#       - my_network
+#   pgadmin:
+#     image: dpage/pgadmin4
+#     container_name: travelguide-pgadmin
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: admin@travelguide.com
+#       PGADMIN_DEFAULT_PASSWORD: admin123
+#     ports:
+#       - "5050:80"
+#     volumes:
+#       - pgadmin-data:/var/lib/pgadmin
+#     depends_on:
+#       - db
+#     networks:
+#       - my_network
+
+# volumes:
+#   postgres_data:
+#   mongodb_data:
+#   pgadmin-data:
+
+# networks:
+#   my_network:
+#     driver: bridge

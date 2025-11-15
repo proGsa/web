@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 import logging
-from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
 
-from service_locator import ServiceLocatorV2, get_service_locator_v2
-from schemas.entertainment import EntertainmentCreate, EntertainmentUpdate, EntertainmentResponse, EntertainmentsResponse
+from schemas.entertainment import EntertainmentCreate
+from schemas.entertainment import EntertainmentResponse
+from schemas.entertainment import EntertainmentsResponse
+from schemas.entertainment import EntertainmentUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +40,6 @@ async def create_entertainment(entertainment: EntertainmentCreate, service_locat
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
-
 @entertainment_router.get(
     "/", response_model=EntertainmentsResponse,
     responses={
@@ -47,7 +52,7 @@ async def get_all_entertainments(service_locator: ServiceLocatorV2 = get_sl_dep)
         result = await service_locator.get_ent_contr().get_all_entertainment()
         if not result:
             raise HTTPException(status_code=404, detail="Entertainments not found")
-        return {"entertainments" : result}
+        return {"entertainments": result}
     except HTTPException:
         raise
     except Exception as e:
@@ -98,6 +103,7 @@ async def update_entertainment(entertainment_id: int, entertainment: Entertainme
     except Exception as e:
         logger.error(f"Внутренняя ошибка при обновлении развлечения ID {city_id}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
+
 
 @entertainment_router.delete(
     "/{entertainment_id}",

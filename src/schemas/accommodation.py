@@ -1,7 +1,8 @@
 from __future__ import annotations
+
 from datetime import datetime
+
 from pydantic import BaseModel
-from typing import List
 
 
 class AccommodationCreate(BaseModel):
@@ -42,4 +43,4 @@ class AccommodationResponse(BaseModel):
 
 
 class AccommodationsResponse(BaseModel):
-    accommodations: List[AccommodationResponse]
+    accommodations: list[AccommodationResponse]

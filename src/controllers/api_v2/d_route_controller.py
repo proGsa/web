@@ -1,14 +1,18 @@
 from __future__ import annotations
 
 import logging
+
 from typing import Any
 
 from fastapi import HTTPException
 
 from models.directory_route import DirectoryRoute
-from schemas.directory_route import DirectoryRouteCreate, DirectoryRouteUpdate, DirectoryRouteResponse, DirectoryRoutePartialUpdate, DirectoryRouteResponseOut
+from schemas.directory_route import DirectoryRouteCreate
+from schemas.directory_route import DirectoryRouteResponse
+from schemas.directory_route import DirectoryRouteResponseOut
 from services.city_service import CityService
 from services.directory_route_service import DirectoryRouteService
+
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +33,7 @@ class DirectoryRouteController:
                 raise HTTPException(status_code=404, detail="One or both cities not found")
 
             d_route = DirectoryRoute(
-                d_route_id = 1,
+                d_route_id=1,
                 type_transport=d_route.type_transport,
                 cost=d_route.cost,
                 distance=d_route.distance,

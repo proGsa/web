@@ -1,0 +1,4 @@
+=== GET /health (JSON) тест: http://localhost/api/v2/health ===
+app_read2: 25 запросов
+app_main: 50 запросов
+app_read1: 25 запросов

@@ -1,14 +1,16 @@
 from __future__ import annotations
+
 import logging
-from datetime import datetime
-from typing import Any
 
 from fastapi import HTTPException
 
-from schemas.accommodation import AccommodationCreate, AccommodationUpdate, AccommodationResponse
+from models.accommodation import Accommodation
+from schemas.accommodation import AccommodationCreate
+from schemas.accommodation import AccommodationResponse
+from schemas.accommodation import AccommodationUpdate
 from services.accommodation_service import AccommodationService
 from services.city_service import CityService
-from models.accommodation import Accommodation
+
 
 logger = logging.getLogger(__name__)
 
@@ -26,15 +28,15 @@ class AccommodationController:
                 raise ValueError("City not found")
             
             accommodation = Accommodation(
-                accommodation_id = 1,
-                price = data.price,
-                address = data.address,
-                name = data.name,
-                type = data.type,
-                rating = data.rating,
-                check_in = data.check_in.strftime('%Y-%m-%dT%H:%M'),
-                check_out = data.check_out.strftime('%Y-%m-%dT%H:%M'),
-                city = city
+                accommodation_id=1,
+                price=data.price,
+                address=data.address,
+                name=data.name,
+                type=data.type,
+                rating=data.rating,
+                check_in=data.check_in.strftime('%Y-%m-%dT%H:%M'),
+                check_out=data.check_out.strftime('%Y-%m-%dT%H:%M'),
+                city=city
             )
             accommodation = await self.accommodation_service.add(accommodation)
             logger.info("Проживание успешно создано: %s", accommodation)
@@ -59,15 +61,15 @@ class AccommodationController:
             if not city:
                 raise ValueError("City not found")
             accommodation = Accommodation(
-                accommodation_id = accommodation_id,
-                price = data.price,
-                address = data.address,
-                name = data.name,
-                type = data.type,
-                rating = data.rating,
-                check_in = data.check_in.strftime('%Y-%m-%dT%H:%M'),
-                check_out = data.check_out.strftime('%Y-%m-%dT%H:%M'),
-                city = city
+                accommodation_id=accommodation_id,
+                price=data.price,
+                address=data.address,
+                name=data.name,
+                type=data.type,
+                rating=data.rating,
+                check_in=data.check_in.strftime('%Y-%m-%dT%H:%M'),
+                check_out=data.check_out.strftime('%Y-%m-%dT%H:%M'),
+                city=city
             )
             new_accommodation = await self.accommodation_service.update(accommodation)
             logger.info("Проживание ID %d успешно обновлено", accommodation_id)

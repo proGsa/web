@@ -1,0 +1,3401 @@
+=== POST http://localhost/api/v2/cities/ ===
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.015 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    67.65 [#/sec] (mean)
+Time per request:       14.782 [ms] (mean)
+Time per request:       14.782 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.95 [Kbytes/sec] received
+                        11.76 kb/s sent
+                        24.71 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:    15   15   0.0     15      15
+Waiting:       15   15   0.0     15      15
+Total:         15   15   0.0     15      15
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    185.77 [#/sec] (mean)
+Time per request:       5.383 [ms] (mean)
+Time per request:       5.383 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.74 [Kbytes/sec] received
+                        32.47 kb/s sent
+                        68.21 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        44 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      198 bytes
+Total body sent:        180
+HTML transferred:       44 bytes
+Requests per second:    177.94 [#/sec] (mean)
+Time per request:       5.620 [ms] (mean)
+Time per request:       5.620 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.41 [Kbytes/sec] received
+                        31.28 kb/s sent
+                        65.68 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    177.18 [#/sec] (mean)
+Time per request:       5.644 [ms] (mean)
+Time per request:       5.644 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.09 [Kbytes/sec] received
+                        30.97 kb/s sent
+                        65.06 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    158.55 [#/sec] (mean)
+Time per request:       6.307 [ms] (mean)
+Time per request:       6.307 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.50 [Kbytes/sec] received
+                        27.72 kb/s sent
+                        58.22 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    178.60 [#/sec] (mean)
+Time per request:       5.599 [ms] (mean)
+Time per request:       5.599 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.36 [Kbytes/sec] received
+                        31.22 kb/s sent
+                        65.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    191.02 [#/sec] (mean)
+Time per request:       5.235 [ms] (mean)
+Time per request:       5.235 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.75 [Kbytes/sec] received
+                        33.39 kb/s sent
+                        70.14 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    199.68 [#/sec] (mean)
+Time per request:       5.008 [ms] (mean)
+Time per request:       5.008 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.42 [Kbytes/sec] received
+                        34.91 kb/s sent
+                        73.32 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    211.28 [#/sec] (mean)
+Time per request:       4.733 [ms] (mean)
+Time per request:       4.733 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.65 [Kbytes/sec] received
+                        36.93 kb/s sent
+                        77.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    192.09 [#/sec] (mean)
+Time per request:       5.206 [ms] (mean)
+Time per request:       5.206 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.95 [Kbytes/sec] received
+                        33.58 kb/s sent
+                        70.53 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    215.84 [#/sec] (mean)
+Time per request:       4.633 [ms] (mean)
+Time per request:       4.633 [ms] (mean, across all concurrent requests)
+Transfer rate:          41.52 [Kbytes/sec] received
+                        37.73 kb/s sent
+                        79.25 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    222.92 [#/sec] (mean)
+Time per request:       4.486 [ms] (mean)
+Time per request:       4.486 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.89 [Kbytes/sec] received
+                        38.97 kb/s sent
+                        81.85 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    186.08 [#/sec] (mean)
+Time per request:       5.374 [ms] (mean)
+Time per request:       5.374 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.62 [Kbytes/sec] received
+                        32.35 kb/s sent
+                        67.96 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    205.85 [#/sec] (mean)
+Time per request:       4.858 [ms] (mean)
+Time per request:       4.858 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.60 [Kbytes/sec] received
+                        35.98 kb/s sent
+                        75.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    196.62 [#/sec] (mean)
+Time per request:       5.086 [ms] (mean)
+Time per request:       5.086 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.83 [Kbytes/sec] received
+                        34.37 kb/s sent
+                        72.20 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    208.72 [#/sec] (mean)
+Time per request:       4.791 [ms] (mean)
+Time per request:       4.791 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.16 [Kbytes/sec] received
+                        36.49 kb/s sent
+                        76.64 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    164.37 [#/sec] (mean)
+Time per request:       6.084 [ms] (mean)
+Time per request:       6.084 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.62 [Kbytes/sec] received
+                        28.73 kb/s sent
+                        60.35 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    197.36 [#/sec] (mean)
+Time per request:       5.067 [ms] (mean)
+Time per request:       5.067 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.97 [Kbytes/sec] received
+                        34.50 kb/s sent
+                        72.47 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    209.12 [#/sec] (mean)
+Time per request:       4.782 [ms] (mean)
+Time per request:       4.782 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.23 [Kbytes/sec] received
+                        36.55 kb/s sent
+                        76.79 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.008 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    121.42 [#/sec] (mean)
+Time per request:       8.236 [ms] (mean)
+Time per request:       8.236 [ms] (mean, across all concurrent requests)
+Transfer rate:          23.36 [Kbytes/sec] received
+                        21.22 kb/s sent
+                        44.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     8    8   0.0      8       8
+Waiting:        8    8   0.0      8       8
+Total:          8    8   0.0      8       8
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    158.05 [#/sec] (mean)
+Time per request:       6.327 [ms] (mean)
+Time per request:       6.327 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.41 [Kbytes/sec] received
+                        27.63 kb/s sent
+                        58.04 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.008 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    126.47 [#/sec] (mean)
+Time per request:       7.907 [ms] (mean)
+Time per request:       7.907 [ms] (mean, across all concurrent requests)
+Transfer rate:          24.33 [Kbytes/sec] received
+                        22.11 kb/s sent
+                        46.44 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     8    8   0.0      8       8
+Waiting:        8    8   0.0      8       8
+Total:          8    8   0.0      8       8
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    166.22 [#/sec] (mean)
+Time per request:       6.016 [ms] (mean)
+Time per request:       6.016 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.98 [Kbytes/sec] received
+                        29.06 kb/s sent
+                        61.04 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.007 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    153.59 [#/sec] (mean)
+Time per request:       6.511 [ms] (mean)
+Time per request:       6.511 [ms] (mean, across all concurrent requests)
+Transfer rate:          29.40 [Kbytes/sec] received
+                        26.70 kb/s sent
+                        56.09 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    156.94 [#/sec] (mean)
+Time per request:       6.372 [ms] (mean)
+Time per request:       6.372 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.19 [Kbytes/sec] received
+                        27.43 kb/s sent
+                        57.63 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    219.11 [#/sec] (mean)
+Time per request:       4.564 [ms] (mean)
+Time per request:       4.564 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.15 [Kbytes/sec] received
+                        38.30 kb/s sent
+                        80.45 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    172.92 [#/sec] (mean)
+Time per request:       5.783 [ms] (mean)
+Time per request:       5.783 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.27 [Kbytes/sec] received
+                        30.23 kb/s sent
+                        63.49 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    205.63 [#/sec] (mean)
+Time per request:       4.863 [ms] (mean)
+Time per request:       4.863 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.56 [Kbytes/sec] received
+                        35.95 kb/s sent
+                        75.51 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    190.22 [#/sec] (mean)
+Time per request:       5.257 [ms] (mean)
+Time per request:       5.257 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.60 [Kbytes/sec] received
+                        33.25 kb/s sent
+                        69.85 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    208.94 [#/sec] (mean)
+Time per request:       4.786 [ms] (mean)
+Time per request:       4.786 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.20 [Kbytes/sec] received
+                        36.52 kb/s sent
+                        76.72 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    207.60 [#/sec] (mean)
+Time per request:       4.817 [ms] (mean)
+Time per request:       4.817 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.94 [Kbytes/sec] received
+                        36.29 kb/s sent
+                        76.23 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    209.95 [#/sec] (mean)
+Time per request:       4.763 [ms] (mean)
+Time per request:       4.763 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.39 [Kbytes/sec] received
+                        36.70 kb/s sent
+                        77.09 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    194.74 [#/sec] (mean)
+Time per request:       5.135 [ms] (mean)
+Time per request:       5.135 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.47 [Kbytes/sec] received
+                        34.04 kb/s sent
+                        71.51 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    190.26 [#/sec] (mean)
+Time per request:       5.256 [ms] (mean)
+Time per request:       5.256 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.60 [Kbytes/sec] received
+                        33.26 kb/s sent
+                        69.86 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    185.19 [#/sec] (mean)
+Time per request:       5.400 [ms] (mean)
+Time per request:       5.400 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.45 [Kbytes/sec] received
+                        32.19 kb/s sent
+                        67.64 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.009 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    107.17 [#/sec] (mean)
+Time per request:       9.331 [ms] (mean)
+Time per request:       9.331 [ms] (mean, across all concurrent requests)
+Transfer rate:          20.62 [Kbytes/sec] received
+                        18.73 kb/s sent
+                        39.35 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     9    9   0.0      9       9
+Waiting:        9    9   0.0      9       9
+Total:          9    9   0.0      9       9
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.007 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    142.15 [#/sec] (mean)
+Time per request:       7.035 [ms] (mean)
+Time per request:       7.035 [ms] (mean, across all concurrent requests)
+Transfer rate:          27.35 [Kbytes/sec] received
+                        24.85 kb/s sent
+                        52.19 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     7    7   0.0      7       7
+Waiting:        7    7   0.0      7       7
+Total:          7    7   0.0      7       7
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    218.58 [#/sec] (mean)
+Time per request:       4.575 [ms] (mean)
+Time per request:       4.575 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.05 [Kbytes/sec] received
+                        38.21 kb/s sent
+                        80.26 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    203.05 [#/sec] (mean)
+Time per request:       4.925 [ms] (mean)
+Time per request:       4.925 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.06 [Kbytes/sec] received
+                        35.49 kb/s sent
+                        74.56 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    199.40 [#/sec] (mean)
+Time per request:       5.015 [ms] (mean)
+Time per request:       5.015 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.36 [Kbytes/sec] received
+                        34.86 kb/s sent
+                        73.22 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    221.68 [#/sec] (mean)
+Time per request:       4.511 [ms] (mean)
+Time per request:       4.511 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.65 [Kbytes/sec] received
+                        38.75 kb/s sent
+                        81.40 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    185.70 [#/sec] (mean)
+Time per request:       5.385 [ms] (mean)
+Time per request:       5.385 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.73 [Kbytes/sec] received
+                        32.46 kb/s sent
+                        68.19 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    172.89 [#/sec] (mean)
+Time per request:       5.784 [ms] (mean)
+Time per request:       5.784 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.26 [Kbytes/sec] received
+                        30.22 kb/s sent
+                        63.48 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    209.60 [#/sec] (mean)
+Time per request:       4.771 [ms] (mean)
+Time per request:       4.771 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.32 [Kbytes/sec] received
+                        36.64 kb/s sent
+                        76.96 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    202.10 [#/sec] (mean)
+Time per request:       4.948 [ms] (mean)
+Time per request:       4.948 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.88 [Kbytes/sec] received
+                        35.33 kb/s sent
+                        74.21 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.009 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    116.75 [#/sec] (mean)
+Time per request:       8.565 [ms] (mean)
+Time per request:       8.565 [ms] (mean, across all concurrent requests)
+Transfer rate:          22.35 [Kbytes/sec] received
+                        20.30 kb/s sent
+                        42.64 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     8    8   0.0      8       8
+Waiting:        8    8   0.0      8       8
+Total:          9    9   0.0      9       9
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    163.19 [#/sec] (mean)
+Time per request:       6.128 [ms] (mean)
+Time per request:       6.128 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.39 [Kbytes/sec] received
+                        28.53 kb/s sent
+                        59.92 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.007 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    142.05 [#/sec] (mean)
+Time per request:       7.040 [ms] (mean)
+Time per request:       7.040 [ms] (mean, across all concurrent requests)
+Transfer rate:          27.33 [Kbytes/sec] received
+                        24.83 kb/s sent
+                        52.16 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     7    7   0.0      7       7
+Waiting:        7    7   0.0      7       7
+Total:          7    7   0.0      7       7
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    227.89 [#/sec] (mean)
+Time per request:       4.388 [ms] (mean)
+Time per request:       4.388 [ms] (mean, across all concurrent requests)
+Transfer rate:          43.84 [Kbytes/sec] received
+                        39.84 kb/s sent
+                        83.68 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    174.49 [#/sec] (mean)
+Time per request:       5.731 [ms] (mean)
+Time per request:       5.731 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.57 [Kbytes/sec] received
+                        30.50 kb/s sent
+                        64.07 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    162.26 [#/sec] (mean)
+Time per request:       6.163 [ms] (mean)
+Time per request:       6.163 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.22 [Kbytes/sec] received
+                        28.36 kb/s sent
+                        59.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    202.22 [#/sec] (mean)
+Time per request:       4.945 [ms] (mean)
+Time per request:       4.945 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.90 [Kbytes/sec] received
+                        35.35 kb/s sent
+                        74.25 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    211.10 [#/sec] (mean)
+Time per request:       4.737 [ms] (mean)
+Time per request:       4.737 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.61 [Kbytes/sec] received
+                        36.90 kb/s sent
+                        77.51 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    217.49 [#/sec] (mean)
+Time per request:       4.598 [ms] (mean)
+Time per request:       4.598 [ms] (mean, across all concurrent requests)
+Transfer rate:          41.84 [Kbytes/sec] received
+                        38.02 kb/s sent
+                        79.86 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    205.25 [#/sec] (mean)
+Time per request:       4.872 [ms] (mean)
+Time per request:       4.872 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.49 [Kbytes/sec] received
+                        35.88 kb/s sent
+                        75.37 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    167.76 [#/sec] (mean)
+Time per request:       5.961 [ms] (mean)
+Time per request:       5.961 [ms] (mean, across all concurrent requests)
+Transfer rate:          32.27 [Kbytes/sec] received
+                        29.32 kb/s sent
+                        61.60 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    201.73 [#/sec] (mean)
+Time per request:       4.957 [ms] (mean)
+Time per request:       4.957 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.61 [Kbytes/sec] received
+                        35.07 kb/s sent
+                        73.68 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    163.64 [#/sec] (mean)
+Time per request:       6.111 [ms] (mean)
+Time per request:       6.111 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.48 [Kbytes/sec] received
+                        28.60 kb/s sent
+                        60.09 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.008 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    126.86 [#/sec] (mean)
+Time per request:       7.883 [ms] (mean)
+Time per request:       7.883 [ms] (mean, across all concurrent requests)
+Transfer rate:          24.40 [Kbytes/sec] received
+                        22.17 kb/s sent
+                        46.58 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     8    8   0.0      8       8
+Waiting:        8    8   0.0      8       8
+Total:          8    8   0.0      8       8
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    164.26 [#/sec] (mean)
+Time per request:       6.088 [ms] (mean)
+Time per request:       6.088 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.60 [Kbytes/sec] received
+                        28.71 kb/s sent
+                        60.31 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    179.18 [#/sec] (mean)
+Time per request:       5.581 [ms] (mean)
+Time per request:       5.581 [ms] (mean, across all concurrent requests)
+Transfer rate:          34.47 [Kbytes/sec] received
+                        31.32 kb/s sent
+                        65.79 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    223.71 [#/sec] (mean)
+Time per request:       4.470 [ms] (mean)
+Time per request:       4.470 [ms] (mean, across all concurrent requests)
+Transfer rate:          43.04 [Kbytes/sec] received
+                        39.11 kb/s sent
+                        82.14 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    201.65 [#/sec] (mean)
+Time per request:       4.959 [ms] (mean)
+Time per request:       4.959 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.79 [Kbytes/sec] received
+                        35.25 kb/s sent
+                        74.04 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    238.38 [#/sec] (mean)
+Time per request:       4.195 [ms] (mean)
+Time per request:       4.195 [ms] (mean, across all concurrent requests)
+Transfer rate:          45.86 [Kbytes/sec] received
+                        41.67 kb/s sent
+                        87.53 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    188.79 [#/sec] (mean)
+Time per request:       5.297 [ms] (mean)
+Time per request:       5.297 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.32 [Kbytes/sec] received
+                        33.00 kb/s sent
+                        69.32 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    230.15 [#/sec] (mean)
+Time per request:       4.345 [ms] (mean)
+Time per request:       4.345 [ms] (mean, across all concurrent requests)
+Transfer rate:          44.28 [Kbytes/sec] received
+                        40.23 kb/s sent
+                        84.51 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    200.96 [#/sec] (mean)
+Time per request:       4.976 [ms] (mean)
+Time per request:       4.976 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.66 [Kbytes/sec] received
+                        35.13 kb/s sent
+                        73.79 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    226.04 [#/sec] (mean)
+Time per request:       4.424 [ms] (mean)
+Time per request:       4.424 [ms] (mean, across all concurrent requests)
+Transfer rate:          43.27 [Kbytes/sec] received
+                        39.29 kb/s sent
+                        82.56 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    164.55 [#/sec] (mean)
+Time per request:       6.077 [ms] (mean)
+Time per request:       6.077 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.66 [Kbytes/sec] received
+                        28.76 kb/s sent
+                        60.42 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    216.08 [#/sec] (mean)
+Time per request:       4.628 [ms] (mean)
+Time per request:       4.628 [ms] (mean, across all concurrent requests)
+Transfer rate:          41.57 [Kbytes/sec] received
+                        37.77 kb/s sent
+                        79.34 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    214.96 [#/sec] (mean)
+Time per request:       4.652 [ms] (mean)
+Time per request:       4.652 [ms] (mean, across all concurrent requests)
+Transfer rate:          41.35 [Kbytes/sec] received
+                        37.58 kb/s sent
+                        78.93 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    185.05 [#/sec] (mean)
+Time per request:       5.404 [ms] (mean)
+Time per request:       5.404 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.60 [Kbytes/sec] received
+                        32.35 kb/s sent
+                        67.95 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    196.23 [#/sec] (mean)
+Time per request:       5.096 [ms] (mean)
+Time per request:       5.096 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.75 [Kbytes/sec] received
+                        34.30 kb/s sent
+                        72.05 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    196.58 [#/sec] (mean)
+Time per request:       5.087 [ms] (mean)
+Time per request:       5.087 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.82 [Kbytes/sec] received
+                        34.36 kb/s sent
+                        72.18 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    221.93 [#/sec] (mean)
+Time per request:       4.506 [ms] (mean)
+Time per request:       4.506 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.69 [Kbytes/sec] received
+                        38.79 kb/s sent
+                        81.49 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    207.17 [#/sec] (mean)
+Time per request:       4.827 [ms] (mean)
+Time per request:       4.827 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.86 [Kbytes/sec] received
+                        36.21 kb/s sent
+                        76.07 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    165.43 [#/sec] (mean)
+Time per request:       6.045 [ms] (mean)
+Time per request:       6.045 [ms] (mean, across all concurrent requests)
+Transfer rate:          31.83 [Kbytes/sec] received
+                        28.92 kb/s sent
+                        60.74 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    207.86 [#/sec] (mean)
+Time per request:       4.811 [ms] (mean)
+Time per request:       4.811 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.99 [Kbytes/sec] received
+                        36.33 kb/s sent
+                        76.32 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    197.98 [#/sec] (mean)
+Time per request:       5.051 [ms] (mean)
+Time per request:       5.051 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.89 [Kbytes/sec] received
+                        34.41 kb/s sent
+                        72.31 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    211.77 [#/sec] (mean)
+Time per request:       4.722 [ms] (mean)
+Time per request:       4.722 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.74 [Kbytes/sec] received
+                        37.02 kb/s sent
+                        77.76 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    210.17 [#/sec] (mean)
+Time per request:       4.758 [ms] (mean)
+Time per request:       4.758 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.43 [Kbytes/sec] received
+                        36.74 kb/s sent
+                        77.17 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    204.37 [#/sec] (mean)
+Time per request:       4.893 [ms] (mean)
+Time per request:       4.893 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.32 [Kbytes/sec] received
+                        35.73 kb/s sent
+                        75.04 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    223.86 [#/sec] (mean)
+Time per request:       4.467 [ms] (mean)
+Time per request:       4.467 [ms] (mean, across all concurrent requests)
+Transfer rate:          43.07 [Kbytes/sec] received
+                        39.13 kb/s sent
+                        82.20 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    186.46 [#/sec] (mean)
+Time per request:       5.363 [ms] (mean)
+Time per request:       5.363 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.87 [Kbytes/sec] received
+                        32.59 kb/s sent
+                        68.47 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    206.83 [#/sec] (mean)
+Time per request:       4.835 [ms] (mean)
+Time per request:       4.835 [ms] (mean, across all concurrent requests)
+Transfer rate:          39.79 [Kbytes/sec] received
+                        36.15 kb/s sent
+                        75.94 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    167.64 [#/sec] (mean)
+Time per request:       5.965 [ms] (mean)
+Time per request:       5.965 [ms] (mean, across all concurrent requests)
+Transfer rate:          32.25 [Kbytes/sec] received
+                        29.31 kb/s sent
+                        61.56 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    220.70 [#/sec] (mean)
+Time per request:       4.531 [ms] (mean)
+Time per request:       4.531 [ms] (mean, across all concurrent requests)
+Transfer rate:          42.46 [Kbytes/sec] received
+                        38.58 kb/s sent
+                        81.04 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    200.16 [#/sec] (mean)
+Time per request:       4.996 [ms] (mean)
+Time per request:       4.996 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.51 [Kbytes/sec] received
+                        34.99 kb/s sent
+                        73.50 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.004 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    225.28 [#/sec] (mean)
+Time per request:       4.439 [ms] (mean)
+Time per request:       4.439 [ms] (mean, across all concurrent requests)
+Transfer rate:          43.34 [Kbytes/sec] received
+                        39.38 kb/s sent
+                        82.72 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          4    4   0.0      4       4
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        42 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      196 bytes
+Total body sent:        178
+HTML transferred:       42 bytes
+Requests per second:    193.99 [#/sec] (mean)
+Time per request:       5.155 [ms] (mean)
+Time per request:       5.155 [ms] (mean, across all concurrent requests)
+Transfer rate:          37.13 [Kbytes/sec] received
+                        33.72 kb/s sent
+                        70.85 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    172.12 [#/sec] (mean)
+Time per request:       5.810 [ms] (mean)
+Time per request:       5.810 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.11 [Kbytes/sec] received
+                        30.09 kb/s sent
+                        63.20 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    209.86 [#/sec] (mean)
+Time per request:       4.765 [ms] (mean)
+Time per request:       4.765 [ms] (mean, across all concurrent requests)
+Transfer rate:          40.37 [Kbytes/sec] received
+                        36.69 kb/s sent
+                        77.06 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    173.46 [#/sec] (mean)
+Time per request:       5.765 [ms] (mean)
+Time per request:       5.765 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.37 [Kbytes/sec] received
+                        30.32 kb/s sent
+                        63.69 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    217.72 [#/sec] (mean)
+Time per request:       4.593 [ms] (mean)
+Time per request:       4.593 [ms] (mean, across all concurrent requests)
+Transfer rate:          41.89 [Kbytes/sec] received
+                        38.06 kb/s sent
+                        79.95 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     4    4   0.0      4       4
+Waiting:        4    4   0.0      4       4
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    172.53 [#/sec] (mean)
+Time per request:       5.796 [ms] (mean)
+Time per request:       5.796 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.19 [Kbytes/sec] received
+                        30.16 kb/s sent
+                        63.35 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    157.55 [#/sec] (mean)
+Time per request:       6.347 [ms] (mean)
+Time per request:       6.347 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.31 [Kbytes/sec] received
+                        27.54 kb/s sent
+                        57.85 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    187.69 [#/sec] (mean)
+Time per request:       5.328 [ms] (mean)
+Time per request:       5.328 [ms] (mean, across all concurrent requests)
+Transfer rate:          36.11 [Kbytes/sec] received
+                        32.81 kb/s sent
+                        68.92 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    175.22 [#/sec] (mean)
+Time per request:       5.707 [ms] (mean)
+Time per request:       5.707 [ms] (mean, across all concurrent requests)
+Transfer rate:          33.71 [Kbytes/sec] received
+                        30.63 kb/s sent
+                        64.34 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.006 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    158.70 [#/sec] (mean)
+Time per request:       6.301 [ms] (mean)
+Time per request:       6.301 [ms] (mean, across all concurrent requests)
+Transfer rate:          30.53 [Kbytes/sec] received
+                        27.74 kb/s sent
+                        58.27 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     6    6   0.0      6       6
+Waiting:        6    6   0.0      6       6
+Total:          6    6   0.0      6       6
+This is ApacheBench, Version 2.3 <$Revision: 1903618 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        nginx/1.29.3
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /api/v2/cities/
+Document Length:        43 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.005 seconds
+Complete requests:      1
+Failed requests:        0
+Total transferred:      197 bytes
+Total body sent:        179
+HTML transferred:       43 bytes
+Requests per second:    186.67 [#/sec] (mean)
+Time per request:       5.357 [ms] (mean)
+Time per request:       5.357 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.91 [Kbytes/sec] received
+                        32.63 kb/s sent
+                        68.54 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     5    5   0.0      5       5
+Waiting:        5    5   0.0      5       5
+Total:          5    5   0.0      5       5

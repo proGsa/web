@@ -1,9 +1,17 @@
 from __future__ import annotations
 
 import logging
-from fastapi import APIRouter, Depends, HTTPException, status
-from schemas.entertainment import EntertainmentCreate, EntertainmentResponse
-from service_locator import ServiceLocatorV2, get_service_locator_v2
+
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
+
+from schemas.entertainment import EntertainmentCreate
+from schemas.entertainment import EntertainmentResponse
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/travels", tags=["travel-entertainments"])

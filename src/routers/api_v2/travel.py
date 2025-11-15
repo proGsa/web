@@ -1,9 +1,19 @@
 from __future__ import annotations
 
 import logging
-from fastapi import APIRouter, Depends, HTTPException, status
-from schemas.travel import TravelCreate, TravelResponse, TravelUpdate, TravelsResponse
-from service_locator import ServiceLocatorV2, get_service_locator_v2
+
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
+
+from schemas.travel import TravelCreate
+from schemas.travel import TravelResponse
+from schemas.travel import TravelsResponse
+from schemas.travel import TravelUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/travels", tags=["travels"])
@@ -51,7 +61,7 @@ async def get_all_travels(service_locator: ServiceLocatorV2 = get_sl_dep):
         travels = await service_locator.get_travel_contr().get_all_travels()
         if not travels:
             raise HTTPException(status_code=404, detail="Travels not found")
-        return {"travels" : travels}
+        return {"travels": travels}
     except HTTPException:
         raise
     except Exception as e:

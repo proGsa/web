@@ -20,7 +20,7 @@ class CityController:
     async def create_city(self, city_data: CityCreate) -> CityResponse:
         """Создать новый город"""
         try:
-            city = City(city_id = 1, name=city_data.name)
+            city = City(city_id=1, name=city_data.name)
             created_city = await self.city_service.add(city)
             logger.info(f"Создан город: {created_city.name}")
             return CityResponse(id=created_city.city_id, name=created_city.name)

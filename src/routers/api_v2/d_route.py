@@ -1,19 +1,20 @@
 from __future__ import annotations
 
 import logging
-from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
 
-from service_locator import ServiceLocatorV2, get_service_locator_v2
-from schemas.directory_route import (
-    DirectoryRouteCreate,
-    DirectoryRouteUpdate,
-    DirectoryRouteResponse,
-    DirectoryRoutePartialUpdate,
-    DirectoryRouteResponseOut,
-    DirectoryRoutesResponse
-)
+from schemas.directory_route import DirectoryRouteCreate
+from schemas.directory_route import DirectoryRoutePartialUpdate
+from schemas.directory_route import DirectoryRouteResponseOut
+from schemas.directory_route import DirectoryRoutesResponse
+from schemas.directory_route import DirectoryRouteUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/directory_routes", tags=["directory-routes"])
@@ -53,7 +54,7 @@ async def get_all_d_routes(service_locator: ServiceLocatorV2 = get_sl_dep):
         result = await service_locator.get_d_route_contr().get_all_d_routes()
         if not result:
             raise HTTPException(status_code=404, detail="DirectoryRoutes not found")
-        return {"d_routes" : result}
+        return {"d_routes": result}
     except HTTPException:
         raise
     except Exception as e:

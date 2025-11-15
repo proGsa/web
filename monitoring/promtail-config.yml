@@ -1,0 +1,41 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: travelguide_logs
+    static_configs:
+      # main app (write)
+      - targets:
+          - localhost
+        labels:
+          job: travelguide
+          app: travelguide-api
+          instance: app_main
+          host: ${HOSTNAME}
+          __path__: /var/log/app/*.log
+
+      # read replicas
+      - targets:
+          - localhost
+        labels:
+          job: travelguide
+          app: travelguide-api
+          instance: app_read1
+          host: ${HOSTNAME}
+          __path__: /var/log/app/*.log
+
+      - targets:
+          - localhost
+        labels:
+          job: travelguide
+          app: travelguide-api
+          instance: app_read2
+          host: ${HOSTNAME}
+          __path__: /var/log/app/*.log

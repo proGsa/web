@@ -1,9 +1,21 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from schemas.user import UserCreate, UserUpdate, UserResponse, UsersResponse
-from service_locator import ServiceLocatorV2, get_service_locator_v2
+from __future__ import annotations
+
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
+
+from schemas.user import UserCreate
+from schemas.user import UserResponse
+from schemas.user import UsersResponse
+from schemas.user import UserUpdate
+from service_locator import ServiceLocatorV2
+from service_locator import get_service_locator_v2
+
 
 user_router = APIRouter(prefix="/users", tags=["users"])
 get_sl_dep = Depends(get_service_locator_v2)
+
 
 @user_router.post("/", response_model=UserResponse, responses={
     400: {"description": "Неверный запрос"},
@@ -28,7 +40,7 @@ async def get_all_users(service_locator: ServiceLocatorV2 = get_sl_dep):
         users = await service_locator.get_user_contr().get_all_users()
         if not users:
             raise HTTPException(status_code=404, detail="Users not found")
-        return {"users" : users}
+        return {"users": users}
     except HTTPException:
         raise
     except Exception as e:
@@ -47,9 +59,8 @@ async def get_user(user_id: int, service_locator: ServiceLocatorV2 = get_sl_dep)
         return user
     except HTTPException:
         raise
-    except Exception as e:
+    except Exception:
         raise HTTPException(status_code=500, detail="Internal server error")
-
 
 
 @user_router.put("/{user_id}", response_model=UserResponse, responses={
@@ -65,9 +76,8 @@ async def update_user(user_id: int, user: UserUpdate, service_locator: ServiceLo
         return updated_user
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
+    except Exception:
         raise HTTPException(status_code=500, detail="Internal server error")
-
 
 
 @user_router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT, responses={
@@ -79,5 +89,5 @@ async def delete_user(user_id: int, service_locator: ServiceLocatorV2 = get_sl_d
         await service_locator.get_user_contr().delete_user(user_id)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
-    except Exception as e:
+    except Exception:
         raise HTTPException(status_code=500, detail="Internal server error")

@@ -96,4 +96,24 @@ create table if not exists travel_db.users_travel(
     users_id INT NOT NULL,
     CONSTRAINT fk_travel_id FOREIGN KEY (travel_id) REFERENCES travel_db.travel(id) ON DELETE CASCADE,
     CONSTRAINT fk_users_id FOREIGN KEY (users_id) REFERENCES travel_db.users(id) ON DELETE CASCADE
-)
+);
+
+DO
+$$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'write_user') THEN
+        CREATE USER write_user WITH ENCRYPTED PASSWORD 'write_password';
+    END IF;
+END
+$$;
+
+GRANT ALL PRIVILEGES ON DATABASE mydb TO write_user;
+DO
+$$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'replica_user') THEN
+        CREATE USER replica_user WITH REPLICATION LOGIN ENCRYPTED PASSWORD 'replica_password';
+    END IF;
+END
+$$;
+

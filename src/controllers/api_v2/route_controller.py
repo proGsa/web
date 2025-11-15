@@ -1,18 +1,19 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime
-from typing import Any, List
 
 from models.route import Route
-from models.travel import Travel
-from schemas.route import RouteCreate, RouteUpdate, RouteResponse, InsertCityRequest
+from schemas.route import InsertCityRequest
+from schemas.route import RouteCreate
+from schemas.route import RouteResponse
+from schemas.route import RouteUpdate
+from services.accommodation_service import AccommodationService
+from services.directory_route_service import DirectoryRouteService
+from services.entertainment_service import EntertainmentService
 from services.route_service import RouteService
 from services.travel_service import TravelService
-from services.directory_route_service import DirectoryRouteService
 from services.user_service import UserService
-from services.entertainment_service import EntertainmentService
-from services.accommodation_service import AccommodationService
+
 
 logger = logging.getLogger(__name__)
 
@@ -86,7 +87,7 @@ class RouteController:
             logger.error(f"Ошибка при получении маршрута ID {route_id}: {e!s}", exc_info=True)
             raise
 
-    async def get_all_routes(self) -> List[RouteResponse]:
+    async def get_all_routes(self) -> list[RouteResponse]:
         try:
             route_list = await self.route_service.get_all_routes()
             responses = []

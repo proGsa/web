@@ -1,7 +1,8 @@
 from __future__ import annotations
-from pydantic import BaseModel
+
 from datetime import datetime
-from typing import Optional, List
+
+from pydantic import BaseModel
 
 
 class RouteCreate(BaseModel):
@@ -13,11 +14,11 @@ class RouteCreate(BaseModel):
 
 
 class RouteUpdate(BaseModel):
-    d_route_id: Optional[int] = None
-    travel_id: Optional[int] = None
-    start_time: Optional[datetime] = None
-    end_time: Optional[datetime] = None
-    type: Optional[str] = None
+    d_route_id: int | None = None
+    travel_id: int | None = None
+    start_time: datetime | None = None
+    end_time: datetime | None = None
+    type: str | None = None
 
 
 class RouteResponse(BaseModel):
@@ -31,9 +32,11 @@ class RouteResponse(BaseModel):
     class Config:
         orm_mode = True
 
+
 class InsertCityRequest(BaseModel):  
     after_city_id: int 
     transport: str 
 
+
 class RoutesResponse(BaseModel):
-    routes: List[RouteResponse]
+    routes: list[RouteResponse]

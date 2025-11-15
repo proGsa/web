@@ -1,21 +1,25 @@
 from __future__ import annotations
 
 import logging
-from typing import List, Optional
 
 from fastapi import HTTPException
 
-from models.travel import Travel
-from models.entertainment import Entertainment
 from models.accommodation import Accommodation
-from schemas.travel import TravelCreate, TravelUpdate, TravelResponse
-from services.travel_service import TravelService
-from services.user_service import UserService
-from services.entertainment_service import EntertainmentService
+from models.entertainment import Entertainment
+from models.travel import Travel
+from schemas.accommodation import AccommodationCreate
+from schemas.accommodation import AccommodationResponse
+from schemas.entertainment import EntertainmentCreate
+from schemas.entertainment import EntertainmentResponse
+from schemas.travel import TravelCreate
+from schemas.travel import TravelResponse
+from schemas.travel import TravelUpdate
 from services.accommodation_service import AccommodationService
 from services.city_service import CityService
-from schemas.entertainment import EntertainmentCreate, EntertainmentResponse
-from schemas.accommodation import AccommodationCreate, AccommodationResponse
+from services.entertainment_service import EntertainmentService
+from services.travel_service import TravelService
+from services.user_service import UserService
+
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +61,7 @@ class TravelController:
             logger.error(f"Ошибка при создании путешествия: {e}", exc_info=True)
             raise HTTPException(status_code=500, detail="Error creating travel")
 
-    async def get_all_travels(self) -> List[TravelResponse]:
+    async def get_all_travels(self) -> list[TravelResponse]:
         """Получить список всех путешествий"""
         try:
             travels = await self.travel_service.get_all_travels()
@@ -78,7 +82,7 @@ class TravelController:
             logger.error(f"Ошибка при получении списка путешествий: {e}", exc_info=True)
             raise HTTPException(status_code=500, detail="Error fetching travels")
 
-    async def get_travel_by_id(self, travel_id: int) -> Optional[TravelResponse]:
+    async def get_travel_by_id(self, travel_id: int) -> TravelResponse | None:
         """Получить путешествие по ID"""
         try:
             travel = await self.travel_service.get_by_id(travel_id)
@@ -96,7 +100,7 @@ class TravelController:
             logger.error(f"Ошибка при получении путешествия ID {travel_id}: {e}", exc_info=True)
             raise HTTPException(status_code=500, detail="Error fetching travel")
 
-    async def update_travel(self, travel_id: int, data: TravelUpdate) -> Optional[TravelResponse]:
+    async def update_travel(self, travel_id: int, data: TravelUpdate) -> TravelResponse | None:
         """Обновить данные путешествия"""
         try:
             existing = await self.travel_service.get_by_id(travel_id)
@@ -214,7 +218,6 @@ class TravelController:
             logger.error(f"Ошибка при удалении развлечения из путешествия {travel_id}: {e}", exc_info=True)
             raise
 
-    
     async def add_accommodation_to_travel(self, travel_id: int, data: AccommodationCreate) -> AccommodationResponse:
         try:
             travel = await self.travel_service.get_by_id(travel_id)

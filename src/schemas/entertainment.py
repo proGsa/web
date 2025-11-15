@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 from datetime import datetime
+
 from pydantic import BaseModel
-from typing import List
+
 
 class EntertainmentCreate(BaseModel):
     city_id: int
@@ -32,4 +34,4 @@ class EntertainmentResponse(BaseModel):
 
 
 class EntertainmentsResponse(BaseModel):
-    entertainments: List[EntertainmentResponse]
+    entertainments: list[EntertainmentResponse]
