@@ -1,0 +1,285 @@
+# from __future__ import annotations
+
+# import logging
+
+# from datetime import datetime
+# from typing import Any
+
+# from fastapi import APIRouter
+# from fastapi import Depends
+# from fastapi import HTTPException
+# from fastapi import Request
+# from fastapi.responses import HTMLResponse
+# from fastapi.responses import RedirectResponse
+# from fastapi.templating import Jinja2Templates
+
+# from ...service_locator import ServiceLocatorV1
+# from ...service_locator import get_service_locator_v1
+
+
+# logger = logging.getLogger(__name__)
+
+# entertainment_router = APIRouter()
+# templates = Jinja2Templates(directory="templates")
+# get_sl_dep = Depends(get_service_locator_v1)
+
+
+# @entertainment_router.post("/entertainments", response_class=HTMLResponse)
+# async def create_entertainment(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
+#     result = await service_locator.get_ent_contr().create_new_entertainment(request)
+#     logger.info("Развлечение успешно создано: %s", result)
+#     return templates.TemplateResponse("entertainment.html", {"request": request})
+
+
+# @entertainment_router.get("/entertainments", response_class=HTMLResponse)
+# async def get_all_entertainments(request: Request, service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
+#     entertainment_list = await service_locator.get_ent_contr().get_all_entertainment()
+#     entertainments = entertainment_list.get("entertainments", []) 
+#     logger.info("Получено %d развлечений", len(entertainments))
+#     for e in entertainments:
+#         e['event_time'] = datetime.fromisoformat(e['event_time'])
+#     logger.info("Получение списка городов")
+#     cities_list = await service_locator.get_city_contr().get_all_cities()
+#     cities = cities_list.get("cities", [])
+#     logger.info("Получено %d городов", len(cities))
+#     return templates.TemplateResponse(
+#         "entertainment.html", 
+#         {
+#             "request": request, 
+#             "entertainments": entertainments, 
+#             "cities": cities
+#         }
+#     )
+
+
+# @entertainment_router.get("/entertainments/{entertainment_id}")
+# async def get_entertainment(entertainment_id: int, service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
+#     try:
+#         result = await service_locator.get_ent_contr().get_entertainment_details(entertainment_id)
+#         if result is None:
+#             logger.warning("Развлечение с ID %d не найдено", entertainment_id)
+#             raise HTTPException(status_code=404, detail="Entertainment not found")
+#         logger.info("Информация о развлечении получена: %s", result)
+#         return result
+#     except Exception as e:
+#         logger.error("Ошибка при получении информации о развлечении: %s", str(e), exc_info=True)
+#         raise HTTPException(status_code=500, detail=str(e))
+
+
+# @entertainment_router.put("/entertainments/{entertainment_id}")
+# async def update_entertainment(entertainment_id: int, request: Request, 
+#                                 service_locator: ServiceLocatorV1 = get_sl_dep) -> HTMLResponse:
+#     result = await service_locator.get_ent_contr().update_entertainment(entertainment_id, request)
+#     logger.info("Развлечение ID %d успешно обновлено: %s", entertainment_id, result)
+#     return templates.TemplateResponse("entertainment.html", {"request": request})
+
+
+# @entertainment_router.delete("/entertainments/{entertainment_id}", response_class=HTMLResponse)
+# async def delete_entertainment(entertainment_id: int, request: Request,
+#                                 service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
+#     result = await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
+#     logger.info("Развлечение ID %d успешно удалено: %s", entertainment_id, result)
+#     return RedirectResponse(url="/entertainment.html", status_code=303)
+
+
+# @entertainment_router.delete("/route/entertainments/{entertainment_id}", response_class=HTMLResponse)
+# async def delete_entertainment_for_route(entertainment_id: int, route_id: int,
+#                                 service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
+#     result = await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
+#     logger.info("Развлечение ID %d успешно удалено: %s", entertainment_id, result)
+#     return RedirectResponse(url=f"/route/edit/{route_id}", status_code=303)
+
+
+# @entertainment_router.post("/route/entertainments/{route_id}", response_class=HTMLResponse)
+# async def add_ent_to_route(route_id: int, request: Request,
+#                                          service_locator: ServiceLocatorV1 = get_sl_dep) -> RedirectResponse:
+#     try:
+#         result = await service_locator.get_ent_contr().create_new_entertainment(request)
+#         logger.info("Развлечение успешно создано: %s", result)
+#         travel = await service_locator.get_travel_serv().get_travel_by_route_id(route_id)
+#         if not travel:
+#             raise ValueError(f"No travel found for route_id={route_id}")
+#         ent_ids = []
+#         entertainments = await service_locator.get_travel_serv().get_entertainments_by_travel(travel.travel_id)
+#         ent_ids = [e.entertainment_id for e in entertainments]
+#         ent_ids.append(result["entertainment_id"])
+
+#         await service_locator.get_travel_serv().link_entertainments(travel.travel_id, ent_ids)
+#         return RedirectResponse(
+#             url=f"/route/edit/{route_id}", 
+#             status_code=303
+#         )
+        
+#     except Exception as e:
+#         logger.error(f"Error adding entertainment: {e!s}")
+#         raise
+
+
+# @entertainment_router.patch("/entertainments/{entertainment_id}")
+# async def update_entertainment_dates(entertainment_id: int, request: Request,
+#     service_locator: ServiceLocatorV1 = get_sl_dep) -> dict[str, Any]:
+#     return await service_locator.get_ent_contr().update_entertainment_dates(entertainment_id, request)
+from __future__ import annotations
+
+import logging
+from datetime import datetime
+from typing import Any
+
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+
+from ...service_locator import ServiceLocatorV1, get_service_locator_v1
+from ...shared.schemas.entertainment import EntertainmentCreate, EntertainmentUpdate
+
+logger = logging.getLogger(__name__)
+
+entertainment_router = APIRouter()
+templates = Jinja2Templates(directory="templates")
+get_sl_dep = Depends(get_service_locator_v1)
+
+
+@entertainment_router.post("/entertainments", response_class=HTMLResponse)
+async def create_entertainment(
+    request: Request,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> HTMLResponse:
+    form = await request.form()
+    ent_data = EntertainmentCreate(
+        city_id=int(form["city_id"]),
+        event_name=form["event_name"],
+        event_time=datetime.fromisoformat(form["event_time"]),
+        address=form["address"],
+        duration=form["duration"],
+    )
+    result = await service_locator.get_ent_contr().create_new_entertainment(ent_data)
+    logger.info("Развлечение успешно создано: %s", result)
+    return templates.TemplateResponse("entertainment.html", {"request": request})
+
+
+@entertainment_router.get("/entertainments", response_class=HTMLResponse)
+async def get_all_entertainments(
+    request: Request,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> HTMLResponse:
+    entertainment_list = await service_locator.get_ent_contr().get_all_entertainment()
+    entertainments = [e.dict() for e in entertainment_list]  # список DTO в словари
+    for e in entertainments:
+        e['event_time'] = datetime.fromisoformat(e['event_time'])
+
+    cities_list = await service_locator.get_city_contr().get_all_cities()
+    cities = [c.dict() for c in cities_list]
+
+    logger.info("Получено %d развлечений и %d городов", len(entertainments), len(cities))
+    return templates.TemplateResponse(
+        "entertainment.html",
+        {
+            "request": request,
+            "entertainments": entertainments,
+            "cities": cities
+        }
+    )
+
+
+@entertainment_router.get("/entertainments/{entertainment_id}")
+async def get_entertainment(
+    entertainment_id: int,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> dict[str, Any]:
+    try:
+        ent = await service_locator.get_ent_contr().get_entertainment_details(entertainment_id)
+        if ent is None:
+            logger.warning("Развлечение с ID %d не найдено", entertainment_id)
+            raise HTTPException(status_code=404, detail="Entertainment not found")
+        logger.info("Информация о развлечении ID %d получена", entertainment_id)
+        return ent.dict()
+    except Exception as e:
+        logger.error("Ошибка при получении информации о развлечении: %s", str(e), exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@entertainment_router.put("/entertainments/{entertainment_id}", response_class=HTMLResponse)
+async def update_entertainment(
+    entertainment_id: int,
+    request: Request,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> HTMLResponse:
+    form = await request.form()
+    ent_data = EntertainmentUpdate(
+        city_id=int(form["city_id"]),
+        event_name=form["event_name"],
+        event_time=datetime.fromisoformat(form["event_time"]),
+        address=form["address"],
+        duration=form["duration"],
+    )
+    result = await service_locator.get_ent_contr().update_entertainment(entertainment_id, ent_data)
+    logger.info("Развлечение ID %d успешно обновлено: %s", entertainment_id, result)
+    return templates.TemplateResponse("entertainment.html", {"request": request})
+
+
+@entertainment_router.delete("/entertainments/{entertainment_id}", response_class=HTMLResponse)
+async def delete_entertainment(
+    entertainment_id: int,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> RedirectResponse:
+    await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
+    logger.info("Развлечение ID %d успешно удалено", entertainment_id)
+    return RedirectResponse(url="/entertainment.html", status_code=303)
+
+
+@entertainment_router.delete("/route/entertainments/{entertainment_id}", response_class=HTMLResponse)
+async def delete_entertainment_for_route(
+    entertainment_id: int,
+    route_id: int,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> RedirectResponse:
+    await service_locator.get_ent_contr().delete_entertainment(entertainment_id)
+    logger.info("Развлечение ID %d успешно удалено для маршрута %d", entertainment_id, route_id)
+    return RedirectResponse(url=f"/route/edit/{route_id}", status_code=303)
+
+
+@entertainment_router.post("/route/entertainments/{route_id}", response_class=HTMLResponse)
+async def add_ent_to_route(
+    route_id: int,
+    request: Request,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> RedirectResponse:
+    form = await request.form()
+    ent_data = EntertainmentCreate(
+        city_id=int(form["city_id"]),
+        event_name=form["event_name"],
+        event_time=datetime.fromisoformat(form["event_time"]),
+        address=form["address"],
+        duration=form["duration"],
+    )
+    result = await service_locator.get_ent_contr().create_new_entertainment(ent_data)
+    logger.info("Развлечение успешно создано: %s", result)
+
+    travel = await service_locator.get_travel_contr().get_travel_by_route_id(route_id)
+    if not travel:
+        raise HTTPException(status_code=404, detail=f"No travel found for route_id={route_id}")
+
+    entertainments = await service_locator.get_travel_contr().get_entertainments_by_travel(travel.travel_id)
+    ent_ids = [e.entertainment_id for e in entertainments]
+    ent_ids.append(result.entertainment_id)
+
+    await service_locator.get_travel_contr().link_entertainments(travel.travel_id, ent_ids)
+
+    return RedirectResponse(url=f"/route/edit/{route_id}", status_code=303)
+
+
+@entertainment_router.patch("/entertainments/{entertainment_id}")
+async def update_entertainment_dates(
+    entertainment_id: int,
+    request: Request,
+    service_locator: ServiceLocatorV1 = get_sl_dep
+) -> dict[str, Any]:
+    form = await request.form()
+    ent_data = EntertainmentUpdate(
+        city_id=int(form["city_id"]),
+        event_name=form["event_name"],
+        event_time=datetime.fromisoformat(form["event_time"]),
+        address=form["address"],
+        duration=form["duration"],
+    )
+    return await service_locator.get_ent_contr().update_entertainment(entertainment_id, ent_data)

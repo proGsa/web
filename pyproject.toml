@@ -206,3 +206,4 @@ jinja2 = ">=3.1.6,<4.0.0"
 uvicorn = ">=0.34.1,<0.35.0"
 passlib = {extras = ["bcrypt"], version = ">=1.7.4,<2.0.0"}
 bcrypt = "==4.1.2"
+aio-pika = ">=9.3,<10.0"

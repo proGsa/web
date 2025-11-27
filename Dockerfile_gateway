@@ -1,0 +1,48 @@
+# --- Stage 1: Builder ---
+FROM python:3.13-slim AS builder
+
+# Переменные окружения
+ENV POETRY_HOME="/opt/poetry"
+ENV PATH="$POETRY_HOME/bin:$PATH"
+ENV PYTHONPATH=/app/src
+ENV CONFIG_PATH=/app/config.cfg
+
+WORKDIR /app
+
+# Установка системных зависимостей и Poetry
+RUN apt-get update && apt-get install -y curl build-essential \
+    && curl -sSL https://install.python-poetry.org | python - \
+    && chmod +x /opt/poetry/bin/poetry
+
+# Копируем зависимости из корня проекта
+COPY pyproject.toml poetry.lock ./
+
+# Установка зависимостей без виртуального окружения
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-root --no-interaction --no-ansi \
+    && pip install "aio-pika"
+
+# Копируем только код gateway
+COPY src/gateway ./src/gateway
+
+# --- Stage 2: Runtime ---
+FROM python:3.13-slim
+
+ENV POETRY_HOME="/opt/poetry"
+ENV PATH="$POETRY_HOME/bin:$PATH"
+ENV PYTHONPATH=/app/src
+
+WORKDIR /app
+
+# Копируем зависимости и Poetry из builder
+COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /opt/poetry /opt/poetry
+
+# Копируем исходный код gateway
+COPY --from=builder /app/src/gateway ./src/gateway
+COPY config.cfg /app/config.cfg
+
+# Запуск приложения через uvicorn
+CMD ["sh", "-c", "uvicorn ${APP_MODULE}:app --host 0.0.0.0 --port ${APP_PORT}"]
+    
