@@ -68,7 +68,15 @@ class AccommodationControllerGatewayV1:
 
     async def create_new_accommodation(self, data):
         payload = data.dict() if hasattr(data, "dict") else data
-        return await self.messaging.rpc_call("core_accommodation_create", payload)
+        for field in ("check_in", "check_out"):
+            if field in payload and hasattr(payload[field], "isoformat"):
+                payload[field] = payload[field].isoformat()
+
+        acc =  await self.messaging.rpc_call("core_accommodation_create", payload)
+        accommodation = AccommodationResponse(accommodation_id=acc["accommodation_id"], name=acc["name"], city_id=acc["city"]["city_id"],
+                        address=acc["address"], price=acc["price"], type=acc["type"], 
+                        rating=acc["rating"], check_in=acc["check_in"], check_out=acc["check_out"])
+        return accommodation
 
     async def get_all_accommodations(self):
         response = await self.messaging.rpc_call("core_accommodation_get_all", {})
@@ -82,7 +90,12 @@ class AccommodationControllerGatewayV1:
         return accommodations
 
     async def get_accommodation_details(self, accommodation_id: int):
-        return await self.messaging.rpc_call("core_accommodation_get", {"accommodation_id": accommodation_id})
+        acc = await self.messaging.rpc_call("core_accommodation_get", {"accommodation_id": accommodation_id})
+        accommodation = AccommodationResponse(accommodation_id=acc["accommodation_id"], name=acc["name"], city_id=acc["city"]["city_id"],
+                        address=acc["address"], price=acc["price"], type=acc["type"], 
+                        rating=acc["rating"], check_in=acc["check_in"], check_out=acc["check_out"])
+        return accommodation
+
 
     async def update_accommodation(self, accommodation_id: int, data):
         payload = {"accommodation_id": accommodation_id}
@@ -90,7 +103,11 @@ class AccommodationControllerGatewayV1:
             payload.update(data.dict())
         else:
             payload.update(data)
-        return await self.messaging.rpc_call("core_accommodation_update", payload)
+        response = await self.messaging.rpc_call("core_accommodation_update", payload)
+        accommodation = AccommodationResponse(accommodation_id=acc["accommodation_id"], name=acc["name"], city_id=acc["city"]["city_id"],
+                        address=acc["address"], price=acc["price"], type=acc["type"], 
+                        rating=acc["rating"], check_in=acc["check_in"], check_out=acc["check_out"])
+        return accommodation
 
     async def delete_accommodation(self, accommodation_id: int):
         return await self.messaging.rpc_call("core_accommodation_delete", {"accommodation_id": accommodation_id})

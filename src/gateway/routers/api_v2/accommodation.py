@@ -79,7 +79,7 @@ async def get_accommodation(accommodation_id: int, service_locator: ServiceLocat
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Ошибка получения размещения ID {city_id}: {e}", exc_info=True)
+        logger.error(f"Ошибка получения размещения ID {accommodation_id}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
 

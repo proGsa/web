@@ -67,6 +67,7 @@ from ..shared.models.route import Route
 from ..shared.models.travel import Travel
 from ..shared.models.user import User
 import logging
+from datetime import datetime
 
 RABBIT_URL = "amqp://user:pass@rabbitmq:5672/"
 logger = logging.getLogger(__name__)
@@ -107,11 +108,11 @@ class DataServiceRPCServer:
             "core_user_login": self.user_repo.get_by_login,
 
             # --- ACCOMMODATION ---
-            "core_accommodation_create": self.acc_repo.add,
+            "core_accommodation_create": self.add_accommodation,
             "core_accommodation_get_all": self.get_acc_list,
-            "core_accommodation_get": self.acc_repo.get_by_id,
-            "core_accommodation_update": self.acc_repo.update,
-            "core_accommodation_delete": self.acc_repo.delete,
+            "core_accommodation_get": self.get_accommodation,
+            "core_accommodation_update": self.update_accommodation,
+            "core_accommodation_delete": self.delete_accommodation,
 
             # --- D_ROUTE ---
             "core_d_route_create": self.d_route_repo.add,
@@ -253,14 +254,58 @@ class DataServiceRPCServer:
         return result
 
     async def get_accommodation(self, payload):
-        repo = await self.locator.get_acc_repo()
         acc_id = payload.get("id")
-        return await repo.get_by_id(acc_id)
+        acc = await self.acc_repo.get_by_id(acc_id)
+        city_obj = await self.city_repo.get_by_id(acc.city.city_id)
+        accommodaton = {
+            "accommodation_id": acc.accommodation_id,
+            "name": acc.name,
+            "city": {
+                "city_id": city_obj.city_id,
+                "name": city_obj.name
+            },
+            "address": acc.address,
+            "price": acc.price,
+            "type": acc.type,
+            "rating": acc.rating,
+            "check_in": acc.check_in.isoformat(),
+            "check_out": acc.check_out.isoformat(),
+        }
+        return accommodaton
 
     async def add_accommodation(self, payload):
-        repo = await self.locator.get_acc_repo()
-        acc = Accommodation(**payload)
-        return await repo.add(acc)
+        acc_data = payload.get("accommodation")
+        if acc_data is None:
+            raise ValueError("Missing 'accommodation' in payload")
+
+        acc_payload = Accommodation(
+            accommodation_id=acc_data["accommodation_id"],
+            name=acc_data["name"],
+            city= await self.city_repo.get_by_id(acc_data["city_id"]),
+            address=acc_data["address"],
+            price=acc_data["price"],
+            type=acc_data["type"],
+            rating=acc_data["rating"],
+            check_in=datetime.fromisoformat(acc_data["check_in"]).replace(tzinfo=None),
+            check_out=datetime.fromisoformat(acc_data["check_out"]).replace(tzinfo=None),
+        )
+        acc = await self.acc_repo.add(acc_payload)
+        city_obj = await self.city_repo.get_by_id(acc.city.city_id)
+        accommodaton = {
+            "accommodation_id": acc.accommodation_id,
+            "name": acc.name,
+            "city": {
+                "city_id": city_obj.city_id,
+                "name": city_obj.name
+            },
+            "address": acc.address,
+            "price": acc.price,
+            "type": acc.type,
+            "rating": acc.rating,
+            "check_in": acc.check_in.isoformat(),
+            "check_out": acc.check_out.isoformat(),
+        }
+        return accommodaton
 
     async def update_accommodation(self, payload):
         repo = await self.locator.get_acc_repo()
@@ -269,8 +314,7 @@ class DataServiceRPCServer:
         return {"status": "ok"}
 
     async def delete_accommodation(self, payload):
-        repo = await self.locator.get_acc_repo()
-        await repo.delete(payload.get("id"))
+        await self.acc_repo.delete(payload.get("accommodation_id"))
         return {"status": "ok"}
 
     # =======================

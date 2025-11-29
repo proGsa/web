@@ -12,7 +12,9 @@ def setup_logging(service_name: str = "core_service") -> None:
     config.read(config_path)
 
     # Создаем отдельную папку для логов каждого сервиса
-    log_dir = Path("../logs") / service_name
+    # log_dir = Path("../logs") / service_name
+    root_dir = config_path.parent
+    log_dir = root_dir / "logs" / service_name
     log_dir.mkdir(parents=True, exist_ok=True)
 
     try:

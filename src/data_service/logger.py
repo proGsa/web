@@ -12,8 +12,10 @@ def setup_logging(service_name: str = "data_service") -> None:
     config = configparser.ConfigParser()
     if not config.read(config_path):
         print(f"WARNING: config file not found or empty: {config_path}")
-
-    log_dir = Path("../logs") / service_name
+        
+    root_dir = config_path.parent
+    log_dir = root_dir / "logs" / service_name
+    # log_dir = Path("../logs") / service_name
     log_dir.mkdir(parents=True, exist_ok=True)
 
     try:

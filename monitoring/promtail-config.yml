@@ -11,31 +11,29 @@ clients:
 scrape_configs:
   - job_name: travelguide_logs
     static_configs:
-      # main app (write)
+      # Core Service logs
       - targets:
           - localhost
         labels:
           job: travelguide
-          app: travelguide-api
-          instance: app_main
-          host: ${HOSTNAME}
-          __path__: /var/log/app/*.log
+          service: core_service
+          environment: production
+          __path__: /var/log/app/core_service/**/*.log
 
-      # read replicas
+      # Data Service logs  
       - targets:
           - localhost
         labels:
           job: travelguide
-          app: travelguide-api
-          instance: app_read1
-          host: ${HOSTNAME}
-          __path__: /var/log/app/*.log
+          service: data_service
+          environment: production
+          __path__: /var/log/app/data_service/**/*.log
 
+      # Gateway logs
       - targets:
           - localhost
         labels:
           job: travelguide
-          app: travelguide-api
-          instance: app_read2
-          host: ${HOSTNAME}
-          __path__: /var/log/app/*.log
+          service: gateway
+          environment: production
+          __path__: /var/log/app/gateway/**/*.log

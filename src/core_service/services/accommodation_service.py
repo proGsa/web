@@ -69,10 +69,29 @@ class AccommodationService(IAccommodationService):
         self.rpc = rpc_client
         logger.debug("AccommodationService инициализирован")
 
-    async def get_by_id(self, accommodation_id: int) -> Accommodation | None:
-        logger.debug("RPC: accommodation.get_by_id %d", accommodation_id)
-        response = await self.rpc.call("accommodation.get_by_id", {"id": accommodation_id})
-        return Accommodation(**response) if response else None
+    async def get_by_id(self, payload) -> Accommodation | None:
+        accommodation_id = payload.get("accommodation_id")
+        if accommodation_id is None:
+            logger.error("accommodation_id не передан в payload")
+            return None  
+        response = await self.rpc.call("core_accommodation_get", {"id": accommodation_id})
+        acc = response.get("result", [])
+        accommodation = Accommodation(
+                accommodation_id=accommodation_id,
+                name=acc["name"],
+                city=City(city_id=acc["city"]["city_id"], name=acc["city"]["name"]),
+                address=acc["address"],
+                price=acc["price"],
+                type=acc["type"],
+                rating=acc["rating"],
+                check_in=datetime.fromisoformat(acc["check_in"]) ,
+                check_out=datetime.fromisoformat(acc["check_out"]),
+            )
+        return {
+                **accommodation.model_dump(),
+                "check_in": accommodation.check_in.isoformat(),
+                "check_out": accommodation.check_out.isoformat(),
+            }
 
     async def get_list(self, payload=None) -> list[Accommodation]:
         logger.debug("RPC: accommodation.get_list")
@@ -102,18 +121,54 @@ class AccommodationService(IAccommodationService):
             for acc in accommodations
         ]
 
-    async def add(self, accommodation: Accommodation) -> Accommodation:
-        logger.debug("RPC: accommodation.add %s", accommodation)
-        response = await self.rpc.call("accommodation.add", accommodation.model_dump())
-        return Accommodation(**response)
+    async def add(self, payload) -> Accommodation:
+        acc_dict = {
+            "accommodation_id": 1,  # или None, если генерируется в Data
+            "name": payload["name"],
+            "city_id": payload["city_id"],
+            "address": payload["address"],
+            "price": payload["price"],
+            "type": payload["type"],
+            "rating": payload["rating"],
+            "check_in": payload["check_in"],   # уже строка ISO
+            "check_out": payload["check_out"], # уже строка ISO
+        }
 
-    async def update(self, accommodation: Accommodation) -> Accommodation:
+        response = await self.rpc.call(
+            "core_accommodation_create",
+            {"accommodation": acc_dict}
+        )
+        acc = response.get("result", [])
+        accommodation = Accommodation(
+                accommodation_id=acc["accommodation_id"],
+                name=acc["name"],
+                city=City(city_id=acc["city"]["city_id"], name=acc["city"]["name"]),
+                address=acc["address"],
+                price=acc["price"],
+                type=acc["type"],
+                rating=acc["rating"],
+                check_in=datetime.fromisoformat(acc["check_in"]) ,
+                check_out=datetime.fromisoformat(acc["check_out"]),
+            )
+        return {
+                **accommodation.model_dump(),
+                "check_in": accommodation.check_in.isoformat(),
+                "check_out": accommodation.check_out.isoformat(),
+            }
+
+    async def update(self, payload) -> Accommodation:
         logger.debug("RPC: accommodation.update %s", accommodation)
         response = await self.rpc.call("accommodation.update", accommodation.model_dump())
 
         return Accommodation(**response)
 
-    async def delete(self, accommodation_id: int) -> None:
-        logger.debug("RPC: accommodation.delete %d", accommodation_id)
-        await self.rpc.call("accommodation.delete", {"id": accommodation_id})
+    async def delete(self, payload) -> None:
+        accommodation_id = payload.get("accommodation_id")
+        if accommodation_id is None:
+            logger.error("accommodation_id не передан в payload")
+            return None 
+        res = await self.rpc.call("core_accommodation_delete", {"accommodation_id": accommodation_id})
+        items = res.get("result", [])
+        return items
+
 

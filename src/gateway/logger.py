@@ -7,13 +7,14 @@ import sys
 from pathlib import Path
 
 def setup_logging(service_name: str = "gateway") -> None:
-    config_path = Path(__file__).parent.parent.parent / "config.cfg"  # поднимаемся на 2 уровня до корня
+    config_path = Path(__file__).parent.parent.parent / "config.cfg"
     config = configparser.ConfigParser()
     config.read(config_path)
 
 
-    # Создаем отдельную папку для логов каждого сервиса
-    log_dir = Path("../logs") / service_name
+    root_dir = config_path.parent
+    log_dir = root_dir / "logs" / service_name
+    # log_dir = Path("../logs") / service_name
     log_dir.mkdir(parents=True, exist_ok=True)
 
     try:

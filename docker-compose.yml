@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile_core
     
-    container_name: core_service
+    # container_name: core_service
     environment:
       APP_MODULE: core_service.main
       APP_PORT: 8000
@@ -14,17 +14,24 @@ services:
     depends_on:
       - rabbitmq
       - data_service
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
+    volumes:
+      - ./logs/core_service:/app/logs/core_service 
     networks:
       - web_my_network
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+
 
   # === Data Service ===
   data_service:
     build: 
       context: .
       dockerfile: Dockerfile_data
-    container_name: data_service
+    # container_name: data_service
     environment:
       APP_MODULE: data_service.main
       APP_PORT: 8001
@@ -39,24 +46,31 @@ services:
       DB_HOST: db-master              # для read: db-slave
       DB_PORT: 5432
 
-      # MongoDB
       # MONGO_URI: mongodb://admin:password@mongodb:27017
     depends_on:
       - rabbitmq
       - db-master
       - db-slave
       # - mongodb
-    ports:
-      - "8001:8001"
+    # ports:
+    #   - "8001:8001"
+    volumes:
+      - ./logs/data_service:/app/logs/data_service 
     networks:
       - web_my_network
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+
 
   # === Gateway ===
-  gateway_main:
+  gateway-3:
     build: 
       context: .
       dockerfile: Dockerfile_gateway
-    container_name: gateway_main
+    container_name: gateway-3 
+    # container_name: gateway_main
     environment:
       APP_MODULE: gateway.main
       APP_PORT: 8010
@@ -66,14 +80,16 @@ services:
       - rabbitmq
       - core_service
       - data_service
+    volumes:
+      - ./logs/gateway:/app/logs/gateway
     networks:
       - web_my_network
 
-  gateway_read1:
+  gateway:
     build: 
       context: .
       dockerfile: Dockerfile_gateway
-    container_name: gateway_read1
+    # container_name: gateway_read1
     environment:
       APP_MODULE: gateway.main
       APP_PORT: 8010
@@ -83,25 +99,36 @@ services:
       - rabbitmq
       - core_service
       - data_service
+    volumes:
+      - ./logs/gateway:/app/logs/gateway
     networks:
       - web_my_network
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
 
-  gateway_read2:
-    build: 
-      context: .
-      dockerfile: Dockerfile_gateway
-    container_name: gateway_read2
-    environment:
-      APP_MODULE: gateway.main
-      APP_PORT: 8010
-      NODE_NAME: gateway_read2
-      RABBIT_URL: amqp://user:pass@rabbitmq:5672/
-    depends_on:
-      - rabbitmq
-      - core_service
-      - data_service
-    networks:
-      - web_my_network
+
+  # gateway_read2:
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile_gateway
+  #   # container_name: gateway_read2
+  #   environment:
+  #     APP_MODULE: gateway.main
+  #     APP_PORT: 8010
+  #     NODE_NAME: gateway_read2
+  #     RABBIT_URL: amqp://user:pass@rabbitmq:5672/
+  #   depends_on:
+  #     - rabbitmq
+  #     - core_service
+  #     - data_service
+  #   networks:
+  #     - web_my_network
+  #   deploy:
+      # replicas: 3
+      # restart_policy:
+        # condition: on-failure
 
   # gateway:
   #   build: 
@@ -211,11 +238,14 @@ services:
       retries: 5
     networks:
       - web_my_network
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   # === Postgres slave ===
   db-slave:
     image: postgres:15
-    container_name: postgres_slave
+    # container_name: web-db-slave
     depends_on:
       db-master:
         condition: service_healthy
@@ -224,7 +254,8 @@ services:
       POSTGRES_PASSWORD: write_password
       POSTGRES_DB: mydb
     volumes:
-      - postgres_slave_data:/var/lib/postgresql/data
+      - postgres_slave_data_1:/var/lib/postgresql/data
+      - postgres_slave_data_2:/var/lib/postgresql/data
     command: >
       bash -c "
       if [ ! -s '/var/lib/postgresql/data/PG_VERSION' ]; then
@@ -249,6 +280,8 @@ services:
       retries: 5
     networks:
       - web_my_network
+    deploy:
+      replicas: 1
 
   mongodb:
     image: mongo:latest
@@ -263,6 +296,10 @@ services:
     restart: unless-stopped
     networks:
       - web_my_network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
   # === pgAdmin ===
   pgadmin:
@@ -279,6 +316,10 @@ services:
       - db-master
     networks:
       - web_my_network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
     # === Nginx ===
   nginx:
     image: openresty/openresty:alpine
@@ -297,6 +338,9 @@ services:
       # - app_read2
     networks:
       - web_my_network
+    deploy:
+      replicas: 1
+
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -316,22 +360,28 @@ services:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
       - web_my_network
-  grafana:
-    image: grafana/grafana:latest
-    container_name: travelguide-grafana
-    environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
-    ports:
-      - "3000:3000"
-    networks:
-      - web_my_network
+
+  # grafana:
+  #   image: grafana/grafana
+  #   container_name: travelguide-grafana
+  #   environment:
+  #     GF_SECURITY_ADMIN_USER: admin
+  #     GF_SECURITY_ADMIN_PASSWORD: admin
+  #     GF_SERVER_ROOT_URL: "http://localhost/monitoring/"
+  #     GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - web_my_network
+      
 networks:
   web_my_network:
     driver: bridge
 volumes:
   postgres_master_data:
-  postgres_slave_data:
+  postgres_slave_data_1:
+  postgres_slave_data_2:
   mongodb_data:
   pgadmin-data:
   rabbitmq_data:
